@@ -1,22 +1,23 @@
 <?php
+    use App\App;
+    use App\Lib\Erro;
+   
+    //Session start
+    //Session_start();
 
-  require_once ('App/Controllers/homeController.php');
-  
-  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : "index";
-  
-  $controller = new Controller();
-  
-  switch ($pagina){
-      case "index":
-          $controller->index();
-          break;
-      case "viewLogin":
-          $controller->login();
-          break;
-      case "viewCadastro":
-          $controller->cadastro();
-          break;
-  }
+    //aconteça todos os erros menos notice
+    error_reporting(E_ALL & ~E_NOTICE);
+
+    require_once("vendor/autoload.php");
+
+    try{
+       
+        $app = new App();
+        $app->run();
+    }catch(\Exception $e){
+        $oError = new Erro($e);
+        $oError->render();
+    }
   
   
   
