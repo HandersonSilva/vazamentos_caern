@@ -1,5 +1,6 @@
 <?php
     namespace App\Controllers;
+    use App\Models\usuarioDAO;
 
     class UsuarioController extends Controller
     {
@@ -11,7 +12,7 @@
             $this->render("usuario/Cadastro");
         }
 
-        public function Login(){
+        public function Login(){      
             $this->render("usuario/Login");
         }
     }

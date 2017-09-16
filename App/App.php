@@ -17,9 +17,9 @@
             define('APP_HOST',$_SERVER['HTTP_HOST']."/"."vazamentos_caern"."/");
             define('PATH',realpath('./'));
             define('TITLE',"V_CAERN");
-            define('DB_HOST',"localhost");
+            define('DB_HOST',"127.0.0.1");
             define('DB_USER',"root");
-            define('DB_NAME',"bd_cursophp");
+            define('DB_NAME',"vazamento_caern");
             define('DB_PASSWORD',"12312");
             define('DB_DRIVER',"mysql");
             
