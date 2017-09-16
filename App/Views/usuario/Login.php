@@ -15,7 +15,7 @@
   </div>
   
   <button type="submit" class="btn btn-primary pull-right">Login</button>
-  <a href="index.php?pagina=viewCadastro" ><label>Não possui conta?</label></a>
+  <a href="../usuario/Cadastro" ><label>Não possui conta?</label></a>
  
 </form>
               </div>
