@@ -21,7 +21,7 @@ class BaseDAO
             if(!isset($connection)){
                 $connection =  new PDO($pdoConfig, DB_USER, DB_PASSWORD);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo "Conexão com o banco ok!!!";
+              
             }
             return $connection;
         } catch (PDOException $e) {
