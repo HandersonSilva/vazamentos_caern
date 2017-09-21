@@ -1,7 +1,32 @@
    
            <script>
             var map;
-            var ponto;
+            var ponto = [];
+
+                //função adicinar ponto ao clicar
+                 function addPonto(pos,map){
+                   // document.getElementById("lat").value = pos.lat();
+                   // document.getElementById("long").value = pos.lng();
+                    
+                    //criando o ponto ao clicar
+                    var pontoMarker = new google.maps.Marker({
+                            position:pos,
+                            animation:google.maps.Animation.BOUNCE,
+                            icon:'_fontes/imgs/icone.png'
+                    });
+
+                    //adicionando o ponto ao mapa
+                    pontoMarker.setMap(map);
+                    //adicionando o pontoMarker ao ponto
+                    ponto.push(pontoMarker);
+
+                 }    
+                //remover pontos
+            function removePonto(){
+                for(var i = 0; i < ponto.length;i++){
+                        ponto[i].setMap(null);
+                }
+            }
 
             //funcao Map
              function init(){
@@ -25,6 +50,16 @@
                                 map.setCenter(localizacaoUser);
                         })
                 }
+
+                //Pegando o clique no mapa
+                google.maps.event.addDomListener(map,'click',function(event){
+                        //remover todos os pontos
+                        removePonto();
+                        //adicionar um novo ponto ao mapa
+                        addPonto(event.latLng, map);
+
+
+                });
              }
 
              //Chamando a função inicial
