@@ -15,7 +15,7 @@
   </div>
   
   <button type="submit" class="btn btn-primary pull-right">Login</button>
-  <a href="../usuario/Cadastro" ><label>Não possui conta?</label></a>
+  <a href="http://<?php echo APP_HOST; ?>usuario/Cadastro" ><label>Não possui conta?</label></a>
  
 </form>
               </div>

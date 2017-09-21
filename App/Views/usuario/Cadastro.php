@@ -8,7 +8,7 @@
               <div class="page-header">
               <h2>Novo usuário</h2>          
           </div>
-          <form action="../usuario/Salvar" method="POST">
+          <form action="http://<?php echo APP_HOST; ?>usuario/Salvar" method="POST">
               <div class="form-group">
             <label for="exampleInputEmail1">Nome usuario</label>
             <input type="text" class="form-control" id="exampleInputEmail1" name="nome" aria-describedby="nome_usuario" placeholder="usuário">

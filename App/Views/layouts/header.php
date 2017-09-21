@@ -30,8 +30,11 @@
       
       
     </style>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg&callback=initMap"
-       async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg&sensor=true"
+       ></script>
+
+    
+       
 
    
 </head>
