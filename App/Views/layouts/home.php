@@ -3,11 +3,13 @@
             var map;
             var ponto = [];
 
+               // geocode();
                 //função adicinar ponto ao clicar
                  function addPonto(pos,map){
-                   // document.getElementById("lat").value = pos.lat();
-                   // document.getElementById("long").value = pos.lng();
-                    
+                      
+                    document.getElementById("lat").value = pos.lat();
+                    document.getElementById("long").value = pos.lng();
+                   
                     //criando o ponto ao clicar
                     var pontoMarker = new google.maps.Marker({
                             position:pos,
@@ -61,15 +63,43 @@
 
                 });
              }
+              //testando o axio com o google geocode
+              function geocode(){
+                      
 
+                        // Make a request for a user with a given ID
+                        axios.get('https://maps.googleapis.com/maps/api/geocode/json?',{
+                                params:{
+                                        latlng :'-5.779011, -35.292898',
+                                        key:'AIzaSyA5PrO7WK1FaI_o1eU26Igcp1-9zKC3eX4'
+                                }
+                                })
+                                .then(function (response) {
+                                        // console.log(response);
+                                         console.log(response.data.results[0].formatted_address);
+                                        var addressComponents =response.data.results[0].address_components;
+                                       
+                                        for(var i = 0; i<addressComponents.length;i++){
+                                            console.log(addressComponents[i].types[0]);
+                                            console.log(addressComponents[i].long_name);
+                                        }
+                                
+                                }).catch(function (error) {
+                                        console.log(error);
+                                });
+
+              }
+           
+              geocode();
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);
       </script>
+
        <!--Estilo da div mapa-->
        <style>
              #mapa{
-                 width:1040px;
-                 height:500px;
+                 width:1010px;
+                 height:480px;
                  border:solid black;
                  }
         </style>
@@ -80,11 +110,12 @@
             <div class="row">
                     <div class="col-md-3">
                         <a href="#">Cadastra nova reclamção</a>
-                        <form method="post" action="#">
+                        <form method="post" action="http://<?php echo APP_HOST; ?>vazamento/cadastrar">
                                 Descricão:<input type="text" name="descricaoV" required>
                                 <!--campos ocultos-->
-                                <input type="hidden" name="latP" required>
-                                <input type="hidden" name="logP" required>
+                                <input type="hidden" name="lat" id="lat" required>
+                                <input type="hidden" name="long" id="long" required>
+                                <input type="submit" value="Cadastrar"/>
                         </form>
                     </div>
                     <div class="col-md-9" >

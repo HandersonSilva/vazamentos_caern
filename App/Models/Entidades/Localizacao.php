@@ -3,7 +3,7 @@
     
     class Localizacao 
     {
-        private $id;
+        private $id_ponto;
         private $log;
         private $lat;
         private $rua;
@@ -11,7 +11,10 @@
         private $cidade; 
 
         public function getId(){
-            return $this->id;
+            return $this->id_ponto;
+        }
+        public function setId($id){
+            $this->id_ponto = $id;
         }
      
         public function getLat(){

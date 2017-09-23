@@ -3,6 +3,8 @@
     namespace App\Models;
     use App\Models\BaseDAO;
     use App\Models\Entidades\Localizacao;
+    use PDO;
+
 
     class LocalizacaoDAO {
         private $conPdo;
@@ -11,7 +13,7 @@
             $this->conPdo = BaseDAO::getConnection();
         }
 
-        public function localizacaoInserir(Localizacao $localizacao){      
+        public function Inserir(Localizacao $localizacao){      
         try{
            
            //realizar insercao
@@ -20,27 +22,56 @@
             $rua = $localizacao->getRua();
             $estado = $localizacao->getEstado();
             $cidade = $localizacao->getCidade(); 
-
-            $ins = $this->conPdo->prepare(
+            
+            $insert = $this->conPdo->prepare(
                 "INSERT INTO caern_ponto(log_ponto,lat_ponto,rua_ponto,estado_ponto,cidade_ponto) 
                 VALUES(:log,:lat,:rua,:estado,:cidade)"
                 );
             //setando os Values
-            $ins->bindParam(':log',$log);
-            $ins->bindParam(':lat',$lat);
-            $ins->bindParam(':rua',$rua);
-            $ins->bindParam(':estado',$estado);
-            $ins->bindParam(':cidade',$cidade);
+            $insert->bindParam(':log',$log);
+            $insert->bindParam(':lat',$lat);
+            $insert->bindParam(':rua',$rua);
+            $insert->bindParam(':estado',$estado);
+            $insert->bindParam(':cidade',$cidade);
 
             //Retornado as linhas afetadas caso tenha sucesso
-            if($ins->execute()){
-                return $ins->rowCount();
+            if($insert->execute()){
+                return $insert->rowCount();
             }
-            $ins = null;//fechar a conexao*/
+            $insert = null;//fechar a conexao*/
             
         }catch(PDOException $e){
             echo $e->getMessage();
         }
+        }
+
+        public function retornaID($log , $lat){
+            
+            try{
+               
+                 // listando os dados via PDO
+	        	// preparamos uma instrução SQL
+	        	$obj = $this->conPdo->prepare(
+                    "SELECT id_ponto FROM caern_ponto cp WHERE cp.lat_ponto = $lat AND cp.log_ponto = $log"
+                );
+              
+                print_r( $obj);
+	        	// executa a instrução SQL
+	        	if($obj->execute()){
+                    echo $obj->rowCount();
+
+                       	// se retornar mais de um dado, exibe
+		            	if($obj->rowCount() > 0){
+                            $row = $obj->fetch(PDO::FETCH_OBJ);
+                            return $row->id_ponto;
+			         }
+		        }
+                 $obj = null;
+
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+
         }
 
       
