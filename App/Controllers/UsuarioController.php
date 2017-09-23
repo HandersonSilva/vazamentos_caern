@@ -22,19 +22,29 @@
         }
 
         public function Salvar(){
+            $usuarioD = new usuarioDAO();
             $usuario = new Usuario();
+
             $usuario->setNome($_POST['nome']);
             $usuario->setEmail($_POST['email']);
             $usuario->setSenha($_POST['senha']);
 
-            $usuarioD = new usuarioDAO();
-            $row = $usuarioD->usuarioInserir($usuario);
-
-            if($row > 0){
-             $this->redirect("usuario/sucesso");
+           
+            $row = $usuarioD->retornaEmail($_POST['email']);
+            
+            if($row == 0){
+              
+                $row = $usuarioD->usuarioInserir($usuario);
+    
+                if($row > 0){
+                 $this->redirect("usuario/sucesso");
+                }else{
+                    $this->render("usuario/Cadastro");
+                }
             }else{
-                $this->render("usuario/Cadastro");
+                echo "esse email já existe!!!";
             }
+            
 
            
         }

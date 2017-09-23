@@ -9,8 +9,8 @@ CREATE TABLE caern_usuario(
 
 CREATE TABLE caern_ponto(
 	id_ponto INT  NOT NULL AUTO_INCREMENT,
-    log_ponto float(10,6) NOT NULL,
-    lat_ponto float(10,6) NOT NULL,
+    log_ponto numeric(10,6) NOT NULL,
+    lat_ponto numeric(10,6) NOT NULL,
     rua_ponto VARCHAR(100) NOT NULL,
     estado_ponto VARCHAR(60) NOT NULL,
     cidade_ponto VARCHAR(60) NULL,
@@ -23,7 +23,6 @@ CREATE TABLE caern_ponto(
     data_vazamento  DATETIME NOT NULL,
     gravidade_vazamento  VARCHAR(50) NOT NULL,
     tempo_vazamento  INT(11) NULL,
-    imagem_vazamento  VARCHAR(150) NULL,
     fk_id_ponto  INT  NOT NULL,
     fk_id_usuario  INT NOT NULL,
     constraint foreign key(fk_id_ponto) references caern_ponto(id_ponto),

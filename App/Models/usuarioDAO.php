@@ -33,5 +33,34 @@
         }
         }
 
+        public function retornaEmail($email){
+            
+            try{
+               $email = "'".$email."'";
+                 // listando os dados via PDO
+	        	// preparamos uma instrução SQL
+	        	$query = $this->conPdo->prepare(
+                    "SELECT u.nome_usuario FROM caern_usuario u WHERE u.email_usuario = $email"
+                );
+              
+               
+	        	// executa a instrução SQL
+	        	if($query->execute()){
+                    
+
+                       	// se retornar mais de um dado, exibe
+		            	if($query->rowCount() > 0){
+                            
+                            return $query->rowCount();
+			         }
+		        }
+                 $query = null;
+
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+
+        }
+
       
     }
