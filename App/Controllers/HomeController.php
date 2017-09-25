@@ -9,7 +9,7 @@
         public function index(){
           
          
-          $this->render('layouts/home');
+          $this->render('layouts/home1');
         }
        
      }

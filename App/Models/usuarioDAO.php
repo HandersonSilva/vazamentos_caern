@@ -14,53 +14,80 @@
         public function usuarioInserir(Usuario $usuario){      
         try{
            
-           //realizar insercao
+            
+           //recupera dados do usuario
             $nome = $usuario->getName();
             $email =$usuario->getEmail();
             $senha=$usuario->getSenha();
-            $ins = $this->conPdo->prepare("INSERT INTO caern_usuario(nome_usuario,email_usuario,senha_usuario) VALUES(:nome,:email,:senha)");
-            $ins->bindParam(':nome',$nome);
-            $ins->bindParam(':email',$email);
-            $ins->bindParam(':senha',$senha);
-
-            if($ins->execute()){
-                return $ins->rowCount();
-            }
-            $ins = null;//fechar a conexao*/
+           
             
+            //prepara query de insercao
+            $insere = $this->conPdo->prepare("INSERT INTO caern_usuario(nome_usuario,email_usuario,senha_usuario) VALUES(:nome,:email,:senha)");
+            $insere->bindParam(':nome',$nome);
+            $insere->bindParam(':email',$email);
+            $insere->bindParam(':senha',$senha);
+          
+            //verifica se operacao foi bem sucedida
+            if($insere->execute()){
+               if($insere->rowCount() > 0){
+                   return $insere->rowCount();
+               }
+                
+            }
+             
         }catch(PDOException $e){
             echo $e->getMessage();
         }
         }
 
-        public function retornaEmail($email){
-            
-            try{
-               $email = "'".$email."'";
-                 // listando os dados via PDO
-	        	// preparamos uma instrução SQL
-	        	$query = $this->conPdo->prepare(
-                    "SELECT u.nome_usuario FROM caern_usuario u WHERE u.email_usuario = $email"
-                );
-              
-               
-	        	// executa a instrução SQL
-	        	if($query->execute()){
+       public function verificaEmail($email) {
+            try {
+                
+                //selecionando email cadastrado no banco com PDO
+                $email = "'".$email."'";
+                $query = $this->conPdo->prepare("SELECT * FROM caern_usuario WHERE email_usuario = $email");
+                
+                //verifica se a operacao foi bem sucedida
+                if($query->execute()){
+                    //verifica se encontrou algum resultado e retorna o numero de colunas 
+                    if($query->rowCount() > 0){
+                        return $query->rowCount();
+                    }
                     
-
-                       	// se retornar mais de um dado, exibe
-		            	if($query->rowCount() > 0){
-                            
-                            return $query->rowCount();
-			         }
-		        }
-                 $query = null;
-
-            }catch(PDOException $e){
+                }
+                $query = null;
+                
+                
+            } catch (PDOException $e) {
                 echo $e->getMessage();
             }
-
-        }
+                }
+                
+                public function retornaLogin($email, $senha) {
+                   try{ 
+                    $sql = "SELECT id_usuario,email_usuario, senha_usuario FROM caern_usuario WHERE email_usuario = '$email' "
+                            . "AND senha_usuario = '$senha'";
+                    
+                    $query = $this->conPdo->prepare($sql);
+                    
+                    
+                    if($query->execute()){
+                        if($query->rowCount() > 0){
+                            while ($row = $query->fetch(\PDO::FETCH_OBJ)) {
+                                
+                            }
+                            foreach ($query as $dados){
+                                return $dados->email_usuario;
+                            }
+                        }
+                    }
+                    $query = null;
+                    
+                } catch (PDOException $e){
+                    echo $e->getMessage();
+                }                
+                
+           }
 
       
     }

@@ -91,8 +91,8 @@
               }
            
               geocode();
-             //Chamando a função inicial
-            google.maps.event.addDomListener(window,'load',init);
+             //Chamando a função inicial+++
+           
       </script>
 
        <!--Estilo da div mapa-->
