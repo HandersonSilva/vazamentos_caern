@@ -5,6 +5,7 @@
     abstract class Controller{
         protected $app;
         private $viewVar;
+    
 
         public function __construct($app){
             $this->setViewParam('nameController',$app->getControllerName());
@@ -14,7 +15,6 @@
         public function render($view){
             $viewVar = $this->getViewVar();
            
-            
           
            require_once PATH.'/App/Views/layouts/header.php';
            require_once PATH.'/App/Views/layouts/menu.php';

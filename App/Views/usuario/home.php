@@ -1,14 +1,15 @@
  
+ 
       <div class="row">
               <div class="col-md-3" id="div_form">
                   <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
                       <div class="form-group">
-                          <textarea name="descricaoV" cols="30" rows="3" placeholder="descrição"></textarea>
+                          <textarea name="descricaoV" cols="30" rows="3" id="descricao" placeholder="descrição"></textarea>
                       </div>
                       
                       <div class="form-group">
                           <p>Data:</p>
-                          <input type="date" class="form-control" name="data">
+                          <input type="date" class="form-control" name="data" id="data">
                       </div>
                        <div class="form-group">
                            <p>Selecione imagem do vazamento</p>
@@ -73,6 +74,26 @@
                     pontoMarker.setMap(map);
                     //adicionando o pontoMarker ao ponto
                     ponto.push(pontoMarker);
+
+                  //pegando os dados para informações
+                    var descricao = document.getElementById("descricao").value;
+                    var data = document.getElementById("data").value;
+                    var  radio1= document.getElementById("inlineRadio1").value;
+                    //setando o html
+                    var html = '<div style="witch:300px;">'+
+                                '<h5>Descrição: '+descricao+'</h5>'+
+                                '<h5>Data: '+data+'</h5>'+
+                                '<h3>Gravidade: '+radio1+'</h3>'+
+                                '</div>';
+                    //criando o infowindow
+                    var infoWindows = new google.maps.InfoWindow({
+                        content:html
+                    });
+                      //Função informação no ponto
+                    pontoMarker.addListener('click',function(){
+                        infoWindows.open(map,pontoMarker);
+                    })
+
 
                  }    
                 //remover pontos

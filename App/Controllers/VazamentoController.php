@@ -9,9 +9,9 @@
 
 
    class VazamentoController extends Controller{
-
+       
         public function index(){
-          
+       
          
           $this->render('usuario/home');
         }
