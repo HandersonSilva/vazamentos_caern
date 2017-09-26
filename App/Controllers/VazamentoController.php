@@ -12,7 +12,7 @@
         public function index(){
           
          
-          $this->render('layouts/home');
+          $this->render('layouts/home1');
         }
 
         //pegando os dados via post e mandando para class vazamentoDAO para cadstrar no banco
@@ -24,7 +24,7 @@
             
             $log = $this->limita_caracteres($_POST['long'], 10, $quebra = true);
             $lat = $this->limita_caracteres($_POST['lat'], 9, $quebra = true);
-          
+            
            
             $localizacao->setLat($lat);
             $localizacao->setLog($log);
@@ -43,13 +43,16 @@
                 //setando vazamento
                 $vazamento = new Vazamento();
                 
+                $date = $_POST["data"];
+                $data_sql = date("y-m-d", strtotime($date));
+                
                 $vazamento->setDescricao($_POST['descricaoV']);
                 $vazamento->setStatus(1);
-                $vazamento->setDate('2017-09-20');
-                $vazamento->setGravidade("Grave");
+                $vazamento->setDate($data_sql);
+                $vazamento->setGravidade($_POST['intensidade']);
                 $vazamento->setTempo(0);
                 $vazamento->setFkPonto($idLocalizacao);
-                $vazamento->setFkUsuario(3);
+                $vazamento->setFkUsuario(1);
                 //salvando objeto vazamento no banco
                 $row = $vazamentoDAO->Inserir($vazamento);
                
@@ -61,11 +64,7 @@
             }else{
                 echo "Erro ao buscar o id..";
             }
-            
-
-           
-
-
+    
 
         }
 

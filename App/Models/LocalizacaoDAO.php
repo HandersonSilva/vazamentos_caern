@@ -51,19 +51,17 @@
                
                  // listando os dados via PDO
 	        	// preparamos uma instrução SQL
-	        	$obj = $this->conPdo->prepare(
-                    "SELECT id_ponto FROM caern_ponto cp WHERE cp.lat_ponto = $lat AND cp.log_ponto = $log"
-                );
+	        	$obj = $this->conPdo->prepare("SELECT id_ponto FROM caern_ponto  WHERE lat_ponto = $lat AND log_ponto = $log");
               
-                print_r( $obj);
+               
 	        	// executa a instrução SQL
 	        	if($obj->execute()){
-                    echo $obj->rowCount();
+                            echo $obj->rowCount();
 
                        	// se retornar mais de um dado, exibe
 		            	if($obj->rowCount() > 0){
-                            $row = $obj->fetch(PDO::FETCH_OBJ);
-                            return $row->id_ponto;
+                                    $row = $obj->fetch(PDO::FETCH_OBJ);
+                                    return $row->id_ponto;
 			         }
 		        }
                  $obj = null;

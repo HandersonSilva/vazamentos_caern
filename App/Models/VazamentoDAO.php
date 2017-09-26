@@ -14,7 +14,7 @@
         public function Inserir(Vazamento $vazamento){      
         try{
            
-            print_r ($vazamento);
+            
            //realizar insercao
             $descricao = $vazamento->getDescricao();
             $status = $vazamento->getStatus();
@@ -24,10 +24,7 @@
             $fk_id_ponto = $vazamento->getFkPonto(); 
             $fk_id_usuario = $vazamento->getFkUsuario(); 
 
-            $insert = $this->conPdo->prepare(
-                "INSERT INTO 
-                caern_vazamento(descricao_vazamento,status_vazamento,data_vazamento,gravidade_vazamento,tempo_vazamento ,fk_id_ponto,fk_id_usuario) 
-                VALUES(:descricao,:status,:data,:gravidade,:tempo,:id_ponto,:id_usuario)");
+            $insert = $this->conPdo->prepare("INSERT INTO caern_vazamento(descricao_vazamento,status_vazamento,data_vazamento,gravidade_vazamento,tempo_vazamento ,fk_id_ponto,fk_id_usuario) VALUES(:descricao,:status,:data,:gravidade,:tempo,:id_ponto,:id_usuario)");
             //setando os Values
             $insert->bindParam(':descricao',$descricao);
             $insert->bindParam(':status',$status);
@@ -38,7 +35,7 @@
             $insert->bindParam(':id_usuario',$fk_id_usuario);
                     
                     echo "<br/>";
-            print_r($insert);
+                    var_dump($insert);
             //Retornado as linhas afetadas caso tenha sucesso
             if($insert->execute()){
                 return $insert->rowCount();

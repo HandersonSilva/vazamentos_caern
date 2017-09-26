@@ -1,8 +1,4 @@
-      <br/>
-      <button type="button" class="btn btn-primary" id="btn_cad_vaz" data-toggle="modal" data-target="#exampleModal" >
-        Cadastrar vazamento
-       </button>
-        
+  
       <!-- janela modal-->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -49,92 +45,151 @@
   </div>
 </div>
       
-      <div style="width: 100%; height: 850px;margin-top: 50px">
-          <div id="map"></div>
-      </div>
-         
+      <div class="row">
+              <div class="col-md-3" id="div_form">
+                  <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
+                      <div class="form-group">
+                          <textarea name="descricaoV" cols="40" rows="3" placeholder="descrição"></textarea>
+                      </div>
+                      
+                      <div class="form-group">
+                          <p>Data:</p>
+                          <input type="date" class="form-control" name="data">
+                      </div>
+                       <div class="form-group">
+                           <p>Selecione imagem do vazamento</p>
+                           <input class="form-control" type="file" placeholder="Selecione imagem" size="20">
+                           
+                      </div>
+                      
+                       <div class="form-group">
+                           <p>Intensidade do vazamento</p>
+                          <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="intensidade" id="inlineRadio1" value="leve" checked="checked">Leve
+                            </label>
+                          </div>
+                           
+                           <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="intensidade" id="inlineRadio1" value="medio" >Médio
+                            </label>
+                          </div>
+                           
+                           <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="intensidade" id="inlineRadio1" value="Grave" >Grave
+                            </label>
+                          </div>
+                      </div>
+                      <input type="hidden" name="lat" id="lat" required>
+                      <input type="hidden" name="long" id="long" required>
+                      
+                      <button type="submit" class="btn btn-primary" id="btn_enviar_dados">Salvar</button>
+                     
+                  </form>
+              </div>    
+          <div class="col-md-9 ">
+              <div id="map" style="border: 2px solid #000"></div>
+          </div>
+                    
+          </div>  
+          <br>
       
       
       <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-          
-        });
-      }
-      
-      
-      var customLabel = {
-        restaurant: {
-          label: 'R'
-        },
-        bar: {
-          label: 'B'
-        }
-      };
-      
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: new google.maps.LatLng(-33.863276, 151.207977),
-          zoom: 12
-        });
-        var infoWindow = new google.maps.InfoWindow;
+        var map;
+            var ponto = [];
 
-          // Change this depending on the name of your PHP or XML file
-          downloadUrl('https://storage.googleapis.com/mapsdevsite/json/mapmarkers2.xml', function(data) {
-            var xml = data.responseXML;
-            var markers = xml.documentElement.getElementsByTagName('marker');
-            Array.prototype.forEach.call(markers, function(markerElem) {
-              var name = markerElem.getAttribute('name');
-              var address = markerElem.getAttribute('address');
-              var type = markerElem.getAttribute('type');
-              var point = new google.maps.LatLng(
-                  parseFloat(markerElem.getAttribute('lat')),
-                  parseFloat(markerElem.getAttribute('lng')));
+               // geocode();
+                //função adicinar ponto ao clicar
+                 function addPonto(pos,map){
+                      
+                    document.getElementById("lat").value = pos.lat();
+                    document.getElementById("long").value = pos.lng();
+                   
+                    //criando o ponto ao clicar
+                    var pontoMarker = new google.maps.Marker({
+                            position:pos,
+                            animation:google.maps.Animation.BOUNCE,
+                            icon:'_fontes/imgs/icone.png'
+                    });
 
-              var infowincontent = document.createElement('div');
-              var strong = document.createElement('strong');
-              strong.textContent = name
-              infowincontent.appendChild(strong);
-              infowincontent.appendChild(document.createElement('br'));
+                    //adicionando o ponto ao mapa
+                    pontoMarker.setMap(map);
+                    //adicionando o pontoMarker ao ponto
+                    ponto.push(pontoMarker);
 
-              var text = document.createElement('text');
-              text.textContent = address
-              infowincontent.appendChild(text);
-              var icon = customLabel[type] || {};
-              var marker = new google.maps.Marker({
-                map: map,
-                position: point,
-                label: icon.label
-              });
-              marker.addListener('click', function() {
-                infoWindow.setContent(infowincontent);
-                infoWindow.open(map, marker);
-              });
-            });
-          });
-        }
-        
-        function downloadUrl(url, callback) {
-        var request = window.ActiveXObject ?
-            new ActiveXObject('Microsoft.XMLHTTP') :
-            new XMLHttpRequest;
+                 }    
+                //remover pontos
+            function removePonto(){
+                for(var i = 0; i < ponto.length;i++){
+                        ponto[i].setMap(null);
+                }
+            }
 
-        request.onreadystatechange = function() {
-          if (request.readyState == 4) {
-            request.onreadystatechange = doNothing;
-            callback(request, request.status);
-          }
-        };
+            //funcao Map
+             function init(){
+                var param = {//setando os parametros do mapa
+                        center:new google.maps.LatLng(-5.812838, -35.207891),
+                        zoom:12,
+                        mapTypeId:google.maps.MapTypeId.ROADMAP
 
-        request.open('GET', url, true);
-        request.send(null);
-      }
+                };
+                //setando o mapa dentro da div mapa
+                map = new google.maps.Map(document.getElementById("map"),param);
 
-      function doNothing() {}
-      
+                //pegando a localização do usuario
+                if(navigator.geolocation){
+                        navigator.geolocation.getCurrentPosition(function(position){
+                                localizacaoUser = new google.maps.LatLng(
+                                        position.coords.latitude,
+                                        position.coords.longitude
+                                        );
+                                //setando no mapa
+                                map.setCenter(localizacaoUser);
+                        })
+                }
+
+                //Pegando o clique no mapa
+                google.maps.event.addDomListener(map,'click',function(event){
+                        //remover todos os pontos
+                        removePonto();
+                        //adicionar um novo ponto ao mapa
+                        addPonto(event.latLng, map);
+
+
+                });
+             }
+              //testando o axio com o google geocode
+              function geocode(){
+                      
+
+                        // Make a request for a user with a given ID
+                        axios.get('https://maps.googleapis.com/maps/api/geocode/json?',{
+                                params:{
+                                        latlng :'-5.779011, -35.292898',
+                                        key:'AIzaSyA5PrO7WK1FaI_o1eU26Igcp1-9zKC3eX4'
+                                }
+                                })
+                                .then(function (response) {
+                                        // console.log(response);
+                                         console.log(response.data.results[0].formatted_address);
+                                        var addressComponents =response.data.results[0].address_components;
+                                       
+                                        for(var i = 0; i<addressComponents.length;i++){
+                                            console.log(addressComponents[i].types[0]);
+                                            console.log(addressComponents[i].long_name);
+                                        }
+                                
+                                }).catch(function (error) {
+                                        console.log(error);
+                                });
+
+              }
+           
+              geocode();
+             //Chamando a função inicial
+            google.maps.event.addDomListener(window,'load',init);
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg&callback=initMap"
-    async defer></script>
+    
