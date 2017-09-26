@@ -13,7 +13,8 @@
 
         public function render($view){
             $viewVar = $this->getViewVar();
-            $sessao = Sessao::class;
+           
+            
           
            require_once PATH.'/App/Views/layouts/header.php';
            require_once PATH.'/App/Views/layouts/menu.php';
