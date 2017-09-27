@@ -1,6 +1,6 @@
   
       <!-- janela modal-->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -8,8 +8,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
-                <div class="modal-body">
+                </div>-->
+              <!--  <div class="modal-body">
                     <form>
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="descrição">
@@ -43,13 +43,13 @@
         </div>
     </div>
   </div>
-</div>
+</div>-->
       
       <div class="row">
               <div class="col-md-3" id="div_form">
                   <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
                       <div class="form-group">
-                          <textarea name="descricaoV" cols="40" rows="3" placeholder="descrição"></textarea>
+                          <textarea name="descricaoV" cols="30" rows="3" placeholder="descrição"></textarea>
                       </div>
                       
                       <div class="form-group">

@@ -3,6 +3,7 @@
     namespace App\Models;
     use App\Models\BaseDAO;
     use App\Models\Entidades\Usuario;
+    use Exception;
 
     class usuarioDAO {
         private $conPdo;

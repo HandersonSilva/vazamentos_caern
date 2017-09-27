@@ -1,6 +1,7 @@
 <?php
 
     namespace App\Models;
+    use PDO;
     use App\Models\BaseDAO;
     use App\Models\Entidades\Vazamento;
 
@@ -45,6 +46,34 @@
         }catch(PDOException $e){
             echo $e->getMessage();
         }
+        }
+        public function retornaData(){
+            try{
+                $select = $this->conPdo->prepare("
+                select p.log_ponto,p.lat_ponto ,v.descricao_vazamento,v.data_vazamento,u.nome_usuario from caern_vazamento v
+                inner join caern_usuario u on u.id_usuario = v.fk_id_usuario
+                inner join caern_ponto p on p.id_ponto = v.fk_id_ponto
+                group by p.log_ponto,p.lat_ponto ,v.descricao_vazamento,v.data_vazamento,u.nome_usuario;
+                ");
+
+               
+                if( $select->execute()){
+                    if($select->rowCount()>0){
+                       while($rowdata = $select->fetch(PDO::FETCH_OBJ)){
+                           // echo $rowdata->codigo." ".$row->nome." ".$row->email." ".$row->senha."<br/>";
+                           $data[]=$rowdata;
+                        }
+                        return $data;
+                    }else{
+                        $data = 0;
+                        return $data;
+                    }
+                }
+                
+                
+              }catch(PDOException $e){
+                throw new Exception("Erro ao cadstrar o vazamento...",500);
+              }
         }
         /*
         public retornaID($log,$at){

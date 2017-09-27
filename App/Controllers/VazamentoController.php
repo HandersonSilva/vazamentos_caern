@@ -5,69 +5,71 @@
   use App\Models\Entidades\Usuario;
   use App\Models\Entidades\Localizacao;
   use App\Models\Entidades\Vazamento;
+  use Exception;
 
 
    class VazamentoController extends Controller{
-
+       
         public function index(){
-          
+       
          
-          $this->render('layouts/home1');
+          $this->render('usuario/home');
         }
+        
 
         //pegando os dados via post e mandando para class vazamentoDAO para cadstrar no banco
-        public function cadastrar(){
-            $localizacaoDAO = new LocalizacaoDAO();
-            $vazamentoDAO= new VazamentoDAO();
-            //setando as entidades necessarias
-            $localizacao = new Localizacao();
-            
-            $log = $this->limita_caracteres($_POST['long'], 10, $quebra = true);
-            $lat = $this->limita_caracteres($_POST['lat'], 9, $quebra = true);
-            
-           
-            $localizacao->setLat($lat);
-            $localizacao->setLog($log);
-            $localizacao->setRua("Rua Fake");
-            $localizacao->setCidade("Natal");
-            $localizacao->setEstado("RN");
+        public function cadastrar(){    
 
-            //Salvando o ponto no banco
-            $localizacaoDAO->Inserir($localizacao);
-        
-            //retornando o id do ponto cadastrado
-            $idLocalizacao = $localizacaoDAO->retornaID( $log, $lat);
-           
-
-            if($idLocalizacao > 0 ){
-                //setando vazamento
-                $vazamento = new Vazamento();
+               try{
+                $localizacaoDAO = new LocalizacaoDAO();
+                $vazamentoDAO= new VazamentoDAO();
+                //setando as entidades necessarias
+                $localizacao = new Localizacao();
                 
-                $date = $_POST["data"];
-                $data_sql = date("y-m-d", strtotime($date));
+                $log = $this->limita_caracteres($_POST['long'], 10, $quebra = true);
+                $lat = $this->limita_caracteres($_POST['lat'], 9, $quebra = true);
                 
-                $vazamento->setDescricao($_POST['descricaoV']);
-                $vazamento->setStatus(1);
-                $vazamento->setDate($data_sql);
-                $vazamento->setGravidade($_POST['intensidade']);
-                $vazamento->setTempo(0);
-                $vazamento->setFkPonto($idLocalizacao);
-                $vazamento->setFkUsuario(1);
-                //salvando objeto vazamento no banco
-                $row = $vazamentoDAO->Inserir($vazamento);
                
-                if($row > 0){
-                    echo "vazamento cadastrado com sucesso!!";
-                }else{
-                    echo "Erro ao cadstrar o vazamento...";
-                }
-            }else{
-                echo "Erro ao buscar o id..";
-            }
+                $localizacao->setLat($lat);
+                $localizacao->setLog($log);
+                $localizacao->setRua("Rua Fake");
+                $localizacao->setCidade("Natal");
+                $localizacao->setEstado("RN");
     
+                //Salvando o ponto no banco
+                $localizacaoDAO->Inserir($localizacao);
+            
+                //retornando o id do ponto cadastrado
+                $idLocalizacao = $localizacaoDAO->retornaID( $log, $lat);
 
+
+                if($idLocalizacao > 0 ){
+                    //setando vazamento
+                    $vazamento = new Vazamento();
+                    
+                    $date = $_POST["data"];
+                    $data_sql = date("y-m-d", strtotime($date));
+                    
+                    $vazamento->setDescricao($_POST['descricaoV']);
+                    $vazamento->setStatus(1);
+                    $vazamento->setDate($data_sql);
+                    $vazamento->setGravidade($_POST['intensidade']);
+                    $vazamento->setTempo(0);
+                    $vazamento->setFkPonto($idLocalizacao);
+                    $vazamento->setFkUsuario(1);
+                    //salvando objeto vazamento no banco
+                    $row = $vazamentoDAO->Inserir($vazamento);
+               }
+                     if($row > 0){
+                        $this->redirect("vazamento");
+                     }
+
+               }catch(PDOException $e){
+                throw new Exception("Erro ao cadstrar o vazamento...",500);
+               }
+            
         }
-
+     
         public function limita_caracteres($texto, $limite, $quebra = true){
             $tamanho = strlen($texto);
             if($tamanho <= $limite){ //Verifica se o tamanho do texto é menor ou igual ao limite

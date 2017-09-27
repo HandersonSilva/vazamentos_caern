@@ -5,6 +5,7 @@
     abstract class Controller{
         protected $app;
         private $viewVar;
+    
 
         public function __construct($app){
             $this->setViewParam('nameController',$app->getControllerName());
@@ -13,7 +14,21 @@
 
         public function render($view){
             $viewVar = $this->getViewVar();
-            $sessao = Sessao::class;
+           
+          
+           require_once PATH.'/App/Views/layouts/header.php';
+           require_once PATH.'/App/Views/layouts/menu.php';
+          
+           require_once PATH.'/App/Views/'.$view.'.php';
+           require_once PATH.'/App/Views/layouts/footer.php';
+
+
+        }
+
+        public function renderHomeData($view,$data){
+           
+            $data[]=$data;
+          
           
            require_once PATH.'/App/Views/layouts/header.php';
            require_once PATH.'/App/Views/layouts/menu.php';
