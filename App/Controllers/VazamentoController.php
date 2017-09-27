@@ -69,6 +69,7 @@
                }
             
         }
+     
         public function limita_caracteres($texto, $limite, $quebra = true){
             $tamanho = strlen($texto);
             if($tamanho <= $limite){ //Verifica se o tamanho do texto é menor ou igual ao limite
