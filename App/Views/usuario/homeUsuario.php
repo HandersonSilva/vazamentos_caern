@@ -1,6 +1,29 @@
- 
- 
-      <div class="row">
+<?php 
+    session_start();
+    $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
+    
+?>
+<div class="row" style="margin-right: 80px; margin-left: 0px">
+    <div class="col-md-4" >
+        <form class="form-inline">
+  
+            <div class="form-group mx-sm-3">
+              <label for="inputEndereco" class="sr-only">Endereco</label>
+              <input type="text" class="form-control" id="inputEndereco" placeholder="Digite um endereço ">
+            </div>
+            <button type="submit" id="btnBuscarMapa" class="btn btn-primary btn-sm">Buscar no mapa</button>
+        </form>
+    </div>
+    <div class="col-md-8 text-center" id="text_info" style="background-image: linear-gradient(to bottom, #90CAF9, #0D47A1);margin-right: 0px; 
+    opacity: 5; color: #fff; border-radius: 10px;">
+        <h4>Marque um ponto no mapa e cadastre os detalhes no formulário para que o vazamento possa ser resolvido o mais rápido possível</h4>
+    </div>
+    
+        
+</div>
+
+
+<div class="row" >
               <div class="col-md-3" id="div_form">
                   <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
                       <div class="form-group">
@@ -43,12 +66,20 @@
                       <button type="submit" class="btn btn-primary" id="btn_enviar_dados">Salvar</button>
                      
                   </form>
+                  <br>
+                <?php if(!empty($cad_vaz)){?>
+                <?php echo'<div class="alert alert-success" role="alert">'
+                    .$_SESSION['sucesso_vaz'];
+                     unset($_SESSION['sucesso_vaz']);?>
+                <?php echo'</div>';?>
+                <?php }?>
               </div>    
           <div class="col-md-9 ">
               <div id="map" style="border: 2px solid #000"></div>
           </div>
                     
-          </div>  
+          </div> 
+          
           <br>
       
       
@@ -78,12 +109,12 @@
                   //pegando os dados para informações
                     var descricao = document.getElementById("descricao").value;
                     var data = document.getElementById("data").value;
-                    var  radio1= document.getElementById("inlineRadio1").value;
+                    var radio = document.querySelector('input[name="intensidade"]:checked').value;
                     //setando o html
                     var html = '<div style="witch:300px;">'+
                                 '<h5>Descrição: '+descricao+'</h5>'+
                                 '<h5>Data: '+data+'</h5>'+
-                                '<h3>Gravidade: '+radio1+'</h3>'+
+                                '<h3>Gravidade: '+radio+'</h3>'+
                                 '</div>';
                     //criando o infowindow
                     var infoWindows = new google.maps.InfoWindow({

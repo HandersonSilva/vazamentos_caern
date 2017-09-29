@@ -6,14 +6,14 @@
   use App\Models\Entidades\Localizacao;
   use App\Models\Entidades\Vazamento;
   use Exception;
-
+  session_start();
 
    class VazamentoController extends Controller{
        
         public function index(){
        
          
-          $this->render('usuario/home');
+          $this->render('usuario/homeUsuario');
         }
         
 
@@ -61,6 +61,7 @@
                     $row = $vazamentoDAO->Inserir($vazamento);
                }
                      if($row > 0){
+                        $_SESSION["sucesso_vaz"] = "Vazamento cadastrado com sucesso";
                         $this->redirect("vazamento");
                      }
 

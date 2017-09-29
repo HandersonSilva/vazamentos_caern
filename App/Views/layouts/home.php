@@ -1,16 +1,15 @@
  
-<br/>
+<div class="container">
+    <div id="map" style="border: 2px solid #000"></div>
+</div>
           
-              <div id="map" style="border: 2px solid #000"></div>
+              
           
       
       <script>
             var map;
             var ponto = [];
            
-         
-     
-              
                 //função adicinar ponto ao clicar
                  function addPonto(pos,map){
                       
@@ -87,7 +86,7 @@
                         //setando o marcador 
                         var Marker = new google.maps.Marker({
                             position: new google.maps.LatLng(<?= $ponto->lat_ponto?>,<?= $ponto->log_ponto?>),
-                            animation:google.maps.Animation.BOUNCE,
+                            animation:google.maps.Animation.prototype,
                             icon:'_fontes/imgs/icone.png'
                         
                     });

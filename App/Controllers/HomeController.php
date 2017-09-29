@@ -15,7 +15,9 @@
             $data= $vazamentoDAO->retornaData();
                     
             if($data>0){
-            $this->renderHomeData('layouts/home',$data);
+                $this->renderHomeData('layouts/home',$data);
+            }else{
+                $this->renderHomeData('usuario/homeUsuario',$data=null);
             }
             
           }catch(PDOException $e){
