@@ -5,12 +5,12 @@
           <div class="col-md-6">
               <form action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
             <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">Email</label>
             <input type="email" class="form-control" id="exampleInputEmail1" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email">
            
             </div>
             <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
+    <label for="exampleInputPassword1">Senha</label>
     <input type="password" class="form-control" id="exampleInputPassword1" name="senha_log" placeholder="Digite sua senha">
   </div>
   

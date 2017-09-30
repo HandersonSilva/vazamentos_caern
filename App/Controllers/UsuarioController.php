@@ -18,19 +18,27 @@
             $this->render("usuario/Login");
         }
         public function validaLogin(){
-            $usuarioD = new usuarioDAO();
-            $login = isset($_POST['email_log']) ?$_POST['email_log'] :"";
-            $senha = isset($_POST['email_log']) ?$_POST['senha_log'] :"";
             
-            $validou = $usuarioD->retornaLogin($login, $senha);
+            $emailt = $_POST['email_log'];
+            $senhat = $_POST['senha_log'];
+            //echo $emailt."   ".$senhat;
             
-            if(!empty($validou)){
-                $_SESSION['email_usuario'] = $validou;
-                echo $_SESSION['email_usuario'];
-            }else{
-                echo "Nenhum registro retornado";
+             $usuario= new usuarioDAO();            
+             
+                if($emailt != NULL && $senhat != NULL){
+                    $dadoLogin=$usuario ->validarusuario($emailt, $senhat);
+                   // echo $dadoLogin;
+                    if($dadoLogin != null){
+                        $_SESSION["nome_usuario"]=$dadoLogin;
+                        
+                        
+                    $this->redirect("Vazamento");
+                        
+                    }else{
+                        echo "usuario nao encontrado!!!!.";
+                    }
             }
-            
+           
         }
 
         public function sucesso(){      
