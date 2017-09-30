@@ -74,6 +74,12 @@
                       </div>
                       <input type="hidden" name="lat" id="lat" required>
                       <input type="hidden" name="long" id="long" required>
+                      <!--stando dados do geocode-->
+                      <input type="hidden" name="number" id="street_number" required>
+                      <input type="hidden" name="rua" id="route" required>
+                      <input type="hidden" name="cidade" id="administrative_area_level_2" required>
+                      <input type="hidden" name="Estado" id="administrative_area_level_1" required>
+                      <input type="hidden" name="pais" id="country" required>
                       
                       <button type="submit" class="btn btn-primary" id="btn_enviar_dados">Salvar</button>
                      
@@ -121,15 +127,17 @@
             var dadosGeocode = {
                 street_number:" ",
                 route:" ",
-                locality:" ",
                 administrative_area_level_1:" ",
+                administrative_area_level_2:" ",
                 country:" "
                 };
 
                // geocode();
                 //função adicinar ponto ao clicar
-                 function addPonto(pos,map,data){
-                   
+                 function addPonto(pos,map,){
+                   var lat = pos.lat();
+                   var log=pos.lng();
+
                     document.getElementById("lat").value = pos.lat();
                     document.getElementById("long").value = pos.lng();
                    
@@ -144,7 +152,8 @@
                     pontoMarker.setMap(map);
                     //adicionando o pontoMarker ao ponto
                     ponto.push(pontoMarker);
-                    var data = geocode(pos.lat(),pos.lng());
+                    geocode(lat,log);
+                    
                    
 
                   //pegando os dados para informações
@@ -212,11 +221,10 @@
               //testando o axio com o google geocode
               function geocode(lat,log){
                       
-
                         // Make a request for a user with a given ID
                         axios.get('https://maps.googleapis.com/maps/api/geocode/json?',{
                                 params:{
-                                        latlng :'-5.779011, -35.292898',
+                                        latlng :lat+","+log,
                                         key:'AIzaSyA5PrO7WK1FaI_o1eU26Igcp1-9zKC3eX4'
                                 }
                                 })
@@ -228,18 +236,23 @@
                                         for(var i = 0; i<addressComponents.length;i++){
                                             if(addressComponents[i].types[0] == 'street_number'){
                                                 dadosGeocode.street_number=addressComponents[i].long_name;
+                                                document.getElementById("street_number").value = dadosGeocode.street_number;
                                             }if (addressComponents[i].types[0] == 'route') {
                                                 dadosGeocode.route =addressComponents[i].long_name;
-                                            }if (addressComponents[i].types[0] == 'locality') {
-                                                dadosGeocode.locality =addressComponents[i].long_name;
+                                                document.getElementById("route").value = dadosGeocode.route;
                                             }if (addressComponents[i].types[0] == 'administrative_area_level_1') {
                                                 dadosGeocode.administrative_area_level_1 =addressComponents[i].long_name;
+                                                document.getElementById("administrative_area_level_1").value = dadosGeocode.administrative_area_level_1;
+                                            }if (addressComponents[i].types[0] == 'administrative_area_level_2') {
+                                                dadosGeocode.administrative_area_level_2 =addressComponents[i].long_name;
+                                                document.getElementById("administrative_area_level_2").value = dadosGeocode.administrative_area_level_2;
                                             }if (addressComponents[i].types[0] == 'country') {
                                                 dadosGeocode.country =addressComponents[i].long_name;
+                                                document.getElementById("country").value = dadosGeocode.country;
                                             }
                                         }
-                                        console.log(dadosGeocode);
-                                        return dadosGeocode;
+                                      
+                                       
                                 
                                 }).catch(function (error) {
                                         console.log(error);
