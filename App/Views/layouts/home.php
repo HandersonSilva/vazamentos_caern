@@ -20,7 +20,7 @@
                     var pontoMarker = new google.maps.Marker({
                             position:pos,
                             animation:google.maps.Animation.BOUNCE,
-                            icon:'_fontes/imgs/icone.png'
+                            icon:'_fontes/imgs/icon_vaz_caern2.png'
                     });
 
                     //adicionando o ponto ao mapa
@@ -87,7 +87,7 @@
                         var Marker = new google.maps.Marker({
                             position: new google.maps.LatLng(<?= $ponto->lat_ponto?>,<?= $ponto->log_ponto?>),
                             animation:google.maps.Animation.prototype,
-                            icon:'_fontes/imgs/icone.png'
+                            icon:'_fontes/imgs/icon_vaz_caern2.png'
                         
                     });
                     //adicionando ao mapa
