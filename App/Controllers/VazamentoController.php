@@ -28,13 +28,17 @@
                 
                 $log = $this->limita_caracteres($_POST['long'], 10, $quebra = true);
                 $lat = $this->limita_caracteres($_POST['lat'], 9, $quebra = true);
-                
-               
+                $rua=$_POST['rua'];
+                $cidade=$_POST['cidade'];
+                $estado=$_POST['Estado'];
+                $pais = $_POST['pais' ];
+
+
                 $localizacao->setLat($lat);
                 $localizacao->setLog($log);
-                $localizacao->setRua("Rua Fake");
-                $localizacao->setCidade("Natal");
-                $localizacao->setEstado("RN");
+                $localizacao->setRua($rua);
+                $localizacao->setCidade($cidade);
+                $localizacao->setEstado($estado);
     
                 //Salvando o ponto no banco
                 $localizacaoDAO->Inserir($localizacao);

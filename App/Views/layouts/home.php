@@ -8,54 +8,7 @@
       
       <script>
             var map;
-            var ponto = [];
-           
-                //função adicinar ponto ao clicar
-                 function addPonto(pos,map){
-                      
-                    //document.getElementById("lat").value = pos.lat();
-                    //document.getElementById("long").value = pos.lng();
-                   
-                    //criando o ponto ao clicar
-                    var pontoMarker = new google.maps.Marker({
-                            position:pos,
-                            animation:google.maps.Animation.BOUNCE,
-                            icon:'_fontes/imgs/icon_vaz_caern2.png'
-                    });
 
-                    //adicionando o ponto ao mapa
-                    pontoMarker.setMap(map);
-                    //adicionando o pontoMarker ao ponto
-                    ponto.push(pontoMarker);
-
-                  //pegando os dados para informações
-                   /* var descricao = document.getElementById("descricao").value;
-                    var data = document.getElementById("data").value;
-                    var  radio1= document.getElementById("inlineRadio1").value;
-                    //setando o html
-                    var html = '<div style="witch:300px;">'+
-                                '<h5>Descrição: '+descricao+'</h5>'+
-                                '<h5>Data: '+data+'</h5>'+
-                                '<h3>Gravidade: '+radio1+'</h3>'+
-                                '</div>';
-                    //criando o infowindow
-                    var infoWindows = new google.maps.InfoWindow({
-                        content:html
-                    });
-                      //Função informação no ponto
-                    pontoMarker.addListener('click',function(){
-                        infoWindows.open(map,pontoMarker);
-                    })
-                    */
-
-
-                 }    
-                //remover pontos
-            function removePonto(){
-                for(var i = 0; i < ponto.length;i++){
-                        ponto[i].setMap(null);
-                }
-            }
 
             //funcao Map
              function init(){
@@ -68,33 +21,73 @@
                 //setando o mapa dentro da div mapa
                 map = new google.maps.Map(document.getElementById("map"),param);
 
-                //pegando a localização do usuario
-                if(navigator.geolocation){
-                        navigator.geolocation.getCurrentPosition(function(position){
-                                localizacaoUser = new google.maps.LatLng(
-                                        position.coords.latitude,
-                                        position.coords.longitude
-                                        );
-                                //setando no mapa
-                                map.setCenter(localizacaoUser);
-                        })
-                }
-                //setando os pontos do banco ao mapa
-                //pegando a variavel data/seatndos os pontos do banco  no mapa PHP com JavaScript 
+              //codigo para trazer os dados do banco e setar no mapa
+                <?php if($data == null){?>
+                        //pegando a localização do usuario
+                        if(navigator.geolocation){
+                                navigator.geolocation.getCurrentPosition(function(position){
+                                        localizacaoUser = new google.maps.LatLng(
+                                                position.coords.latitude,
+                                                position.coords.longitude
+                                                );
+                                        //setando no mapa
+                                        map.setCenter(localizacaoUser);
+                                })
+                        }
+                <?php }else{ ?>
                 <?php foreach($data as $ponto){?>
+
                         <?php if($ponto->lat_ponto !="" && $ponto->log_ponto !="") {?>
-                        //setando o marcador 
-                        var Marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(<?= $ponto->lat_ponto?>,<?= $ponto->log_ponto?>),
-                            animation:google.maps.Animation.prototype,
-                            icon:'_fontes/imgs/icon_vaz_caern2.png'
+                                var descricao ='<?=$ponto->descricao_vazamento?>';
+                                var usuario = '<?=$ponto->nome_usuario?>';
+                                var rua = '<?=$ponto->rua_ponto?>';
+                                var cidade = '<?=$ponto->cidade_ponto?>';
+                                var estado = '<?=$ponto->estado_ponto?>';
+                                var data = '<?=$ponto->data_vazamento?>';
+                                var status ='<?=$ponto->status_vazamento?>';
+                                //verificar o status
+                                if(status == 1){
+                                        status = "Vazamento  em Aberto";
+                                }else{
+                                        status = "Vazamento Fechado";
+                                }
+                                var html = '<div style="witch:300px;">'+
+                                        '<h4>Cadastrado por: '+usuario+'</h4>'+'<br/>'+
+                                        '<h7>Data '+data+'</h7>'+'<br/>'+
+                                        '<h7>Descrição: '+descricao+'</h7>'+'<br/>'+
+                                        '<h7>Rua '+rua+'<br/>'+" Cidade "+cidade+'<br/>'+" UF "+estado+'</h7>'+'<br/>'+
+                                        '<h6>Situação: '+status+'</h6>'+
+                                        '</div>';
+                                //setando o marcador 
+                                var marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(<?= $ponto->lat_ponto?>,<?= $ponto->log_ponto?>),
+                                animation:google.maps.Animation.prototype,
+                                icon:'_fontes/imgs/icon_vaz_caern2.png',
+                                html: html
+                           
                         
                     });
+                   
+                   
+                    
                     //adicionando ao mapa
-                    Marker.setMap(map);
+                    marker.setMap(map);
+
+                     //criando o infowindow
+                     var infoWindows = new google.maps.InfoWindow({
+                        content:"Carregando...."
+                    });
+                      //Função informação no ponto
+                    marker.addListener('click',function(){
+                        infoWindows.setContent(this.html);//para mostrar a informação de cada ponto
+                        infoWindows.open(map,this);
+                    })
                 <?php }else{$break;}?>
 
                 <?php } ?>
+                <?php } ?>
+               
+
 
                 //Pegando o clique no mapa
                 google.maps.event.addDomListener(map,'click',function(event){
@@ -106,35 +99,7 @@
 
                 });
              }
-              //testando o axio com o google geocode
-              function geocode(){
-                      
-
-                      //pegando os dados da api geocode
-                        axios.get('https://maps.googleapis.com/maps/api/geocode/json?',{
-                                params:{
-                                        latlng :'-5.779011, -35.292898',
-                                        key:'AIzaSyA5PrO7WK1FaI_o1eU26Igcp1-9zKC3eX4'
-                                }
-                                })
-                                .then(function (response) {
-                                        // console.log(response);
-                                         console.log(response.data.results[0].formatted_address);
-                                         //pegando as variavel aonde esta os dados
-                                        var addressComponents =response.data.results[0].address_components;
-                                       //percorrendo a variavel
-                                        for(var i = 0; i<addressComponents.length;i++){
-                                            console.log(addressComponents[i].types[0]);
-                                            console.log(addressComponents[i].long_name);
-                                        }
-                                
-                                }).catch(function (error) {
-                                        console.log(error);
-                                });
-
-              }
-           //chamando afunção geocode 
-              geocode();
+             
 
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);

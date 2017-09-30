@@ -10,7 +10,7 @@ CREATE TABLE caern_usuario(
 CREATE TABLE caern_ponto(
 	id_ponto INT  NOT NULL AUTO_INCREMENT,
     log_ponto numeric(10,6) NOT NULL,
-    lat_ponto numeric(10,6) NOT NULL,
+    lat_ponto numeric(10,7) NOT NULL,
     rua_ponto VARCHAR(100) NOT NULL,
     estado_ponto VARCHAR(60) NOT NULL,
     cidade_ponto VARCHAR(60) NULL,
