@@ -10,24 +10,7 @@
             var map;
             var ponto = [];
            
-                //função adicinar ponto ao clicar
-                 function addPonto(pos,map){
-                      
-                    //document.getElementById("lat").value = pos.lat();
-                    //document.getElementById("long").value = pos.lng();
-                   
-                    //criando o ponto ao clicar
-                    var pontoMarker = new google.maps.Marker({
-                            position:pos,
-                            animation:google.maps.Animation.BOUNCE,
-                            icon:'_fontes/imgs/icon_vaz_caern2.png'
-                    });
-
-                    //adicionando o ponto ao mapa
-                    pontoMarker.setMap(map);
-                    //adicionando o pontoMarker ao ponto
-                    ponto.push(pontoMarker);
-
+             
                   //pegando os dados para informações
                    /* var descricao = document.getElementById("descricao").value;
                     var data = document.getElementById("data").value;
@@ -46,16 +29,13 @@
                     pontoMarker.addListener('click',function(){
                         infoWindows.open(map,pontoMarker);
                     })
-                    */
+                    
 
 
                  }    
-                //remover pontos
-            function removePonto(){
-                for(var i = 0; i < ponto.length;i++){
-                        ponto[i].setMap(null);
-                }
+           
             }
+            */
 
             //funcao Map
              function init(){
@@ -68,19 +48,20 @@
                 //setando o mapa dentro da div mapa
                 map = new google.maps.Map(document.getElementById("map"),param);
 
-                //pegando a localização do usuario
-                if(navigator.geolocation){
-                        navigator.geolocation.getCurrentPosition(function(position){
-                                localizacaoUser = new google.maps.LatLng(
-                                        position.coords.latitude,
-                                        position.coords.longitude
-                                        );
-                                //setando no mapa
-                                map.setCenter(localizacaoUser);
-                        })
-                }
-                //setando os pontos do banco ao mapa
-                //pegando a variavel data/seatndos os pontos do banco  no mapa PHP com JavaScript 
+              
+                <?php if($data == null){?>
+                        //pegando a localização do usuario
+                        if(navigator.geolocation){
+                                navigator.geolocation.getCurrentPosition(function(position){
+                                        localizacaoUser = new google.maps.LatLng(
+                                                position.coords.latitude,
+                                                position.coords.longitude
+                                                );
+                                        //setando no mapa
+                                        map.setCenter(localizacaoUser);
+                                })
+                        }
+                <?php }else{ ?>
                 <?php foreach($data as $ponto){?>
                         <?php if($ponto->lat_ponto !="" && $ponto->log_ponto !="") {?>
                         //setando o marcador 
@@ -95,6 +76,9 @@
                 <?php }else{$break;}?>
 
                 <?php } ?>
+                <?php } ?>
+               
+
 
                 //Pegando o clique no mapa
                 google.maps.event.addDomListener(map,'click',function(event){
