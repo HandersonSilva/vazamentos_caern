@@ -1,11 +1,13 @@
 <?php 
     session_start();
     $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
-    
+    if(isset($_SESSION['nome_usuario']) && $_SESSION['nome_usuario'] != ""){
+        echo "Bem vindo!!! ".$_SESSION['nome_usuario'];
+    }
 ?>
 <div class="row" style="margin-right: 80px; margin-left: 0px">
-    <div class=" col-md-4 " >
-        <form class="col-sm-12 form-inline">
+    <div class="col-md-4" >
+        <form class="form-inline">
   
             <div class="form-group mx-sm-3">
               <label for="inputEndereco" class="sr-only">Endereco</label>
@@ -14,7 +16,7 @@
             <button type="submit" id="btnBuscarMapa" class="btn btn-primary btn-sm">Buscar no mapa</button>
         </form>
     </div>
-    <div class="col-md-8 col-sm-12 text-center" id="text_info" style="background-image: linear-gradient(to bottom, #90CAF9, #0D47A1);margin-right: 0px; 
+    <div class="col-md-8 text-center" id="text_info" style="background-image: linear-gradient(to bottom, #90CAF9, #0D47A1);margin-right: 0px; 
     opacity: 5; color: #fff; border-radius: 10px;">
         <h4>Marque um ponto no mapa e cadastre os detalhes no formulário para que o vazamento possa ser resolvido o mais rápido possível</h4>
     </div>
@@ -25,21 +27,9 @@
 
 <div class="row" >
               <div class="col-md-3" id="div_form">
-                   <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><button class="btn btn-primary" id="cad_vaz">Cadastrar</button>
-                                <span class="glyphicon glyphicon-file">
-                                </span></a>
-                            </h4>
-                        </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                           
-                           <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
+                  <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
                       <div class="form-group">
-                          <textarea name="descricaoV" cols="40"  rows="3" id="descricao" placeholder="descrição"></textarea>
+                          <textarea name="descricaoV" cols="30"  rows="3" id="descricao" placeholder="descrição"></textarea>
                       </div>
                       
                       <div class="form-group">
@@ -84,21 +74,7 @@
                       <button type="submit" class="btn btn-primary" id="btn_enviar_dados">Salvar</button>
                      
                   </form>
-                            
-                        </div>
-                    </div>
-                </div>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-            </div>
-               <br>
+                  <br>
                 <?php if(!empty($cad_vaz)){?>
                 <?php echo'<div class="alert alert-success" role="alert">'
                     .$_SESSION['sucesso_vaz'];
@@ -110,13 +86,7 @@
               <div id="map" style="border: 2px solid #000"></div>
           </div>
                     
-          </div>
-           
-<div class="row"><!--lista de vazamentos cadastrados-->
-    <div class="col-md-3">
-        
-    </div>
-</div>
+          </div> 
           
           <br>
       
@@ -263,23 +233,4 @@
              
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);
-           
-                
-                    $("#cad_vaz").click( function(){
-                        
-                        $(".lista").hide();
-                        
-                        
-                        setTimeout(function() {
-                        $(".lista").show();
-                        }, 10000);
-                    });
-                    
-                    
- 
-
-                
-                
-            
-            
     </script>

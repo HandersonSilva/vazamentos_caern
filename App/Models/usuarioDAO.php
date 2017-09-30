@@ -64,7 +64,7 @@
             }
                 }
                 
-                public function retornaLogin($email, $senha) {
+              /*  public function retornaLogin($email, $senha) {
                    try{ 
                     $sql = "SELECT id_usuario,email_usuario, senha_usuario FROM caern_usuario WHERE email_usuario = '$email' "
                             . "AND senha_usuario = '$senha'";
@@ -87,7 +87,28 @@
                 } catch (PDOException $e){
                     echo $e->getMessage();
                 }                
-                
+                */
+                public function validarusuario($emailt, $senhat){
+                    try {
+                        $sql = "SELECT nome_usuario FROM caern_usuario WHERE email_usuario = '$emailt' "
+                                . "AND senha_usuario = '$senhat'";
+                        
+                        $query = $this->conPdo->prepare($sql);
+                       // print_r($query);
+                        
+                    if($query->execute()){
+                        if($query->rowCount()>0){
+                          while($row=$query->fetch(\PDO::FETCH_OBJ)){
+                              return $row->nome_usuario;
+                          }
+                           
+                        }
+                    }
+                        
+                        
+                    } catch (\PDOException $ex) {
+                        throw new Exception($ex, 500);
+                    }
            }
 
       
