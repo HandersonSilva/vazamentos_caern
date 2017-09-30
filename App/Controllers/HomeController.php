@@ -13,7 +13,7 @@
             
             //retorna dados do banco
             $data= $vazamentoDAO->retornaData();
-                    
+           
             if($data>0){
                 $this->renderHomeData('layouts/home',$data);
             }else{
