@@ -50,10 +50,10 @@
         public function retornaData(){
             try{
                 $select = $this->conPdo->prepare("
-                select p.log_ponto,p.lat_ponto ,v.descricao_vazamento,v.data_vazamento,u.nome_usuario from caern_vazamento v
+                select p.log_ponto,p.lat_ponto,p.rua_ponto,p.cidade_ponto,p.estado_ponto ,v.descricao_vazamento,v.data_vazamento,status_vazamento,u.nome_usuario from caern_vazamento v
                 inner join caern_usuario u on u.id_usuario = v.fk_id_usuario
                 inner join caern_ponto p on p.id_ponto = v.fk_id_ponto
-                group by p.log_ponto,p.lat_ponto ,v.descricao_vazamento,v.data_vazamento,u.nome_usuario;
+                group by p.log_ponto,p.lat_ponto,p.rua_ponto,p.cidade_ponto,p.estado_ponto ,v.descricao_vazamento,v.data_vazamento,status_vazamento,u.nome_usuario;
                 ");
 
                

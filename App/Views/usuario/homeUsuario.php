@@ -6,17 +6,16 @@
     
 ?>
 <div class="row" id="linha_principal">
-    
-  <div class="col-lg-3">
+   <div class="col-lg-3">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Digite um endereço">
       <span class="input-group-btn">
         <button class="btn btn-primary" type="button">Buscar</button>
       </span>
     </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-md-1"></div>
-    <div class="col-md-8  text-center"  id="text_info">
+  </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-8  text-center" id="text_info">
         <h4>Marque um ponto no mapa e cadastre os detalhes no formulário para que o vazamento possa ser resolvido o mais rápido possível</h4>
     </div>
     <div class="col-md-1"></div>
@@ -40,7 +39,7 @@
                            
                            <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
                       <div class="form-group">
-                          <textarea name="descricaoV" class="col-sm-12 form-control" cols="40%"  rows="3" id="descricao" placeholder="descrição"></textarea>
+                          <textarea name="descricaoV" class="col-sm-12" cols="40%"  rows="3" id="descricao" placeholder="descrição"></textarea>
                       </div>
                       
                       <div class="form-group">
@@ -83,11 +82,15 @@
                         </div>
                     </div>
                 </div>
-                   
-                    <?php echo '<p class="lista">Id vazamento:'
-                        .$_SESSION['id_vaz'].'<br>'. 'Descrição vazamento: '.$des_vaz?>
-                    <?php echo '</p>';?>
-                    
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
+                <p class="lista">Teste lista</p>
             </div>
                <br>
                 <?php if(!empty($cad_vaz)){?>
@@ -98,7 +101,7 @@
                 <?php }?>
               </div>    
           <div class="col-md-9 ">
-              <div id="map" style="border: 1px solid #000"></div>
+              <div id="map" style="border: 2px solid #000"></div>
           </div>
                     
           </div>
@@ -227,7 +230,7 @@
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);
            
-                    var segundos = 10;
+                    var segundos = 30;
                     $("#cad_vaz").click( function(){
                         
                         $(".lista").hide();
