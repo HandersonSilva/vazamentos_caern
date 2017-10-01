@@ -75,6 +75,27 @@
                 throw new Exception("Erro ao cadstrar o vazamento...",500);
               }
         }
+        
+        public function vazamentoDados() {
+            try{
+            $sql = "SELECT id_vazamento, descricao_vazamento, data_vazamento, data_vazamento FROM caern_vazamento";
+            $query = $this->conPdo->query($sql);
+            
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    while ($row = $query->fetch(\PDO::FETCH_OBJ)) {
+                        
+                        
+                        return $row;
+                    }
+                    
+                }
+            }
+            $query = null;
+         } catch (PDOException $ex){
+             throw new Exception("Erro ao buscar dados...",500);
+         }   
+        }
         /*
         public retornaID($log,$at){
             try{

@@ -1,7 +1,5 @@
 <footer class="footer" >
-        <div class="container">
-            <p class="text-muted text-center">Todos os direitos reservados a vazamentoscaern.com</ps>
-        </div>
+    <p>Todos os direitos reservados a vazamentoscaern.com</p>
 </footer>
 
 

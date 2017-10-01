@@ -16,6 +16,7 @@
                     
             if($data>0){
                 $this->renderHomeData('layouts/home',$data);
+                
             }else{
                 $this->renderHomeData('usuario/homeUsuario',$data=null);
             }

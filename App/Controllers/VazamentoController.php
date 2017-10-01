@@ -12,8 +12,9 @@
        
         public function index(){
        
-         
+           $this->retornaVazamento();
           $this->render('usuario/homeUsuario');
+          
         }
         
 
@@ -62,12 +63,28 @@
                }
                      if($row > 0){
                         $_SESSION["sucesso_vaz"] = "Vazamento cadastrado com sucesso";
+                        
                         $this->redirect("vazamento");
+                        
                      }
 
                }catch(PDOException $e){
                 throw new Exception("Erro ao cadstrar o vazamento...",500);
                }
+            
+        }
+        
+        public function retornaVazamento(){
+            $vazamento = new VazamentoDAO();
+            
+            $dados_vazamento = $vazamento->vazamentoDados();
+            if(!empty($dados_vazamento)){
+                
+                    $_SESSION["id_vaz"] = $dados_vazamento->id_vazamento;
+                    $_SESSION["desc_vazamento"] = $dados_vazamento->descricao_vazamento;
+                 
+                  
+            }
             
         }
      
