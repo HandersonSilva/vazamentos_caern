@@ -45,11 +45,14 @@
                                 var estado = '<?=$ponto->estado_ponto?>';
                                 var data = '<?=$ponto->data_vazamento?>';
                                 var status ='<?=$ponto->status_vazamento?>';
+                                var img = "";
                                 //verificar o status
                                 if(status == 1){
                                         status = "Vazamento  em Aberto";
+                                        img = '_fontes/imgs/icon_vaz_caern2.png';
                                 }else{
                                         status = "Vazamento Fechado";
+                                        img = '_fontes/imgs/vazamento_fechado.png';
                                 }
                                 var html = '<div style="witch:300px;">'+
                                         '<h4>Cadastrado por: '+usuario+'</h4>'+'<br/>'+
@@ -62,7 +65,7 @@
                                 var marker = new google.maps.Marker({
                                 position: new google.maps.LatLng(<?= $ponto->lat_ponto?>,<?= $ponto->log_ponto?>),
                                 animation:google.maps.Animation.prototype,
-                                icon:'_fontes/imgs/icon_vaz_caern2.png',
+                                icon:img,
                                 html: html
                            
                         
