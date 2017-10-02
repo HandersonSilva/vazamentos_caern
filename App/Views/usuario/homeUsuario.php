@@ -74,6 +74,12 @@
                       </div>
                       <input type="hidden" name="lat" id="lat" required>
                       <input type="hidden" name="long" id="long" required>
+                      <!-- local aonde ficara os daddos passados pelo geocode-->
+                      <input type="hidden" name="pais" id="pais" required>
+                      <input type="hidden" name="uf" id="uf" required>
+                      <input type="hidden" name="cidade" id="cidade" required>
+                      <input type="hidden" name="rua" id="rua" required>
+                      
                       
                       <button type="submit" class="btn btn-primary" id="btn_enviar_dados">Salvar</button>
                      
@@ -82,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+             <!--   <p class="lista">Teste lista</p>
                 <p class="lista">Teste lista</p>
                 <p class="lista">Teste lista</p>
                 <p class="lista">Teste lista</p>
@@ -90,7 +97,7 @@
                 <p class="lista">Teste lista</p>
                 <p class="lista">Teste lista</p>
                 <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
+                -->
             </div>
                <br>
                 <?php if(!empty($cad_vaz)){?>
@@ -115,14 +122,20 @@
           <br>
       
       
-      <script>
+          <script>
         var map;
             var ponto = [];
+            var dadosGeocode = {
+                route:" ",
+                administrative_area_level_2:"",
+                administrative_area_level_1:" ",
+                country:" "
+                };
 
                // geocode();
                 //função adicinar ponto ao clicar
-                 function addPonto(pos,map){
-                      
+                 function addPonto(pos,map,data){
+                   
                     document.getElementById("lat").value = pos.lat();
                     document.getElementById("long").value = pos.lng();
                    
@@ -137,6 +150,8 @@
                     pontoMarker.setMap(map);
                     //adicionando o pontoMarker ao ponto
                     ponto.push(pontoMarker);
+                    geocode(pos.lat(),pos.lng());
+                   
 
                   //pegando os dados para informações
                     var descricao = document.getElementById("descricao").value;
@@ -191,34 +206,48 @@
 
                 //Pegando o clique no mapa
                 google.maps.event.addDomListener(map,'click',function(event){
+                    
                         //remover todos os pontos
                         removePonto();
                         //adicionar um novo ponto ao mapa
-                        addPonto(event.latLng, map);
+                        addPonto(event.latLng, map, data);
 
 
                 });
              }
               //testando o axio com o google geocode
-              function geocode(){
-                      
+              function geocode(lat,log){
+                      console.log(lat);
 
                         // Make a request for a user with a given ID
                         axios.get('https://maps.googleapis.com/maps/api/geocode/json?',{
                                 params:{
-                                        latlng :'-5.779011, -35.292898',
+                                        latlng :lat+','+log,
                                         key:'AIzaSyA5PrO7WK1FaI_o1eU26Igcp1-9zKC3eX4'
                                 }
                                 })
                                 .then(function (response) {
                                         // console.log(response);
-                                         console.log(response.data.results[0].formatted_address);
+                                         //console.log(response.data.results[0].formatted_address);
                                         var addressComponents =response.data.results[0].address_components;
                                        
                                         for(var i = 0; i<addressComponents.length;i++){
-                                            console.log(addressComponents[i].types[0]);
-                                            console.log(addressComponents[i].long_name);
+                                            if (addressComponents[i].types[0] == 'route') {
+                                                dadosGeocode.route =addressComponents[i].long_name;
+                                                document.getElementById("rua").value = dadosGeocode.route;
+                                            }if (addressComponents[i].types[0] == 'administrative_area_level_2') {
+                                                dadosGeocode.administrative_area_level_2 =addressComponents[i].long_name;
+                                                document.getElementById("cidade").value =dadosGeocode.administrative_area_level_2;
+                                            }if (addressComponents[i].types[0] == 'administrative_area_level_1') {
+                                                dadosGeocode.administrative_area_level_1 =addressComponents[i].long_name;
+                                                document.getElementById("uf").value =dadosGeocode.administrative_area_level_1;
+                                            }if (addressComponents[i].types[0] == 'country') {
+                                                dadosGeocode.country =addressComponents[i].long_name;
+                                                document.getElementById("pais").value= dadosGeocode.country;
+                                            }
                                         }
+                                        console.log(dadosGeocode);
+                                       
                                 
                                 }).catch(function (error) {
                                         console.log(error);
@@ -226,11 +255,12 @@
 
               }
            
-              geocode();
+             
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);
-           
-                    var segundos = 30;
+
+
+            var segundos = 30;
                     $("#cad_vaz").click( function(){
                         
                         $(".lista").hide();
@@ -247,8 +277,4 @@
                         
                     });
                     
-                    
-                    
-            
-            
-    </script>
+</script>
