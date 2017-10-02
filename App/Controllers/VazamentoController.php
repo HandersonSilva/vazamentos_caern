@@ -31,7 +31,7 @@
                 $lat = $this->limita_caracteres($_POST['lat'], 9, $quebra = true);
                 $rua=$_POST['rua'];
                 $cidade=$_POST['cidade'];
-                $estado=$_POST['Estado'];
+                $estado=$_POST['uf'];
                 $pais = $_POST['pais' ];
 
 
