@@ -77,51 +77,18 @@
         }
         
         public function vazamentoDados() {
-            try{
-            $sql = "SELECT id_vazamento, descricao_vazamento, data_vazamento, data_vazamento FROM caern_vazamento";
-            $query = $this->conPdo->query($sql);
+            $sql = "SELECT u.nome_usuario , v.descricao_vazamento,v.status_vazamento,v.data_vazamento FROM caern_vazamento v INNER JOIN caern_usuario u ON  u.id_usuario = v.fk_id_usuario";
+            
+            $query = $this->conPdo->prepare($sql);
             
             if($query->execute()){
-                if($query->rowCount() > 0){
-                    while ($row = $query->fetch(\PDO::FETCH_OBJ)) {
-                        
-                        
-                        return $row;
+                if ($query->rowCount() > 0) {
+                    while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                        $dados[] = $row;
                     }
-                    
+                    return $dados;
                 }
             }
             $query = null;
-         } catch (PDOException $ex){
-             throw new Exception("Erro ao buscar dados...",500);
-         }   
         }
-        /*
-        public retornaID($log,$at){
-            try{
-                 // listando os dados via PDO
-	        	// preparamos uma instrução SQL
-	        	$obj = $this->conPdo->prepare(
-                    "SELECT id_ponto FROM caern_ponto cp WHERE cp.log_ponto = :lat AND cp.lat_ponto = :log"
-                );
-                $obj->bindParam(':log',$log);
-                $obj->bindParam(':lat',$lat);
-
-	        	// executa a instrução SQL
-	        	if($obj->execute()){
-		        	// se retornar mais de um dado, exibe
-		            	if($obj->rowCount() > 0){
-                            $row = $obj->fetch(PDO::FETCH_OBJ);
-                            return $row->id_ponto;
-			         }
-		        }
-                 $obj = null;
-
-            }catch(PDOException $e){
-                echo $e->getMessage();
-            }
-
-        }*/
-
-      
     }

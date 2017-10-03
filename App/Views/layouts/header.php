@@ -25,7 +25,17 @@
     <style>
     body{
       background-color: #80deea;
+     
+      
     }
+    .cad_vaz{
+        margin-left: 45px;
+    }
+    
+    /*navbar*/
+    .bg-dark {
+        background-color: #2962ff!important;
+}
     
     .form-control{
         background-color: #e8eaf6;
@@ -37,11 +47,16 @@
       margin-right: 80px; 
       margin-left: 0px;
     }
+    .lista{
+       margin-top: 10px;
+        padding: 5px;
+        overflow-y: scroll;
+    }
 
     #col_end{
       padding-right: 15px;
     }
-
+   
     #text_info{
       font-family: 'Andika';font-size: 22px;
       background-image: linear-gradient(to bottom, #90CAF9, #0D47A1);margin-right: 0px;
@@ -50,6 +65,9 @@
       margin: auto;
       border-radius: 10px;
       width: 100%;
+    }
+    #form_login{
+        border: 1px solid #000;
     }
     
     .footer {
@@ -68,13 +86,29 @@
 
             margin-right: 10px;
         }
+        
 
         #text_info{
      
-        margin-left: 5px;
-      }
-
-         
+            margin-left: 5px;
+        }
+      
+        #div_form{
+            padding: 2px;
+            border: 0.5px solid ;
+            border-color: #64b5f6;
+        }
+        .row{
+            margin: 5px 5px 0px 5px;
+            margin-bottom: 30px;
+            width: 100%
+        }
+        #map {
+            margin-top: 20px;
+            width: 100%;
+            height: 500px;
+ }
+             
 }
     </style>
     

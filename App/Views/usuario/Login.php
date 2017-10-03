@@ -1,9 +1,8 @@
-     
-      <div class="container" style="margin-top: 100px">
+       <div class="container" style="margin-top: 100px">
           <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-6">
-              <form action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
+              <form id="form_login" action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
             <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
             <input type="email" class="form-control" id="exampleInputEmail1" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email">

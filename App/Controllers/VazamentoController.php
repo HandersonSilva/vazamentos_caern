@@ -12,11 +12,32 @@
        
         public function index(){
        
-           $this->retornaVazamento();
-          $this->render('usuario/homeUsuario');
+           try{
+            
+                $data = $this->getVaz();
+            
+                $this->render("usuario/homeUsuario");
+              
+            
+            
+          }catch(PDOException $e){
+            throw new Exception("Ops! Erro ao buscar dados no Banco",500);
+          }
+            
           
         }
         
+        public static function getVaz() {
+            $vazamentoD = new VazamentoDAO();
+            $dados = $vazamentoD->vazamentoDados();
+            
+            if($dados != null){
+                
+                return $dados;
+                      
+            }
+            
+        }
 
         //pegando os dados via post e mandando para class vazamentoDAO para cadstrar no banco
         public function cadastrar(){    
@@ -78,19 +99,6 @@
             
         }
         
-        public function retornaVazamento(){
-            $vazamento = new VazamentoDAO();
-            
-            $dados_vazamento = $vazamento->vazamentoDados();
-            if(!empty($dados_vazamento)){
-                
-                    $_SESSION["id_vaz"] = $dados_vazamento->id_vazamento;
-                    $_SESSION["desc_vazamento"] = $dados_vazamento->descricao_vazamento;
-                 
-                  
-            }
-            
-        }
      
         public function limita_caracteres($texto, $limite, $quebra = true){
             $tamanho = strlen($texto);

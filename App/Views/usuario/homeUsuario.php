@@ -1,8 +1,9 @@
-<?php 
+<?php
+    use App\Controllers\VazamentoController;
     session_start();
     $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
-    $id_vaz = isset($_SESSION['id_vaz'])?$_SESSION['id_vaz']:"";
-    $des_vaz = isset($_SESSION['desc_vazamento'])?$_SESSION['desc_vazamento']:"";
+    
+    $dados_vaz =  VazamentoController::getVaz();
     
 ?>
 <div class="row" id="linha_principal">
@@ -23,14 +24,16 @@
 </div>
 
 
-<div class="row" >
+<div class="row">
               <div class="col-md-3" id="div_form">
                    <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><button class="btn btn-primary" id="cad_vaz">Formulário de cadastro</button>
-                                <span class="glyphicon glyphicon-file">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <button class="btn btn-primary btn-md cad_vaz" id="cad_vaz" title="formularioCadastro" value="formulario de cadastro">Formulário de cadastro</button>
+                                    <button class="btn btn-warning btn-md cad_vaz" id="fech_form" title="formularioCadastro" value="formulario de cadastro">Fechar formulário</button>
+                                    <span class="glyphicon glyphicon-file">
                                 </span></a>
                             </h4>
                         </div>
@@ -88,16 +91,30 @@
                         </div>
                     </div>
                 </div>
-             <!--   <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                -->
+                 <div class="lista" style="width: auto; height: 350px;">
+                    <ul class="list-group " >     
+                <?php if(!empty($dados_vaz)){?>
+                        <strong><p>Histórico de vazamentos</p></strong>
+                    <?php foreach ($dados_vaz as $data){ 
+                        $status = $data->status_vazamento;
+                         if($status == 1){
+                            $status = " reclamação em aberto";
+                         }else  if($status == 0){
+                              $status = " reclamação fechada";
+                         }
+                        ?>
+                        <li class="list-group-item"><?php echo '<strong>Postado por: </strong>'.'<font class="text-success">'.$data->nome_usuario.'</font>'.'<br>'.
+                                    '<strong>Descrição: </strong>'.'<font class="text-success">'.$data->descricao_vazamento.'</font>'.'<br>'.
+                                    '<strong>Data: </strong>'.'<font class="text-success">'.$data->data_vazamento.'</font>'.'<br>'.
+                                    '<strong>Status :</strong> '.'<font class="text-success">'.$status.'</font>'?>
+                                
+                        </li>
+               
+                             
+                    <?php }?>
+                <?php }?>
+                    </ul>
+                </div>             
             </div>
                <br>
                 <?php if(!empty($cad_vaz)){?>
@@ -108,7 +125,7 @@
                 <?php }?>
               </div>    
           <div class="col-md-9 ">
-              <div id="map" style="border: 2px solid #000"></div>
+              <div id="map" style="border: 1px solid #000"></div>
           </div>
                     
           </div>
@@ -260,14 +277,32 @@
             google.maps.event.addDomListener(window,'load',init);
 
 
-            var segundos = 30;
-                    $("#cad_vaz").click( function(){
+            var segundos = 10;
+            
+             
+                    $("#fech_form").hide();
+                
+                
+                    $("button#cad_vaz").click( function(){
                         
+                        $("button#cad_vaz").hide();
+                        $("button#fech_form").show();
                         $(".lista").hide();
+               
+                        //setTimeout(function() {
+                        //$(".lista").show();
+                       // }, segundos * 1000);
+                    });
+                    
+                    $("button#fech_form").click( function(){
                         
-                        setTimeout(function() {
+                        $("button#fech_form").hide();
+                         $("button#cad_vaz").show();
                         $(".lista").show();
-                        }, segundos * 1000);
+               
+                        //setTimeout(function() {
+                        //$(".lista").show();
+                       // }, segundos * 1000);
                     });
                     
                     $("#btn_enviar_dados").click( function(){
