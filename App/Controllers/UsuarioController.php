@@ -30,8 +30,8 @@
                    // echo $dadoLogin;
                     if($dadoLogin != null){
                         $_SESSION["msg_login"] = "Dados validados";
-                        $_SESSION["nome_usuario"]=$dadoLogin;
-                        
+                        $_SESSION["nome_usuario"]= $dadoLogin->nome_usuario;
+                        $_SESSION['id_user'] = $dadoLogin->id_usuario;
                         
                         $this->redirect("usuario/login");
                         
@@ -78,6 +78,7 @@
         public function logout() {
             
             unset($_SESSION["nome_usuario"]);
+            unset($_SESSION["id_user"]);
             $this->redirect("vazamento");
             
         }

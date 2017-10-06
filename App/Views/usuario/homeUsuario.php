@@ -4,9 +4,8 @@
     session_start();
     $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
     
-    $dados_vaz =  VazamentoController::getVaz();
-      
-    
+    //atribui a variavel no array $dados_vaz os dados de todos os vazamentos
+    $dados_vaz =  VazamentoController::getVaz();   
 ?>
 <div class="row" id="linha_principal">
    <div class="col-lg-3">
@@ -84,7 +83,7 @@
                       <input type="hidden" name="uf" id="uf" required>
                       <input type="hidden" name="cidade" id="cidade" required>
                       <input type="hidden" name="rua" id="rua" required>
-                      
+                      <input type="hidden" name="id_usuario_logado" id="id_usuario_logado" value="<?php echo $_SESSION['id_user'];?>" required >
                       
                       <button type="submit" class="btn btn-primary" id="btn_enviar_dados">Salvar</button>
                      
@@ -93,14 +92,15 @@
                         </div>
                     </div>
                 </div>
-                 <div class="lista" style="width: auto; height: 350px;">
+                 <div class="lista" style="width: auto; height: 400px;">
                     <ul class="list-group " >     
-                <?php if(!empty($dados_vaz)){ 
+                <?php if(!empty($dados_vaz)){//se existir dados 
                     
-                            echo '<strong><p>Histórico de vazamentos</p></strong>'?>
+                            echo '<strong><p>Histórico de vazamentos cadastrados</p></strong>'?>
                         
-                    <?php foreach ($dados_vaz as $data){ 
+                    <?php foreach ($dados_vaz as $data){//percorre o array $dados_vaz 
                         $status = $data->status_vazamento;
+                        //converte a data do sql para o format
                         $data_sql = $data->data_vazamento;
                         $data_campo = date("d/m/Y", strtotime($data_sql));
                          if($status == 1){

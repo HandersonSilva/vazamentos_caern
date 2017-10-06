@@ -75,14 +75,14 @@
                     
                     $date = $_POST["data"];
                     $data_sql = date("y-m-d", strtotime($date));
-                    
+                    $id = $_POST["id_usuario_logado"];
                     $vazamento->setDescricao($_POST['descricaoV']);
                     $vazamento->setStatus(1);
                     $vazamento->setDate($data_sql);
                     $vazamento->setGravidade($_POST['intensidade']);
                     $vazamento->setTempo(0);
                     $vazamento->setFkPonto($idLocalizacao);
-                    $vazamento->setFkUsuario(1);
+                    $vazamento->setFkUsuario($id);
                     //salvando objeto vazamento no banco
                     $row = $vazamentoDAO->Inserir($vazamento);
                }
@@ -114,6 +114,8 @@
             }
             return $novo_texto; // Retorna o valor formatado
          }
+         
+         
        
      }
 

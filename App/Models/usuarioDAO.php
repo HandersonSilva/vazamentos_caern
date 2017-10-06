@@ -90,7 +90,7 @@
                 */
                 public function validarusuario($emailt, $senhat){
                     try {
-                        $sql = "SELECT nome_usuario FROM caern_usuario WHERE email_usuario = '$emailt' "
+                        $sql = "SELECT id_usuario,nome_usuario FROM caern_usuario WHERE email_usuario = '$emailt' "
                                 . "AND senha_usuario = '$senhat'";
                         
                         $query = $this->conPdo->prepare($sql);
@@ -99,7 +99,7 @@
                     if($query->execute()){
                         if($query->rowCount()>0){
                           while($row=$query->fetch(\PDO::FETCH_OBJ)){
-                              return $row->nome_usuario;
+                              return $row;
                           }
                            
                         }
