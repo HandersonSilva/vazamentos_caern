@@ -4,7 +4,7 @@
         $usuario_logado = isset($_SESSION["nome_usuario"])?$_SESSION["nome_usuario"]:"";
         $msg = isset($_SESSION["msg_login"])?$_SESSION["msg_login"]:"";
  ?>
-
+<script src="../public/script_site.js"></script>
 <div class="container" style="margin-top: 100px">
           <div class="row">
           <div class="col-md-3"></div>
@@ -12,15 +12,15 @@
               <form id="form_user" action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
                     <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email">
+                    <input type="email" class="form-control" id="email_log" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email">
 
                     </div>
                     <div class="form-group">
                     <label for="exampleInputPassword1">Senha</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="senha_log" placeholder="Digite sua senha">
+                    <input type="password" class="form-control" id="senha_log" name="senha_log" placeholder="Digite sua senha">
                     </div>
 
-                    <button type="submit" class="btn btn-primary pull-right">Login</button>
+                  <button type="submit" id="btn_login" class="btn btn-primary pull-right" >Login</button>
                     <a href="http://<?php echo APP_HOST; ?>usuario/Cadastro" ><label>Não possui conta?</label></a>
  
                </form>

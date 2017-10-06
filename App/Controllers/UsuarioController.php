@@ -70,9 +70,7 @@
                 $_SESSION["sucesso"] = $msg;
                 $this->redirect("Usuario/cadastro");
             }
-            
-
-           
+          
         }
         
         public function logout() {

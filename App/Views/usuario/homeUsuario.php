@@ -317,6 +317,16 @@
                         
                         
                     });
+                    //verifica se ja esta logado
+                    $("#menu_logar").click( function(){
+                        var log = document.getElementById("login_ver").value;
+                        
+                        if(log != ""){
+                            alert("Você já está logado");
+                            document.location.href="http://<?php echo APP_HOST;?>vazamento";
+                        }
+                        
+                    });
                     
                     
                     

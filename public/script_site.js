@@ -33,6 +33,32 @@ $(document).ready( function(){
 
 	});
         
+        //validacao formulario de login
+        $('#btn_login').click( function(){
+            var campo_vazio = false;
+            //verifica se os campos foram preenchidos
+            if($('#email_log').val() == ''){
+            $('#email_log').css({'border-color': '#A94442'});
+                campo_vazio = true;
+
+            }else{
+            $('#email_log').css({'border-color': '#00FA9A'});
+                                                }
+
+            if($('#senha_log').val() == ''){
+               $('#senha_log').css({'border-color': '#A94442'});
+                campo_vazio = true;
+
+            }else{
+                $('#senha_log').css({'border-color': '#00FA9A'});
+                             }                   
+
+            if(campo_vazio) return false;
+
+					
+
+	});
+        
         
     
 });
