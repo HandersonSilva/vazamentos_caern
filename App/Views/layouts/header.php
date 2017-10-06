@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     
     <!--inclui arquivo css customizado a pagina-->
-    <link rel="stylesheet" href="public/estilo_home.css">
-    <script src="public/script_site.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
+    <script type="text/javascript" src="public/script_site.js"></script>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg"
     ></script>
@@ -23,11 +23,16 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
-    body{
+            body{
       background-color: #80deea;
      
       
     }
+    #img_logo{
+        width:120px;
+        height: 47px;
+    }
+    
     .cad_vaz{
         margin-left: 45px;
     }
@@ -38,7 +43,7 @@
 }
     
     .form-control{
-        background-color: #e8eaf6;
+        background-color: #f5f5f5;
         align:center;
     }
 
@@ -50,7 +55,7 @@
     .lista{
        margin-top: 10px;
         padding: 5px;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     #col_end{
@@ -66,12 +71,16 @@
       border-radius: 10px;
       width: 100%;
     }
-    #form_login{
-        border: 1px solid #000;
+    #form_user{
+        padding: 10px;
+        border: 1px solid #78909c;
+        border-radius: 5px;
+        background-color: #eceff1;
     }
     
     .footer {
-    margin: 0px auto 0px auto;
+            margin-top: 20px; 
+            bottom: 0px;
             padding: 0px 0 0 0;
             color: #fff;
             height: 50px;
@@ -113,4 +122,4 @@
     </style>
     
 </head>
-<body>
+<body onload="contagem_regressiva(10);">

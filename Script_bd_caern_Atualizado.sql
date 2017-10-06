@@ -20,7 +20,7 @@ CREATE TABLE caern_ponto(
 	id_vazamento INT NOT NULL AUTO_INCREMENT,
 	descricao_vazamento TEXT NOT NULL,
 	status_vazamento INT NOT NULL DEFAULT 0 COMMENT '0 = reclamação fechada\n1 = reclamação aberta\n',
-    data_vazamento  DATETIME NOT NULL,
+    data_vazamento  DATE NOT NULL,
     gravidade_vazamento  VARCHAR(50) NOT NULL,
     tempo_vazamento  INT(11) NULL,
     fk_id_ponto  INT  NOT NULL,

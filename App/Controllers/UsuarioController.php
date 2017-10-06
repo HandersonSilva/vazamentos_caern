@@ -29,13 +29,15 @@
                     $dadoLogin=$usuario ->validarusuario($emailt, $senhat);
                    // echo $dadoLogin;
                     if($dadoLogin != null){
+                        $_SESSION["msg_login"] = "Dados validados";
                         $_SESSION["nome_usuario"]=$dadoLogin;
                         
                         
-                    $this->redirect("Vazamento");
+                        $this->redirect("usuario/login");
                         
                     }else{
-                        echo "usuario nao encontrado!!!!.";
+                        $_SESSION["msg_erro_login"] = "Usuário não encontrado!!!";
+                        $this->redirect("usuario/login");
                     }
             }
            
@@ -58,7 +60,7 @@
             if($usuarioD->verificaEmail($usuario->getEmail()) > 0){//retornou email
                 $msg = "Email já cadastrado";
                 $_SESSION["msg"] = $msg;
-                
+                $this->contagemRegressiva();
                 $this->redirect("usuario/Cadastro");
             
             }else{//nao retornou nenhum email
@@ -72,5 +74,18 @@
 
            
         }
+        
+        public function logout() {
+            
+            unset($_SESSION["nome_usuario"]);
+            $this->redirect("vazamento");
+            
+        }
+        
+        public static function UrlAtual(){
+            $dominio= $_SERVER['HTTP_HOST'];
+            $url = "http://" . $dominio. $_SERVER['REQUEST_URI'];
+            return $url;
+            }
     }
     

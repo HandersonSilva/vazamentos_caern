@@ -14,7 +14,7 @@
               <div class="page-header">
               <h2>Novo usuário</h2>          
           </div>
-              <form action="http://<?php echo APP_HOST;?>usuario/Salvar" method="POST">
+              <form action="http://<?php echo APP_HOST;?>usuario/Salvar" method="POST" id="form_user">
               <div class="form-group">
             <label for="exampleInputEmail1">Nome usuário</label>
             <input type="text" class="form-control" id="nome_cad" name="nome_usuario" aria-describedby="nome_usuario" placeholder="usuário">
@@ -37,14 +37,14 @@
 </form>
               <br>
               <?php if(!empty($msg)){?>
-               <?php echo'<div class="alert alert-danger" role="alert">'
+               <?php echo'<div class="alert alert-dangerrole="alert">'
                     .$_SESSION['msg'];
                      unset($_SESSION['msg']);?>
                 <?php echo'</div>';?>
               <?php }?>
               
                <?php if(!empty($sucesso)){?>
-               <?php echo'<div class="alert alert-success" role="alert">'
+               <?php echo'<div class="alert alert-success  close " role="alert">'
                     .$_SESSION['sucesso'];
                      unset($_SESSION['sucesso']);?>
                 <?php echo'</div>';?>

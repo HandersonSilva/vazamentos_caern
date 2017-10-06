@@ -1,9 +1,11 @@
 <?php
     use App\Controllers\VazamentoController;
+    
     session_start();
     $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
     
     $dados_vaz =  VazamentoController::getVaz();
+      
     
 ?>
 <div class="row" id="linha_principal">
@@ -93,10 +95,14 @@
                 </div>
                  <div class="lista" style="width: auto; height: 350px;">
                     <ul class="list-group " >     
-                <?php if(!empty($dados_vaz)){?>
-                        <strong><p>Histórico de vazamentos</p></strong>
+                <?php if(!empty($dados_vaz)){ 
+                    
+                            echo '<strong><p>Histórico de vazamentos</p></strong>'?>
+                        
                     <?php foreach ($dados_vaz as $data){ 
                         $status = $data->status_vazamento;
+                        $data_sql = $data->data_vazamento;
+                        $data_campo = date("d/m/Y", strtotime($data_sql));
                          if($status == 1){
                             $status = " reclamação em aberto";
                          }else  if($status == 0){
@@ -105,7 +111,7 @@
                         ?>
                         <li class="list-group-item"><?php echo '<strong>Postado por: </strong>'.'<font class="text-success">'.$data->nome_usuario.'</font>'.'<br>'.
                                     '<strong>Descrição: </strong>'.'<font class="text-success">'.$data->descricao_vazamento.'</font>'.'<br>'.
-                                    '<strong>Data: </strong>'.'<font class="text-success">'.$data->data_vazamento.'</font>'.'<br>'.
+                                    '<strong>Data: </strong>'.'<font class="text-success">'.$data_campo.'</font>'.'<br>'.
                                     '<strong>Status :</strong> '.'<font class="text-success">'.$status.'</font>'?>
                                 
                         </li>
@@ -311,5 +317,8 @@
                         
                         
                     });
+                    
+                    
+                    
                     
 </script>

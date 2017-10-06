@@ -2,10 +2,7 @@
 <div class="container">
     <div id="map" style="border: 2px solid #000"></div>
 </div>
-          
-              
-          
-      
+         
       <script>
             var map;
 
