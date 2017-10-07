@@ -1,5 +1,7 @@
 $(document).ready( function(){
     
+    
+    
     $('#btn_cad').click( function(){
         var campo_vazio = false;
         //verifica se os campos foram preenchidos

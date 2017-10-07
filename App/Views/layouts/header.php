@@ -40,7 +40,8 @@
     /*navbar*/
     .bg-dark {
         background-color: #2962ff!important;
-}
+    }
+    
     
     .form-control{
         background-color: #f5f5f5;
@@ -48,7 +49,7 @@
     }
 
     #linha_principal{
-
+      margin-top: 50px;
       margin-right: 80px; 
       margin-left: 0px;
     }
@@ -77,6 +78,7 @@
         border-radius: 5px;
         background-color: #eceff1;
     }
+    
     
     .footer {
             margin-top: 20px; 

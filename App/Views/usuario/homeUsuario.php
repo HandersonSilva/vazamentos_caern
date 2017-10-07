@@ -1,5 +1,6 @@
 <?php
     use App\Controllers\VazamentoController;
+    use App\Controllers\UsuarioController;
     
     session_start();
     $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
@@ -26,13 +27,14 @@
 
 
 <div class="row">
+        
               <div class="col-md-3" id="div_form">
                    <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                    <button class="btn btn-primary btn-md cad_vaz" id="cad_vaz" title="formularioCadastro" value="formulario de cadastro">Formulário de cadastro</button>
+                                    <button class="btn btn-primary btn-md cad_vaz" id="cad_vaz" title="formularioCadastro" value="formulario de cadastro">Cadastrar novo vazamento</button>
                                     <button class="btn btn-warning btn-md cad_vaz" id="fech_form" title="formularioCadastro" value="formulario de cadastro">Fechar formulário</button>
                                     <span class="glyphicon glyphicon-file">
                                 </span></a>
@@ -100,7 +102,7 @@
                         
                     <?php foreach ($dados_vaz as $data){//percorre o array $dados_vaz 
                         $status = $data->status_vazamento;
-                        //converte a data do sql para o format
+                        //converte a data do sql para o formato BR
                         $data_sql = $data->data_vazamento;
                         $data_campo = date("d/m/Y", strtotime($data_sql));
                          if($status == 1){
@@ -281,11 +283,19 @@
              
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);
+            
+            //verifica se ja esta logado
+                $("#menu_logar").click( function(){
+                    var log = document.getElementById("login_ver").value;
 
+                    if(log != ""){
+                        alert("Você já está logado");
+                        document.location.href="http://<?php echo APP_HOST; ?>vazamento";
+                    }
+
+                });
 
             var segundos = 10;
-            
-             
                     $("#fech_form").hide();
                 
                 
@@ -310,25 +320,5 @@
                         //$(".lista").show();
                        // }, segundos * 1000);
                     });
-                    
-                    $("#btn_enviar_dados").click( function(){
-                       
-                        $(".lista").show();
-                        
-                        
-                    });
-                    //verifica se ja esta logado
-                    $("#menu_logar").click( function(){
-                        var log = document.getElementById("login_ver").value;
-                        
-                        if(log != ""){
-                            alert("Você já está logado");
-                            document.location.href="http://<?php echo APP_HOST;?>vazamento";
-                        }
-                        
-                    });
-                    
-                    
-                    
-                    
+                     
 </script>

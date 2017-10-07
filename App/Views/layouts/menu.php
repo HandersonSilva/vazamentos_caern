@@ -1,11 +1,13 @@
 <?php
        
       use App\Controllers\UsuarioController;
-      session_start(); 
+      session_start();
+      $nome_usuario = isset($_SESSION['nome_usuario'])?$_SESSION['nome_usuario']:"";
       $url = UsuarioController::UrlAtual();
           
  ?>
-<nav class="navbar navbar-dark bg-dark" id="my_navbar">
+
+<nav class="navbar bg-dark my_navbar" id="my_navbar">
         <a class="navbar-brand" href="http://<?php echo APP_HOST; ?>">
             <img src="_fontes/imgs/logo_vaz_caern.png" id="img_logo"></a>
 
@@ -21,7 +23,7 @@
             <li class="nav-item">
                 <a class="nav-link" id="menu_logar" href="http://<?php echo APP_HOST; ?>usuario/Login">Logar</a>
                 <!--seta o value do campo com a sessao do usario logado-->
-                <input type="hidden" name="login_ver" id="login_ver" value="<?php echo $_SESSION['nome_usuario'];?>" required>
+                <input type="hidden" name="login_ver" id="login_ver" value="<?php echo $nome_usuario;?>" required>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="http://<?php echo APP_HOST; ?>usuario/logout">Logout</a>
@@ -31,7 +33,8 @@
     </div>
     
    </nav>
-<p class="text-right"><?php if(isset($_SESSION['nome_usuario']) && $url == 'http://'.APP_HOST.'vazamento'){
-        echo "Bem vindo(a) ".$_SESSION["nome_usuario"];
+
+    <p class="text-right" style="margin-right: 5px;margin-top: 5px;"><?php if(isset($_SESSION['nome_usuario']) && $url == 'http://'.APP_HOST.'vazamento'){
+        echo "Bem vindo(a) ".$nome_usuario;
     }?>
     </p>

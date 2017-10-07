@@ -74,7 +74,8 @@
                     $vazamento = new Vazamento();
                     
                     $date = $_POST["data"];
-                    $data_sql = date("y-m-d", strtotime($date));
+                    $data_sql = date("y-d-m", strtotime($date));
+                    
                     $id = $_POST["id_usuario_logado"];
                     $vazamento->setDescricao($_POST['descricaoV']);
                     $vazamento->setStatus(1);
