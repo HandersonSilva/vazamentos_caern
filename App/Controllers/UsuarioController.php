@@ -31,6 +31,7 @@
                     if($dadoLogin != null){
                         $_SESSION["msg_login"] = "Dados validados";
                         $_SESSION["nome_usuario"]= $dadoLogin->nome_usuario;
+                        $_SESSION["email_usuario"]= $dadoLogin->email_usuario;
                         $_SESSION['id_user'] = $dadoLogin->id_usuario;
                         
                         $this->redirect("usuario/login");
@@ -73,10 +74,39 @@
           
         }
         
+        
+        public function cadcom() {
+           $nome = $_POST["nome_com"];
+           $comentario = $_POST["comentario"];
+           
+           $usuario = new usuarioDAO();
+           
+           $cadastra = $usuario->cadastraComentario($nome, $comentario);
+           
+           if($cadastra > 0){
+               echo 'Comentario cadastrado...';
+               
+           } else {
+               
+           }
+        }
+        
+        public static function getComentarios() {
+            $usuario = new usuarioDAO();
+           
+           $coment = $usuario->retornaComentarios();
+           
+           if($coment != null){
+               return $coment;
+           }
+        }
+        
         public function logout() {
             
             unset($_SESSION["nome_usuario"]);
             unset($_SESSION["id_user"]);
+            unset($_SESSION["email_usuario"]);
+            
             $this->redirect("vazamento");
             
         }

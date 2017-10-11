@@ -22,6 +22,7 @@
             define('DB_NAME',"bd_caern");
             define('DB_PASSWORD',"");
             define('DB_DRIVER',"mysql");
+            define('IMG_LOGO',"_fontes/imgs/logo_vaz_caern.png");
             
             $this->url();
         }

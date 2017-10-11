@@ -1,22 +1,22 @@
  <?php
         session_start();
-        
+        $email_usuario_log = isset($_SESSION["email_usuario"])?$_SESSION["email_usuario"]:"";
         $usuario_logado = isset($_SESSION["nome_usuario"])?$_SESSION["nome_usuario"]:"";
         $msg = isset($_SESSION["msg_login"])?$_SESSION["msg_login"]:"";
  ?>
 <script src="../public/script_site.js"></script>
-<div class="container" style="margin-top: 100px">
+<div class="container" style="margin-top: 10px">
           <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <form id="form_user" action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
                     <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="email_log" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email">
+                    <label for="exampleInputEmail1">Email*</label>
+                    <input type="email" class="form-control" id="email_log" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email" value="<?php echo $email_usuario_log?>">
 
                     </div>
                     <div class="form-group">
-                    <label for="exampleInputPassword1">Senha</label>
+                    <label for="exampleInputPassword1">Senha*</label>
                     <input type="password" class="form-control" id="senha_log" name="senha_log" placeholder="Digite sua senha">
                     </div>
 
@@ -24,6 +24,7 @@
                     <a href="http://<?php echo APP_HOST; ?>usuario/Cadastro" ><label>Não possui conta?</label></a>
  
                </form>
+              <p id="msg" style="color: #d9534f"></p>
                 <?php if(!empty($usuario_logado)){?>
                   <?php echo '<p id="cronometro" >'.'</p>'?>
                   
@@ -39,18 +40,21 @@
 <script>
   var contador = 5;
         function contar() {
+            
             document.getElementById('cronometro').innerHTML = "Você será redirecionado em: "+contador;
             contador--;
         }
         function redirecionar() {
             contar();
             if (contador == 0) {
+                
                 document.location.href = 'http://<?php echo APP_HOST;?>vazamento';
             }
         }
         setInterval(redirecionar, 1000);
 
 
+        
 </script>
 
 

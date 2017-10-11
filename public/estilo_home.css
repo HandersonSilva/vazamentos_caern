@@ -21,6 +21,18 @@
     background-color: #2962ff!important;
 }
 
+#text-home{
+    color: #fff; 
+    margin-left: 10px;
+    padding-top: 2px;
+    padding-right: 3px;
+}
+
+#page-header{
+    background-color: #31708f;
+    margin-left: 10%;
+    border-radius: 25px;
+}
 .row{
     margin: 20px 20px 0px 20px;
     margin-bottom: 30px;
@@ -35,6 +47,9 @@
       height: 500px;
       box-shadow: 3px 3px 5px #888888;
      
+  }
+  .text_com{
+      font-family: 'Yantramanav';font-size: 18px;
   }
 
 /* estilo home principal*/

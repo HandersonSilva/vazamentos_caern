@@ -72,12 +72,15 @@
                 
                 
               }catch(PDOException $e){
-                throw new Exception("Erro ao cadstrar o vazamento...",500);
+                throw new Exception("Erro ao cadastrar o vazamento...",500);
               }
         }
         
         public function vazamentoDados() {
-            $sql = "SELECT u.nome_usuario , v.descricao_vazamento,v.status_vazamento,v.data_vazamento FROM caern_vazamento v INNER JOIN caern_usuario u ON  u.id_usuario = v.fk_id_usuario";
+            
+            try{
+            $sql = "SELECT u.nome_usuario , v.descricao_vazamento,v.status_vazamento,v.data_vazamento FROM caern_vazamento v "
+                    . "INNER JOIN caern_usuario u ON  u.id_usuario = v.fk_id_usuario order by v.data_vazamento desc";
             
             $query = $this->conPdo->prepare($sql);
             
@@ -90,5 +93,9 @@
                 }
             }
             $query = null;
+            
+            } catch (PDOException $ex){
+                throw new Exception("Erro ao buscar dados de vazamentos", 500);
         }
+      }
     }

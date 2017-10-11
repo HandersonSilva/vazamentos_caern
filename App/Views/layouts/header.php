@@ -12,7 +12,10 @@
      <link href='https://fonts.googleapis.com/css?family=Andika' rel='stylesheet'>
     <!-- Bootstrap CSS cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- utilizando fontes do google fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Yantramanav' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Viga' rel='stylesheet'>
     <!--inclui arquivo css customizado a pagina-->
     <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
     <script type="text/javascript" src="public/script_site.js"></script>
@@ -47,6 +50,31 @@
         background-color: #f5f5f5;
         align:center;
     }
+    
+    .lista_com{
+        margin-top: 10px;
+        padding: 5px;
+        overflow-y: auto;
+    }
+    .lista_com_person{
+       
+        padding: 0px;
+        background-color: transparent;
+        border: 0px;
+    }
+    
+    
+
+#hr_com{
+    border: 1px solid ;
+}
+
+   .navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #80deea;
+}
 
     #linha_principal{
       margin-top: 50px;

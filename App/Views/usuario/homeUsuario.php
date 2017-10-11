@@ -45,12 +45,12 @@
                            
                            <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
                       <div class="form-group">
-                          <textarea name="descricaoV" class="col-sm-12" cols="40%"  rows="3" id="descricao" placeholder="descrição"></textarea>
+                          <textarea name="descricaoV" id="descricaoV" class="col-sm-12" cols="40%"  rows="3" id="descricao" placeholder="descrição"></textarea>
                       </div>
                       
                       <div class="form-group">
                           <p>Data:</p>
-                          <input type="date" class="form-control" name="data" id="data">
+                          <input type="date"  class="form-control" name="data" id="data">
                       </div>
                        <div class="form-group">
                            <p>Selecione imagem do vazamento</p>
@@ -124,7 +124,7 @@
                     </ul>
                 </div>             
             </div>
-               <br>
+               
                 <?php if(!empty($cad_vaz)){?>
                 <?php echo'<div class="alert alert-success" role="alert">'
                     .$_SESSION['sucesso_vaz'];

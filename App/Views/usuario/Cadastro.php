@@ -16,18 +16,18 @@
           </div>
               <form action="http://<?php echo APP_HOST;?>usuario/Salvar" method="POST" id="form_user">
               <div class="form-group">
-            <label for="exampleInputEmail1">Nome usuário</label>
+            <label for="exampleInputEmail1">Nome usuário*</label>
             <input type="text" class="form-control" id="nome_cad" name="nome_usuario" aria-describedby="nome_usuario" placeholder="usuário">
            
             </div>
               
             <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
+            <label for="exampleInputEmail1">Email*</label>
             <input type="email" class="form-control" id="email_cad" name="email_usuario" aria-describedby="emailHelp" placeholder="Email">
            
             </div>
             <div class="form-group">
-    <label for="exampleInputPassword1">Senha</label>
+    <label for="exampleInputPassword1">Senha*</label>
     <input type="password" class="form-control" id="senha_cad" name="senha_usuario" placeholder="Senha">
   </div>
   
