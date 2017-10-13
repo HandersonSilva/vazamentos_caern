@@ -1,9 +1,12 @@
-<?php 
+<?php
+    use App\Controllers\VazamentoController;
+    use App\Controllers\UsuarioController;
+    
     session_start();
     $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
-    $id_vaz = isset($_SESSION['id_vaz'])?$_SESSION['id_vaz']:"";
-    $des_vaz = isset($_SESSION['desc_vazamento'])?$_SESSION['desc_vazamento']:"";
     
+    //atribui a variavel no array $dados_vaz os dados de todos os vazamentos
+    $dados_vaz =  VazamentoController::getVaz();   
 ?>
 <div class="row" id="linha_principal">
    <div class="col-lg-3">
@@ -23,14 +26,17 @@
 </div>
 
 
-<div class="row" >
+<div class="row">
+        
               <div class="col-md-3" id="div_form">
                    <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><button class="btn btn-primary" id="cad_vaz">Formulário de cadastro</button>
-                                <span class="glyphicon glyphicon-file">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <button class="btn btn-primary btn-md cad_vaz" id="cad_vaz" title="formularioCadastro" value="formulario de cadastro">Cadastrar novo vazamento</button>
+                                    <button class="btn btn-warning btn-md cad_vaz" id="fech_form" title="formularioCadastro" value="formulario de cadastro">Fechar formulário</button>
+                                    <span class="glyphicon glyphicon-file">
                                 </span></a>
                             </h4>
                         </div>
@@ -39,12 +45,12 @@
                            
                            <form action="http://<?php echo APP_HOST; ?>vazamento/cadastrar" id="form_dados" method="post">
                       <div class="form-group">
-                          <textarea name="descricaoV" class="col-sm-12" cols="40%"  rows="3" id="descricao" placeholder="descrição"></textarea>
+                          <textarea name="descricaoV" id="descricaoV" class="col-sm-12" cols="40%"  rows="3" id="descricao" placeholder="descrição"></textarea>
                       </div>
                       
                       <div class="form-group">
                           <p>Data:</p>
-                          <input type="date" class="form-control" name="data" id="data">
+                          <input type="date"  class="form-control" name="data" id="data">
                       </div>
                        <div class="form-group">
                            <p>Selecione imagem do vazamento</p>
@@ -79,7 +85,7 @@
                       <input type="hidden" name="uf" id="uf" required>
                       <input type="hidden" name="cidade" id="cidade" required>
                       <input type="hidden" name="rua" id="rua" required>
-                      
+                      <input type="hidden" name="id_usuario_logado" id="id_usuario_logado" value="<?php echo $_SESSION['id_user'];?>" required >
                       
                       <button type="submit" class="btn btn-primary" id="btn_enviar_dados">Salvar</button>
                      
@@ -88,18 +94,37 @@
                         </div>
                     </div>
                 </div>
-             <!--   <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                <p class="lista">Teste lista</p>
-                -->
+                 <div class="lista" style="width: auto; height: 400px;">
+                    <ul class="list-group " >     
+                <?php if(!empty($dados_vaz)){//se existir dados 
+                    
+                            echo '<strong><p>Histórico de vazamentos cadastrados</p></strong>'?>
+                        
+                    <?php foreach ($dados_vaz as $data){//percorre o array $dados_vaz 
+                        $status = $data->status_vazamento;
+                        //converte a data do sql para o formato BR
+                        $data_sql = $data->data_vazamento;
+                        $data_campo = date("d/m/Y", strtotime($data_sql));
+                         if($status == 1){
+                            $status = " reclamação em aberto";
+                         }else  if($status == 0){
+                              $status = " reclamação fechada";
+                         }
+                        ?>
+                        <li class="list-group-item"><?php echo '<strong>Postado por: </strong>'.'<font class="text-success">'.$data->nome_usuario.'</font>'.'<br>'.
+                                    '<strong>Descrição: </strong>'.'<font class="text-success">'.$data->descricao_vazamento.'</font>'.'<br>'.
+                                    '<strong>Data: </strong>'.'<font class="text-success">'.$data_campo.'</font>'.'<br>'.
+                                    '<strong>Status :</strong> '.'<font class="text-success">'.$status.'</font>'?>
+                                
+                        </li>
+               
+                             
+                    <?php }?>
+                <?php }?>
+                    </ul>
+                </div>             
             </div>
-               <br>
+               
                 <?php if(!empty($cad_vaz)){?>
                 <?php echo'<div class="alert alert-success" role="alert">'
                     .$_SESSION['sucesso_vaz'];
@@ -108,7 +133,7 @@
                 <?php }?>
               </div>    
           <div class="col-md-9 ">
-              <div id="map" style="border: 2px solid #000"></div>
+              <div id="map" style="border: 1px solid #000"></div>
           </div>
                     
           </div>
@@ -258,23 +283,42 @@
              
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);
+            
+            //verifica se ja esta logado
+                $("#menu_logar").click( function(){
+                    var log = document.getElementById("login_ver").value;
 
+                    if(log != ""){
+                        alert("Você já está logado");
+                        document.location.href="http://<?php echo APP_HOST; ?>vazamento";
+                    }
 
-            var segundos = 30;
-                    $("#cad_vaz").click( function(){
+                });
+
+            var segundos = 10;
+                    $("#fech_form").hide();
+                
+                
+                    $("button#cad_vaz").click( function(){
                         
+                        $("button#cad_vaz").hide();
+                        $("button#fech_form").show();
                         $(".lista").hide();
-                        
-                        setTimeout(function() {
-                        $(".lista").show();
-                        }, segundos * 1000);
+               
+                        //setTimeout(function() {
+                        //$(".lista").show();
+                       // }, segundos * 1000);
                     });
                     
-                    $("#btn_enviar_dados").click( function(){
-                       
+                    $("button#fech_form").click( function(){
+                        
+                        $("button#fech_form").hide();
+                         $("button#cad_vaz").show();
                         $(".lista").show();
-                        
-                        
+               
+                        //setTimeout(function() {
+                        //$(".lista").show();
+                       // }, segundos * 1000);
                     });
-                    
+                     
 </script>

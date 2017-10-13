@@ -12,11 +12,32 @@
        
         public function index(){
        
-           $this->retornaVazamento();
-          $this->render('usuario/homeUsuario');
+           try{
+            
+                $data = $this->getVaz();
+            
+                $this->render("usuario/homeUsuario");
+              
+            
+            
+          }catch(PDOException $e){
+            throw new Exception("Ops! Erro ao buscar dados no Banco",500);
+          }
+            
           
         }
         
+        public static function getVaz() {
+            $vazamentoD = new VazamentoDAO();
+            $dados = $vazamentoD->vazamentoDados();
+            
+            if($dados != null){
+                
+                return $dados;
+                      
+            }
+            
+        }
 
         //pegando os dados via post e mandando para class vazamentoDAO para cadstrar no banco
         public function cadastrar(){    
@@ -53,15 +74,16 @@
                     $vazamento = new Vazamento();
                     
                     $date = $_POST["data"];
-                    $data_sql = date("y-m-d", strtotime($date));
+                    $data_sql = date("y-d-m", strtotime($date));
                     
+                    $id = $_POST["id_usuario_logado"];
                     $vazamento->setDescricao($_POST['descricaoV']);
                     $vazamento->setStatus(1);
                     $vazamento->setDate($data_sql);
                     $vazamento->setGravidade($_POST['intensidade']);
                     $vazamento->setTempo(0);
                     $vazamento->setFkPonto($idLocalizacao);
-                    $vazamento->setFkUsuario(1);
+                    $vazamento->setFkUsuario($id);
                     //salvando objeto vazamento no banco
                     $row = $vazamentoDAO->Inserir($vazamento);
                }
@@ -78,19 +100,6 @@
             
         }
         
-        public function retornaVazamento(){
-            $vazamento = new VazamentoDAO();
-            
-            $dados_vazamento = $vazamento->vazamentoDados();
-            if(!empty($dados_vazamento)){
-                
-                    $_SESSION["id_vaz"] = $dados_vazamento->id_vazamento;
-                    $_SESSION["desc_vazamento"] = $dados_vazamento->descricao_vazamento;
-                 
-                  
-            }
-            
-        }
      
         public function limita_caracteres($texto, $limite, $quebra = true){
             $tamanho = strlen($texto);
@@ -106,6 +115,8 @@
             }
             return $novo_texto; // Retorna o valor formatado
          }
+         
+         
        
      }
 

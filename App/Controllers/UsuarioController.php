@@ -29,13 +29,16 @@
                     $dadoLogin=$usuario ->validarusuario($emailt, $senhat);
                    // echo $dadoLogin;
                     if($dadoLogin != null){
-                        $_SESSION["nome_usuario"]=$dadoLogin;
+                        $_SESSION["msg_login"] = "Dados validados";
+                        $_SESSION["nome_usuario"]= $dadoLogin->nome_usuario;
+                        $_SESSION["email_usuario"]= $dadoLogin->email_usuario;
+                        $_SESSION['id_user'] = $dadoLogin->id_usuario;
                         
-                        
-                    $this->redirect("Vazamento");
+                        $this->redirect("usuario/login");
                         
                     }else{
-                        echo "usuario nao encontrado!!!!.";
+                        $_SESSION["msg_erro_login"] = "Usuário não encontrado!!!";
+                        $this->redirect("usuario/login");
                     }
             }
            
@@ -58,7 +61,7 @@
             if($usuarioD->verificaEmail($usuario->getEmail()) > 0){//retornou email
                 $msg = "Email já cadastrado";
                 $_SESSION["msg"] = $msg;
-                
+                $this->contagemRegressiva();
                 $this->redirect("usuario/Cadastro");
             
             }else{//nao retornou nenhum email
@@ -68,9 +71,50 @@
                 $_SESSION["sucesso"] = $msg;
                 $this->redirect("Usuario/cadastro");
             }
-            
-
-           
+          
         }
+        
+        
+        public function cadcom() {
+           $nome = $_POST["nome_com"];
+           $comentario = $_POST["comentario"];
+           
+           $usuario = new usuarioDAO();
+           
+           $cadastra = $usuario->cadastraComentario($nome, $comentario);
+           
+           if($cadastra > 0){
+               echo 'Comentario cadastrado...';
+               
+           } else {
+               
+           }
+        }
+        
+        public static function getComentarios() {
+            $usuario = new usuarioDAO();
+           
+           $coment = $usuario->retornaComentarios();
+           
+           if($coment != null){
+               return $coment;
+           }
+        }
+        
+        public function logout() {
+            
+            unset($_SESSION["nome_usuario"]);
+            unset($_SESSION["id_user"]);
+            unset($_SESSION["email_usuario"]);
+            
+            $this->redirect("vazamento");
+            
+        }
+        
+        public static function UrlAtual(){
+            $dominio= $_SERVER['HTTP_HOST'];
+            $url = "http://" . $dominio. $_SERVER['REQUEST_URI'];
+            return $url;
+            }
     }
     
