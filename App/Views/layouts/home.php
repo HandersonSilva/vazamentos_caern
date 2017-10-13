@@ -118,15 +118,20 @@
                                 var estado = '<?=$ponto->estado_ponto?>';
                                 var data = '<?=$data_formatada?>';
                                 var status ='<?=$ponto->status_vazamento?>';
+                                var img = "";
                                 //verificar o status
-                                var icone = "";
+                                
                                 if(status == 1){
                                         status = "Vazamento  em Aberto";
-                                        icone = "_fontes/imgs/icon_vaz_caern2.png";
+                                  
+                                        img = '_fontes/imgs/icon_vaz_caern2.png';
                                 }else{
                                         status = "Vazamento Fechado";
-                                        icone = "_fontes/imgs/vaz_cadastrado.png";
+                                        img = '_fontes/imgs/vazamento_fechado.png';
+
+                                       
                                 }
+                                  
                                 var html = '<div style="witch:300px;">'+
                                         '<h4>Cadastrado por: '+usuario+'</h4>'+'<br/>'+
                                         '<h7>Data: '+data+'</h7>'+'<br/>'+
@@ -138,7 +143,7 @@
                                 var marker = new google.maps.Marker({
                                 position: new google.maps.LatLng(<?= $ponto->lat_ponto?>,<?= $ponto->log_ponto?>),
                                 animation:google.maps.Animation.prototype,
-                                icon:icone,
+                                icon:img,
                                 html: html
                            
                         
