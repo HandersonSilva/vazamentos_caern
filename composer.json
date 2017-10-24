@@ -1,0 +1,25 @@
+{
+    "autoload": {
+       "psr-4": {
+           "App\\": "App"
+
+           
+       }   
+   },
+
+   "name": "VAZAMENTO_CAERN",
+   
+   "require":{
+       "php":">=5.3"
+   },
+
+   "minimum-stability" : "alpha",
+
+   "authors": [{
+       "name":"Turma ADS 2015"
+   }]
+  
+}
+
+    
+  
