@@ -64,30 +64,6 @@
             }
                 }
                 
-              /*  public function retornaLogin($email, $senha) {
-                   try{ 
-                    $sql = "SELECT id_usuario,email_usuario, senha_usuario FROM caern_usuario WHERE email_usuario = '$email' "
-                            . "AND senha_usuario = '$senha'";
-                    
-                    $query = $this->conPdo->prepare($sql);
-                    
-                    
-                    if($query->execute()){
-                        if($query->rowCount() > 0){
-                            while ($row = $query->fetch(\PDO::FETCH_OBJ)) {
-                                
-                            }
-                            foreach ($query as $dados){
-                                return $dados->email_usuario;
-                            }
-                        }
-                    }
-                    $query = null;
-                    
-                } catch (PDOException $e){
-                    echo $e->getMessage();
-                }                
-                */
                 public function validarusuario($emailt, $senhat){
                     try {
                         $sql = "SELECT id_usuario,nome_usuario,email_usuario FROM caern_usuario WHERE email_usuario = '$emailt' "
@@ -152,6 +128,72 @@
                    throw new Exception("Erro ao na operação de cadastro",500);
                }
            }
-
-      
-    }
+           
+           public function comparaEmail($email) {
+               try {
+                   $sql = "SELECT id_usuario, email_usuario FROM caern_usuario WHERE email_usuario = '$email'";
+                   $query = $this->conPdo->prepare($sql);
+                   
+                   if($query->execute()){
+                       while ($row = $query->fetch(\PDO::FETCH_OBJ)) {
+                           return $row;
+                       }
+                       
+                   }
+                   $query = null;
+                   
+               } catch (Exception $exc) {
+                   throw new Exception("Erro ao buscar email", 500);
+               }
+             }
+             
+             public function salvarToken($token ,$fk_usuario) {
+                 $sql = "insert into tokens (token,fk_usuario) values('$token',$fk_usuario)";
+                 $inserir = $this->conPdo->prepare($sql);
+                 
+                 if($inserir->execute()){
+                     if($inserir->rowCount() > 0){
+                         return $inserir->rowCount();
+                     }
+                 }
+                 
+                 $inserir = null;
+                 
+             }
+             
+             public function verificaToken($token) {
+                 try {
+                     $sql = "SELECT fk_usuario, token FROM tokens WHERE token = '$token'";
+                     $verifica = $this->conPdo->prepare($sql);
+                     
+                     if($verifica->execute()){
+                         while ($row = $verifica->fetch(\PDO::FETCH_OBJ)) {
+                             return  $row;
+                         }
+                     }
+                     $verifica = null;
+                     
+                 } catch (Exception $exc) {
+                     throw new Exception("Erro ao tentar buscar token na base de dados",500);
+                 }
+                
+                 
+           }
+           
+           public function atualizaSenhaUsuario($nova_senha, $fk_usuario) {
+               try {
+                     $sql = "UPDATE caern_usuario SET senha_usuario = '$nova_senha' WHERE id_usuario = $fk_usuario";
+                     $update_senha = $this->conPdo->prepare($sql);
+                     
+                     if($update_senha->execute()){
+                         if($update_senha->rowCount() > 0):
+                             return $update_senha->rowCount();
+                         endif;
+                     }
+                     $update_senha = null;
+                     
+                 } catch (Exception $exc) {
+                     throw new Exception("Desculpe não foi possível concluir a operação",500);
+                 }
+           }
+   }

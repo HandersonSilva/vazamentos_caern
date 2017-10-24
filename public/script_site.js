@@ -1,5 +1,20 @@
 $(document).ready( function(){
     
+            var url_atual = window.location.href;
+            //verifica se ja esta logado
+                $("#menu_logar").click( function(){
+                    var log = document.getElementById("login_ver").value;
+                    
+                    if(log != ""){
+                        
+                        alert("Você já está logado\n Por favor faça logout para poder realizar o login");
+                        document.getElementById("menu_logar").href = "";
+                        document.location.href= url_atual;
+                        
+                    }
+
+                });
+    
     //lista de comentarios
      $("#btn_fechar_form").hide();
      
@@ -18,24 +33,34 @@ $(document).ready( function(){
      //validando formulario cadastro de vazamento
      $("#btn_enviar_dados").click( function(){
          var campo_vazio = false;
+         var texto_erro = "OPS!!! --- verifique: ";
+         var msg_erro = "";
          var quebra = "\n";
          if($("#lat").val() == "" && $("#long").val() == ""){
-             swal("Siga os seguintes passos: ", "Marque o ponto do vazamento no mapa"+quebra, "error");
+             msg_erro += "-->Marque o ponto do vazamento no mapa";
+             swal(texto_erro, msg_erro+quebra, "error");
              campo_vazio = true;
          }
          if($("#id_usuario_logado").val() == ""){
-             swal("Siga os seguintes passos: ", "Para cadastrar um vazamento é necessário está logado "+quebra, "error");
+             msg_erro += "-->Para cadastrar um vazamento é necessário está logado ";
+             swal(texto_erro, msg_erro+quebra, "error");
              campo_vazio = true;
          }
          if($("#descricaoV").val() == ""){
-             swal("Siga os seguintes passos: ", "Preencha o campo descrição "+quebra, "error");
+             msg_erro += "-->Preencha o campo descrição";
+             swal(texto_erro, msg_erro+quebra, "error");
              campo_vazio = true;
          }
          if($("#data").val() == ""){
-             swal("Siga os seguintes passos: ", "Precisamos que digite uma data "+quebra, "error");
+             msg_erro += "-->Precisamos que digite uma data ";
+             swal(texto_erro, msg_erro+quebra, "error");
              campo_vazio = true;
          }
-         if(campo_vazio){ return false;}
+         if(campo_vazio){
+             return false;
+         }
+             
+         
          
          
      });
@@ -101,14 +126,26 @@ $(document).ready( function(){
                                             }                                 
 
         if(campo_vazio) return false;
-
-					
-
+        
 	});
+        //confirma logout
+        $("#logout").click( function(){
+            //recupera o valor do campo val_logout
+            var logout = $("#val_logout").val();
+            swal({
+                title: "Sair do sistema?",
+                text: "Clique em ok para confirmar ou cancelar para abortar operação",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                   
+                  document.location.href= logout;
+                  
+                } 
+              });
+        });
         
-        
-        
-        
-        
-    
 });

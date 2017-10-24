@@ -1,27 +1,33 @@
- <?php 
+<?php
   use App\Controllers\UsuarioController;
+  use App\Controllers\HomeController;
+  // limite de itens
+   $limit = 10;
+   // contador
+  $count = 0;
   $usuario = UsuarioController::getComentarios();
- ?>
-
+  $feeds = HomeController::geraFeed();?>
 <script type="text/javascript" src="public/script_site.js"></script>
+<!--inclui arquivo css customizado a pagina-->
+<link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
 <div class="row">
     <div class="page-header" id="page-header">
         <h5 id="text-home" >Aqui você poderá visualizar os vazamentos já cadastrados por todos os usuários</h5>
     </div>
-    <div class="col-md-9" style="margin-top: 10px;">
+    <div class="col-md-9 col-xs-12" style="margin-top: 10px;">
         
         <div id="map" style="border: 2px solid #000"></div>
     </div>
     <div class="col-md-3" style="margin-top: 10px;" id="div_coment">
-        <a href="http://<?=APP_HOST?>vazamento"><button type="button" class="btn btn-default" id="btn_tela_hUsuario">Cadastrar um vazamento</button></a>
+        <a href="http://<?=APP_HOST;?>vazamento"><button type="button" class="btn btn-default col-md-10 col-sm-10" id="btn_tela_hUsuario">Cadastrar um vazamento</button></a>
         <br><br>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            <button class="btn btn-success btn-md" id="btn_abrir_form" title="formularioCadastro" value="formulario de cadastro">Deixe um comentário</button>
-                            <button class="btn btn-success btn-md" id="btn_fechar_form" title="formularioCadastro" value="formulario de cadastro">Minimizar</button>
+                            <button class="btn btn-success btn-md col-sm-12" id="btn_abrir_form" title="formularioCadastro" value="formulario de cadastro">Deixe um comentário</button>
+                            <button class="btn btn-success btn-md col-sm-12" id="btn_fechar_form" title="formularioCadastro" value="formulario de cadastro">Minimizar</button>
                         </a>
                     </h4>
                 </div>
@@ -74,11 +80,28 @@
     </div>
     
 </div>
-         
+<div class="row">
+    
+    
+    <div class="col-md-8">
+        <h4>Últimas notícias do RN</h4>
+        <?php if(!empty($feeds)){
+     foreach ($feeds->channel->item as $item ){
+         // formata e imprime uma string
+        printf('<a href="%s" title="%s" target="new" style="color:#0000FF;">%s</a><br>', $item->link, $item->title, $item->title,$item->picture);
+        // incrementamos a variável $count
+        $count++;
+        // caso nosso contador seja igual ao limite paramos a iteração
+        if($count == $limit) break;
+     }
+    }else{
+        echo 'Não foi possível carregar o feed ';
+    }?>
+    </div>
+    
+</div>    
       <script>
             var map;
-
-
             //funcao Map
              function init(){
                 var param = {//setando os parametros do mapa
@@ -118,20 +141,15 @@
                                 var estado = '<?=$ponto->estado_ponto?>';
                                 var data = '<?=$data_formatada?>';
                                 var status ='<?=$ponto->status_vazamento?>';
-                                var img = "";
                                 //verificar o status
-                                
+                                var icone = "";
                                 if(status == 1){
                                         status = "Vazamento  em Aberto";
-                                  
-                                        img = '_fontes/imgs/icon_vaz_caern2.png';
+                                        icone = "_fontes/imgs/icon_vaz_caern2.png";
                                 }else{
                                         status = "Vazamento Fechado";
-                                        img = '_fontes/imgs/vazamento_fechado.png';
-
-                                       
+                                        icone = "_fontes/imgs/vaz_cadastrado.png";
                                 }
-                                  
                                 var html = '<div style="witch:300px;">'+
                                         '<h4>Cadastrado por: '+usuario+'</h4>'+'<br/>'+
                                         '<h7>Data: '+data+'</h7>'+'<br/>'+
@@ -143,7 +161,7 @@
                                 var marker = new google.maps.Marker({
                                 position: new google.maps.LatLng(<?= $ponto->lat_ponto?>,<?= $ponto->log_ponto?>),
                                 animation:google.maps.Animation.prototype,
-                                icon:img,
+                                icon:icone,
                                 html: html
                            
                         

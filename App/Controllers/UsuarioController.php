@@ -1,9 +1,11 @@
 <?php
     namespace App\Controllers;
+    session_start();
     use App\Models\usuarioDAO;
     use App\Models\Entidades\Usuario;
-    session_start();
-
+    use PHPMailer\PHPMailer\PHPMailer;
+  
+   
     class UsuarioController extends Controller
     {
         public function index(){
@@ -17,6 +19,13 @@
         public function Login(){
             $this->render("usuario/Login");
         }
+        public function redefinir() {
+            $this->render("usuario/redefinirSenha");
+        }
+        
+        public function newsenha() {
+                $this->render("usuario/novaSenha");
+            }
         public function validaLogin(){
             
             $emailt = $_POST['email_log'];
@@ -43,11 +52,7 @@
             }
            
         }
-
-        public function sucesso(){      
-            $this->render("usuario/sucesso");
-        }
-
+        
         public function Salvar(){
             $usuarioD = new usuarioDAO();
             $usuario = new Usuario();
@@ -61,7 +66,7 @@
             if($usuarioD->verificaEmail($usuario->getEmail()) > 0){//retornou email
                 $msg = "Email já cadastrado";
                 $_SESSION["msg"] = $msg;
-                $this->contagemRegressiva();
+          
                 $this->redirect("usuario/Cadastro");
             
             }else{//nao retornou nenhum email
@@ -84,7 +89,7 @@
            $cadastra = $usuario->cadastraComentario($nome, $comentario);
            
            if($cadastra > 0){
-               echo 'Comentario cadastrado...';
+               $this->redirect("home");
                
            } else {
                
@@ -92,7 +97,7 @@
         }
         
         public static function getComentarios() {
-            $usuario = new usuarioDAO();
+           $usuario = new usuarioDAO();
            
            $coment = $usuario->retornaComentarios();
            
@@ -107,14 +112,105 @@
             unset($_SESSION["id_user"]);
             unset($_SESSION["email_usuario"]);
             
-            $this->redirect("vazamento");
+            $this->redirect("home");
             
         }
         
         public static function UrlAtual(){
-            $dominio= $_SERVER['HTTP_HOST'];
-            $url = "http://" . $dominio. $_SERVER['REQUEST_URI'];
-            return $url;
+                    $dominio= $_SERVER['HTTP_HOST'];
+                    $url = "http://" . $dominio. $_SERVER['REQUEST_URI'];
+                    return $url;
             }
+            
+        public function validaEmailRecup() {
+                $usuarioDao = new usuarioDAO();
+                
+                $email = $_POST['email_recup'];
+                $email_existe = $usuarioDao->comparaEmail($email);
+                
+                if(!empty($email_existe)){
+                   $id_usuario = $email_existe->id_usuario; 
+                   
+                   $token = uniqid();
+                   $usuarioDao->salvarToken($token, $id_usuario);
+                   
+                   //informacoes do email
+                   $this->enviaLink($email,$token);
+                    
+                    
+                }else{
+                    echo 'Email nao cadastrado';
+                }
+                
+            }
+            
+            public function enviaLink($para,$token) {
+                $email_setup = "caernvazamentos@gmail.com";
+
+                $mail = new PHPMailer();
+               
+                // Configura para envio de e-mails usando SMTP
+                $mail->isSMTP();
+                // Servidor SMTP
+                $mail->Host = 'smtp.gmail.com';
+                // Usar autenticação SMTP
+                $mail->SMTPAuth = true;
+                // Usuário da conta
+                $mail->Username = $email_setup;
+                // Senha da conta
+                $mail->Password = 'ca123ern';
+                // Tipo de encriptação que será usado na conexão SMTP
+                $mail->SMTPSecure = 'ssl';
+                // Porta do servidor SMTP
+                $mail->Port = 465;
+                // Informa se vamos enviar mensagens usando HTML
+                $mail->IsHTML(true);
+                // Email do Remetente
+                $mail->From = $email_setup;
+                // Nome do Remetente
+                $mail->FromName = 'Vazamentos-caern';
+                // Endereço do e-mail do destinatário
+                $mail->addAddress($para);
+                // Assunto do e-mail
+                $mail->Subject = 'Redefinição de senha!!!';
+                // Mensagem que vai no corpo do e-mail
+                
+                $mail->Body = '<h4>Você está recebendo o link para redefinição de senha</h4><br>'.
+                                'Clique no link e depois copie e cole o código gerado<br><br>'.
+                                '<a href="http://localhost/vazamentos_caern/usuario/newsenha">Redefinir senha</a><br><br>'.
+                                '<strong>Código: </strong>'.$token;
+                
+
+                // Envia o e-mail e captura o sucesso ou erro
+                if($mail->Send()):
+                    echo 'Enviado com sucesso !';
+                else:
+                    echo 'Erro ao enviar Email:' . $mail->ErrorInfo;
+                endif;
+            }
+            
+            public function validaToken() {
+                $usuarioDao = new usuarioDAO();
+                
+                //recupera a nova senha e token digitados no formulario de redefinição
+                $nova_senha = $_POST["senha_nov"];
+                $token = $_POST["token"];
+                //verifica se o token vindo pelo formulario existe no banco
+                $verifica = $usuarioDao->verificaToken($token);
+                
+                if(!empty($verifica)){//caso exista o token atualiza a senha
+                    $fk_usuario =  $verifica->fk_usuario;
+                    $atualizar = $usuarioDao->atualizaSenhaUsuario($nova_senha, $fk_usuario);
+                    if($atualizar > 0){
+                        echo "Senha atualizada";
+                    }else{
+                        echo "Erro ao atualizar senha";
+                    }
+                    
+                }else{
+                    echo "Forneça um token válido";
+                }
+            }
+            
     }
     

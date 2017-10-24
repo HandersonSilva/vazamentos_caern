@@ -26,9 +26,9 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
-            body{
+       html body{
       background-color: #80deea;
-     
+      margin: opx;
       
     }
     #img_logo{
@@ -44,10 +44,14 @@
     .bg-dark {
         background-color: #2962ff!important;
     }
+    #col_login{
+     margin-top: 40px;
+ }
     
     
     .form-control{
         background-color: #f5f5f5;
+        height: 40px;
         align:center;
     }
     
@@ -82,7 +86,7 @@
       margin-left: 0px;
     }
     .lista{
-       margin-top: 10px;
+        margin-top: 10px;
         padding: 5px;
         overflow-y: auto;
     }
@@ -133,7 +137,7 @@
         }
       
         #div_form{
-            padding: 2px;
+            padding: 5px;
             border: 0.5px solid ;
             border-color: #64b5f6;
         }
@@ -143,13 +147,32 @@
             width: 100%
         }
         #map {
-            margin-top: 20px;
-            width: 100%;
+            margin-top: auto;
+            width: 95%;
             height: 500px;
- }
+        }
+ 
+        .cad_vaz{
+            margin-left: 0px;
+        }
+        
+        #page-header{
+            margin: auto;
+        }
+        .col-sm-12{
+            margin: 1px;
+        }
+        div.col-md-9{
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        
+        .lista{
+            padding: 0px;
+    }
              
 }
     </style>
     
 </head>
-<body onload="contagem_regressiva(10);">
+<body>

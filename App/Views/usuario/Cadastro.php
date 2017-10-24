@@ -1,12 +1,11 @@
- <?php 
-  session_start();
-  $msg = isset($_SESSION['msg'])? $_SESSION['msg'] : "";
-  $sucesso = isset($_SESSION['sucesso'])? $_SESSION['sucesso'] : "";
+ <?php
+session_start();
+$msg = isset($_SESSION['msg'])? $_SESSION['msg'] : "";
+$sucesso = isset($_SESSION['sucesso'])? $_SESSION['sucesso'] : "";
  
  ?>
 <script src="../public/script_site.js"></script>
-    
-      <div class="container" style="margin-top: 100px">
+   <div class="container" style="margin-top: 100px">
           
           <div class="row">
           <div class="col-md-3"></div>
@@ -37,7 +36,7 @@
 </form>
               <br>
               <?php if(!empty($msg)){?>
-               <?php echo'<div class="alert alert-dangerrole="alert">'
+               <?php echo'<div class="alert alert-danger" role="alert">'
                     .$_SESSION['msg'];
                      unset($_SESSION['msg']);?>
                 <?php echo'</div>';?>

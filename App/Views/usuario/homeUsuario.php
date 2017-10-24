@@ -1,13 +1,14 @@
 <?php
+     session_start();
     use App\Controllers\VazamentoController;
     use App\Controllers\UsuarioController;
     
-    session_start();
     $cad_vaz = isset($_SESSION['sucesso_vaz'])?$_SESSION['sucesso_vaz']:"";
-    
+    $url = UsuarioController::UrlAtual();
     //atribui a variavel no array $dados_vaz os dados de todos os vazamentos
     $dados_vaz =  VazamentoController::getVaz();   
 ?>
+<script src="../public/script_site.js"></script>
 <div class="row" id="linha_principal">
    <div class="col-lg-3">
     <div class="input-group">
@@ -28,7 +29,7 @@
 
 <div class="row">
         
-              <div class="col-md-3" id="div_form">
+              <div class="col-md-3 col-sm-2" id="div_form">
                    <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -125,11 +126,20 @@
                 </div>             
             </div>
                
-                <?php if(!empty($cad_vaz)){?>
-                <?php echo'<div class="alert alert-success" role="alert">'
-                    .$_SESSION['sucesso_vaz'];
-                     unset($_SESSION['sucesso_vaz']);?>
-                <?php echo'</div>';?>
+                <?php if(!empty($cad_vaz)){
+                    
+                    echo '<script>swal({
+                                text:"Vazamento cadastrado com sucesso",
+                                icon: "success",
+                            });</script>';
+                
+                
+                    
+                     unset($_SESSION['sucesso_vaz']);
+                    ?>
+                
+                    
+                
                 <?php }?>
               </div>    
           <div class="col-md-9 ">
@@ -148,6 +158,7 @@
       
       
           <script>
+                  
         var map;
             var ponto = [];
             var dadosGeocode = {
@@ -284,18 +295,7 @@
              //Chamando a função inicial
             google.maps.event.addDomListener(window,'load',init);
             
-            //verifica se ja esta logado
-                $("#menu_logar").click( function(){
-                    var log = document.getElementById("login_ver").value;
-
-                    if(log != ""){
-                        alert("Você já está logado");
-                        document.location.href="http://<?php echo APP_HOST; ?>vazamento";
-                    }
-
-                });
-
-            var segundos = 10;
+                
                     $("#fech_form").hide();
                 
                 

@@ -27,6 +27,19 @@
          
           
         }
+        
+        public static function geraFeed() {
+            ini_set('allow_url_fopen', 1);
+            ini_set('allow_url_include', 1);
+
+            // caminho do feed do meu blog
+            $feed = 'http://g1.globo.com/dynamo/rn/rio-grande-do-norte/rss2.xml';
+            // leitura do feed
+            $rss = simplexml_load_file($feed);
+            
+            
+            return $rss;
+        }
        
      }
 
