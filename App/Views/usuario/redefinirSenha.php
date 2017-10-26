@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  $email_enviado = isset($_SESSION["email_sucesso"]) ? $_SESSION["email_sucesso"] : "";
+?>
 <script src="../public/script_site.js"></script>
 <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
 <div class="container" style="margin-top: 50px">
@@ -15,7 +19,8 @@
                     
                </form>
               
-              <p id="msg" style="color: #d9534f"></p>
+              <p id="msg" style="color: #d9534f"><?php echo $email_enviado;              
+                     unset($_SESSION["email_sucesso"]);?></p>
                 
               </div>
           

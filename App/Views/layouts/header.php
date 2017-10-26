@@ -37,7 +37,7 @@
     }
     
     .cad_vaz{
-        margin-left: 45px;
+        margin-left: 25px;
     }
     
     /*navbar*/
@@ -81,7 +81,7 @@
 }
 
     #linha_principal{
-      margin-top: 50px;
+      margin-top: 100px;
       margin-right: 80px; 
       margin-left: 0px;
     }

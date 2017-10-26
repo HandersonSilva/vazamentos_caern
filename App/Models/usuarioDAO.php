@@ -147,8 +147,8 @@
                }
              }
              
-             public function salvarToken($token ,$fk_usuario) {
-                 $sql = "insert into tokens (token,fk_usuario) values('$token',$fk_usuario)";
+             public function salvarToken($token ,$fk_usuario,$hora_atual) {
+                 $sql = "insert into tokens (token,fk_usuario,tempo_token) values('$token',$fk_usuario,'$hora_atual')";
                  $inserir = $this->conPdo->prepare($sql);
                  
                  if($inserir->execute()){
@@ -163,7 +163,7 @@
              
              public function verificaToken($token) {
                  try {
-                     $sql = "SELECT fk_usuario, token FROM tokens WHERE token = '$token'";
+                     $sql = "SELECT fk_usuario, token,tempo_token FROM tokens WHERE token = '$token'";
                      $verifica = $this->conPdo->prepare($sql);
                      
                      if($verifica->execute()){

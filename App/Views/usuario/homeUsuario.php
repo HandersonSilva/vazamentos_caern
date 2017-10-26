@@ -35,8 +35,8 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                    <button class="btn btn-primary btn-md cad_vaz" id="cad_vaz" title="formularioCadastro" value="formulario de cadastro">Cadastrar novo vazamento</button>
-                                    <button class="btn btn-warning btn-md cad_vaz" id="fech_form" title="formularioCadastro" value="formulario de cadastro">Fechar formulário</button>
+                                    <button class="btn btn-primary btn-md col-md-10 col-sm-12 cad_vaz" id="cad_vaz" title="formularioCadastro" value="formulario de cadastro">Cadastrar novo vazamento</button>
+                                    <button class="btn btn-warning btn-md col-md-10 col-sm-12  cad_vaz" id="fech_form" title="formularioCadastro" value="formulario de cadastro">Fechar formulário</button>
                                     <span class="glyphicon glyphicon-file">
                                 </span></a>
                             </h4>
@@ -51,7 +51,7 @@
                       
                       <div class="form-group">
                           <p>Data:</p>
-                          <input type="date"  class="form-control" name="data" id="data">
+                          <input type="date"  class="form-control" name="data" id="data" maxlength="10">
                       </div>
                        <div class="form-group">
                            <p>Selecione imagem do vazamento</p>
@@ -109,19 +109,21 @@
                          if($status == 1){
                             $status = " reclamação em aberto";
                          }else  if($status == 0){
-                              $status = " reclamação fechada";
+                              $status = "reclamação fechada";
                          }
                         ?>
                         <li class="list-group-item"><?php echo '<strong>Postado por: </strong>'.'<font class="text-success">'.$data->nome_usuario.'</font>'.'<br>'.
                                     '<strong>Descrição: </strong>'.'<font class="text-success">'.$data->descricao_vazamento.'</font>'.'<br>'.
                                     '<strong>Data: </strong>'.'<font class="text-success">'.$data_campo.'</font>'.'<br>'.
-                                    '<strong>Status :</strong> '.'<font class="text-success">'.$status.'</font>'?>
+                                    '<strong>Status :</strong> '.'<font class="text-success"  id="status">'.$status.'</font>'?>
                                 
                         </li>
                
                              
                     <?php }?>
-                <?php }?>
+                <?php }else{
+                    echo "<p>Nenhum vazamento cadastrado até agora!!!</p>";
+                }?>
                     </ul>
                 </div>             
             </div>
@@ -158,7 +160,8 @@
       
       
           <script>
-                  
+              
+               
         var map;
             var ponto = [];
             var dadosGeocode = {
@@ -320,5 +323,6 @@
                         //$(".lista").show();
                        // }, segundos * 1000);
                     });
+                  
                      
 </script>
