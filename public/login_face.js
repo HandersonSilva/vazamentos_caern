@@ -107,7 +107,7 @@ function loginFacebook() {
                 data: {login:loginFace},
                 success:function(data){
             
-                   console.log("login realizado com sucesso!!!");
+                   
                     
                 },
                 error: function (result) {

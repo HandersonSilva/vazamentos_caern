@@ -29,6 +29,7 @@
             }
         public function facebook() {
             $login_face = isset($_POST['login'])?$_POST['login']:"";
+            echo $login_face;
             if($login_face == 'connected'){
                 $_SESSION['login_face'] = $login_face;
                 $this->render("usuario/homeUsuario");
