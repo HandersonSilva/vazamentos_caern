@@ -5,7 +5,7 @@
         $msg = isset($_SESSION["msg_login"])?$_SESSION["msg_login"]:"";
  ?>
 <script src="../public/script_site.js"></script>
-
+<script src="../public/jquery-3.2.1.min.js"></script>
 <script src="../public/login_face.js"></script>
 <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
 <div class="container" style="margin-top: 50px">

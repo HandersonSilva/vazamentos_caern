@@ -19,7 +19,7 @@
     <!--inclui arquivo css customizado a pagina-->
     <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
     <script type="text/javascript" src="public/script_site.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/public/jquery-3.2.1.min.js"></script>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg"
     ></script>
