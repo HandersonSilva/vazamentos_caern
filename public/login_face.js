@@ -19,11 +19,11 @@
     if (response.status === 'connected') {
             loginFace ='connected';
             $(function(){
-                $.ajax()({
+                $.ajax({
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {login:loginFace},
-                    success:function(data){
+                    success:function(){
                 
                         //alert(data);
                             //redirecionar para outra pagina
@@ -97,11 +97,11 @@ function loginFacebook() {
     FB.login(function(response) {
         if (response.authResponse) {
             $(function(){
-                $.ajax()({
+                $.ajax({
                 type:"POST",
                 url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                 data: {login:loginFace},
-                success:function(data){
+                success:function(){
             
                    
                     
