@@ -15,7 +15,7 @@
                 document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
               }*/
               jQuery(function(){
-                $.ajax({
+                jQuery.ajax({
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {login:loginFace},
