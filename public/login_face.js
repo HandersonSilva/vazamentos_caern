@@ -1,12 +1,5 @@
 
-    //pegando o click do button
-    window.onload = function(){
-        jQuery(document).ready(function($){
-            $("#btn_login_face").click( function(){
-                loginFacebook();
-            });
-        });
-    }
+  
   //var loginFace = "";
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -18,37 +11,45 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
             loginFace ='connected';
-            $(function(){
+            window.onload = function(){
+                document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
+              }
+        
                 $.ajax({
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {login:loginFace},
                     success:function(){
-                
+                        
                         //alert(data);
                             //redirecionar para outra pagina
                       //  window.location = "http://handersonsilva.com/vazamentos_caern/usuario/facebook";
                     }
                });      
-            });  
+            
     }
-    /*
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
              // The person is not logged into your app or we are unable to tell.
+               //pegando o click do button
+            window.onload = function(){
+                jQuery(document).ready(function($){
+                    $("#btn_login_face").click( function(){
+                        loginFacebook();
+                    });
+                });
+            }
         //resolvendo problema de carregamento da pagina
           window.onload = function(){
-            document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
+            document.getElementById('#btn_login_face').value = 'Entre com o facebook';
           }
         } else{
 
             //resolvendo problema de carregamento da pagina
             window.onload = function(){
-                document.getElementById('status').innerHTML = 'Please log ' +
-                'into this app.';
+                document.getElementById('#btn_login_face').value = 'Entre com o facebook';
               }
           
-        }*/
+        }
    
     
     

@@ -7,7 +7,7 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <!--incluindo jquery a pagina-->
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="-->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"></script>
      <link href='https://fonts.googleapis.com/css?family=Andika' rel='stylesheet'>
     <!-- Bootstrap CSS cdn -->
@@ -19,7 +19,7 @@
     <!--inclui arquivo css customizado a pagina-->
     <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
     <script type="text/javascript" src="public/script_site.js"></script>
-    <script  src="public/jquery-3.2.1.min.js"></script>
+   
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg"
     ></script>
