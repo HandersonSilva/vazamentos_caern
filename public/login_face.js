@@ -21,13 +21,13 @@
             $(function(){
                 $.ajax({
                     type:"POST",
-                    url:"http://handersonsilva.com/login_face/controller.php",
+                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {login:loginFace},
                     success:function(data){
                 
-                        alert(data);
+                        //alert(data);
                             //redirecionar para outra pagina
-                        window.location = "http://handersonsilva.com/login_face/sucesso.php";
+                      //  window.location = "http://handersonsilva.com/vazamentos_caern/usuario/facebook";
                     }
                });      
             });  
@@ -89,7 +89,32 @@ FB.init({
 FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
 });
-FB.Event.subscribe('auth.login', function () {
+
+};
+
+//função login
+function loginFacebook() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+            $(function(){
+                $.ajax({
+                type:"POST",
+                url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
+                data: {login:loginFace},
+                success:function(data){
+            
+                   
+                    
+                },
+                error: function (result) {
+                    // Como requisitar $resposta e mostrar ela aqui
+                }
+            });      
+        });
+        }       
+    });
+ }
+/* FB.Event.subscribe('auth.login', function () {
     loginFace = 'connected';
     $(function(){
             $.ajax({
@@ -106,18 +131,7 @@ FB.Event.subscribe('auth.login', function () {
             }
         });      
     });
-});
-};
-
-//função login
-function loginFacebook() {
-    FB.login(function(response) {
-        if (response.authResponse) {
-      
-        }       
-    });
- }
-
+});*/
 // Load the SDK asynchronously
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
