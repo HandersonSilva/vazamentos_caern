@@ -24,8 +24,7 @@
     ></script>
     <!--framework axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!--AJAX-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   
 
     <style>
        html body{
