@@ -27,6 +27,17 @@
         public function newsenha() {
                 $this->render("usuario/novaSenha");
             }
+        public function facebook() {
+            $login_face = isset($_POST['login'])?$_POST['login']:"";
+            if($login_face == 'connected'){
+                $_SESSION['login_face'] = $login_face;
+                $this->render("usuario/homeUsuario");
+            }else {
+                $_SESSION["msg_login"] = "Não foi Possivel conectar ao Facebook";
+                $this->redirect("usuario/login");
+            }
+               
+        }
         public function validaLogin(){
             
             $emailt = $_POST['email_log'];

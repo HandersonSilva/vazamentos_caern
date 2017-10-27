@@ -3,9 +3,7 @@
     window.onload = function(){
         jQuery(document).ready(function($){
             $("#btn_login_face").click( function(){
-    
-                 alert("Aqui será implementado o login do facebook");
-        
+                loginFacebook();
             });
         });
     }
@@ -91,9 +89,10 @@ FB.init({
 FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
 });
+};
 
 //função login
- /*function loginFacebook() {
+function loginFacebook() {
     FB.login(function(response) {
         if (response.authResponse) {
       
@@ -104,11 +103,11 @@ FB.getLoginStatus(function(response) {
         $(function(){
                 $.ajax({
                 type:"POST",
-                url:"http://handersonsilva.com/login_face/controller.php",
+                url:"http://handersonsilva.com/usuario/facebook",
                 data: {login:loginFace},
                 success:function(data){
             
-                    alert(data);
+                   console.log("login realizado com sucesso!!!");
                     
                 },
                 error: function (result) {
@@ -116,11 +115,8 @@ FB.getLoginStatus(function(response) {
                 }
             });      
         });
-    });*/
-   // }
-
-
-};
+    });
+ }
 
 // Load the SDK asynchronously
 (function(d, s, id) {
