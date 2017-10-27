@@ -11,10 +11,10 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
             loginFace ='connected';
-            window.onload = function(){
+            /*window.onload = function(){
                 document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
-              }
-        
+              }*/
+              jQuery(function(){
                 $.ajax({
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
@@ -25,7 +25,8 @@
                             //redirecionar para outra pagina
                       //  window.location = "http://handersonsilva.com/vazamentos_caern/usuario/facebook";
                     }
-               });      
+               }); 
+            });     
             
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
@@ -39,15 +40,15 @@
                 });
             }
         //resolvendo problema de carregamento da pagina
-          window.onload = function(){
+         /* window.onload = function(){
             document.getElementById('#btn_login_face').value = 'Entre com o facebook';
-          }
+          }*/
         } else{
 
             //resolvendo problema de carregamento da pagina
-            window.onload = function(){
+           /* window.onload = function(){
                 document.getElementById('#btn_login_face').value = 'Entre com o facebook';
-              }
+              }*/
           
         }
    
