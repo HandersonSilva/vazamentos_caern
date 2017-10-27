@@ -14,7 +14,7 @@
           <div class="col-md-6" id="col_login">
               <h3>Login do usuário</h3>
               <form id="form_user" action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
-                <button type="button" style="  width: 100%; height: 50%;" id="btn_login_face" class="btn btn-primary" >ENTRE com o facebook</button>
+                <button type="button" style="  width: 100%; height: 50%;" id="btn_login_face" class="btn btn-primary" >Entre com o facebook</button>
                    
                     <div class="form-group">
                     <label for="exampleInputEmail1">Email*</label>
