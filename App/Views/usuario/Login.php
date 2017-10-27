@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-md-6"><a href="http://<?php echo APP_HOST; ?>usuario/Cadastro" ><label>Não possui conta?</label></a></div>
                         <div class=" col-md-6 text-right">
-                            <a href="http://<?=APP_HOST;?>usuario/redefinir" ><label>Esqueci a senha</label></a>
+                            <a href="http://<?=APP_HOST;?>usuario/redefinir" ><label>Esqueci minha senha</label></a>
                     </div>
                </div> 
                </form>

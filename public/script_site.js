@@ -1,5 +1,5 @@
 $(document).ready( function(){
-    
+           
             var url_atual = window.location.href;
             //verifica se ja esta logado
                 $("#menu_logar").click( function(){
@@ -14,6 +14,7 @@ $(document).ready( function(){
                     }
 
                 });
+               
     
     //lista de comentarios
      $("#btn_fechar_form").hide();
@@ -148,4 +149,52 @@ $(document).ready( function(){
               });
         });
         
+        //validando formulario para redefinicao de senha
+        $("#btn_atualizar").click(  function(retorno){
+           var nova_senha = $("#senha_nov").val();
+           var nova_senha2 = $("#rep_senha_nov").val();
+           var token = $("#token").val();
+           var campo_vazio = false;
+           if(nova_senha == ""){
+               $("#erro_senha1").html("Erro: digite uma nova senha");
+               $("#erro_senha1").css({"color" : "red"});
+               campo_vazio = true;
+               
+               
+           }
+           if(nova_senha == "" &&  nova_senha2 == ""){
+               $("#erro_senha1").html("Erro: digite uma nova senha");
+               $("#erro_senha2").html("Erro: campo obrigatório");
+               $("#erro_senha2").css({"color" : "red"});
+               
+               campo_vazio = true;
+              
+           }
+           if(nova_senha != "" && nova_senha2 == ""){
+               $("#erro_senha2").html("Erro:repita a senha acima");
+               $("#erro_senha2").css({"color" : "red"});
+               campo_vazio = true;
+           }
+         
+           
+            if(token == ""){
+               $("#erro_token").html("Erro:forneça o token");
+               $("#erro_token").css({"color" : "red"});
+               campo_vazio = true;
+           } 
+               
+            if( (nova_senha != "" && nova_senha2 != "") &&  nova_senha != nova_senha2){
+               $("#erro_senha1").html("");
+               $("#erro_senha2").html("");
+               $("#erro_senhas").html("Erro: as senhas não correspondem");
+               $("#erro_senhas").css({"color" : "red"});
+               
+               campo_vazio = true;
+           }
+           
+           
+           if(campo_vazio){ return false};
+        });
+        
+     if(retorno == false){setTimeout(document.load(),3000);}
 });
