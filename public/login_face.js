@@ -89,6 +89,24 @@ FB.init({
 FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
 });
+FB.Event.subscribe('auth.login', function () {
+    loginFace = 'connected';
+    $(function(){
+            $.ajax({
+            type:"POST",
+            url:"http://handersonsilva.com/usuario/facebook",
+            data: {login:loginFace},
+            success:function(data){
+        
+               
+                
+            },
+            error: function (result) {
+                // Como requisitar $resposta e mostrar ela aqui
+            }
+        });      
+    });
+});
 };
 
 //função login
@@ -97,24 +115,6 @@ function loginFacebook() {
         if (response.authResponse) {
       
         }       
-    });
-    FB.Event.subscribe('auth.login', function () {
-        loginFace = 'connected';
-        $(function(){
-                $.ajax({
-                type:"POST",
-                url:"http://handersonsilva.com/usuario/facebook",
-                data: {login:loginFace},
-                success:function(data){
-            
-                   
-                    
-                },
-                error: function (result) {
-                    // Como requisitar $resposta e mostrar ela aqui
-                }
-            });      
-        });
     });
  }
 
