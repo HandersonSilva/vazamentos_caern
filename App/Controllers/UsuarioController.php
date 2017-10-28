@@ -58,7 +58,7 @@
                    // $this->redirect("usuario/login");
                 }
             }else{
-                $this->redirect("usuario/login");
+                //$this->redirect("usuario/login");
             }
             
                
