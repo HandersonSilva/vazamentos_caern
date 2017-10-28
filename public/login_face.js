@@ -49,10 +49,7 @@
                     },
                     success:function(response){
                         alert(response);
-                        if(response == 'not connected'){
-                            loginFace = 'not logged';
-                            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/login";
-                        }
+                       
                         //alert(data);
                             //redirecionar para outra pagina
                            // window.location = "http://handersonsilva.com/vazamentos_caern/usuario/login";

@@ -54,7 +54,7 @@
                 }
                 if($login_face =='not connected') {
                     unset($_SESSION['login_face']);
-                    echo "not connected";
+                
                    // $this->redirect("usuario/login");
                 }
             }else{
