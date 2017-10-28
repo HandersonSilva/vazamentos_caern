@@ -12,8 +12,14 @@
         public function index(){
             $this->redirect("usuario/Cadastro");
         }
-        public function usuarioHome(){
-            $this->render("usuario/homeUsuario");
+        public function Home(){
+            $login_face = isset( $_SESSION['login_face'] ) ?  $_SESSION['login_face'] :"";
+            if($login_face == 'connected'){
+                $this->render("usuario/homeUsuario");
+            }else{
+                $this->redirect("usuario/login");
+            }
+           
         }
 
         public function Cadastro(){
