@@ -156,7 +156,7 @@ function loginFacebook() {
             return_scopes: true
         });
     }
-    if(loginFace === 'connected'){
+    if(loginFace == 'connected'){
         window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
     }else{
         alert(loginFace);
