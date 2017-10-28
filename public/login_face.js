@@ -14,6 +14,16 @@
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
+    // Logged into your app and Facebook.
+        FB.api('/me', {fields:'name,email'} , function(response) {
+            // Response tem tudo que você solicitou, inclusive o access_token.
+            console.log(response);
+            console.log('Successful login for: ' + response.name+"|"+response.email);
+            nameUseFace = response.name;
+            emailUserFace = response.email;
+
+        
+        });
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -23,35 +33,24 @@
             /*window.onload = function(){
                 document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
               }*/
-               // Logged into your app and Facebook.
-                FB.api('/me', {fields:'name,email'} , function(response) {
-                // Response tem tudo que você solicitou, inclusive o access_token.
-                console.log(response);
-                console.log('Successful login for: ' + response.name+"|"+response.email);
-                nameUseFace = response.name;
-                emailUserFace = response.email;
-
-                $(function(){
-                    $.ajax({
-                        type:"POST",
-                        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                        data: {
-                                statusLogin:loginFace,
-                                nameUser:  nameUseFac,
-                                emailUser: emailUserFace
-                            },
-                        success:function(response){
-                            alert("Conectado ao face"+response);
-                            //alert(data);
-                                //redirecionar para outra pagina
-                                window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
-                        }
-                   }); 
-                });   
-                });
-
               console.log("Connected");
-              
+              $(function(){
+                $.ajax({
+                    type:"POST",
+                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
+                    data: {
+                            statusLogin:loginFace,
+                            nameUser:  nameUseFac,
+                            emailUser: emailUserFace
+                        },
+                    success:function(response){
+                        alert("Conectado ao face"+response);
+                        //alert(data);
+                            //redirecionar para outra pagina
+                            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
+                    }
+               }); 
+            });     
             
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
