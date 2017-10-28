@@ -22,9 +22,12 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
             loginFace ='connected';
-            /*window.onload = function(){
-                document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
-              }*/
+            $( document ).ready( function(){ 
+                $( "#btn_login_face" ).text( " Continuar com o Fcebook " ).attr({ 
+                    title: " Continuar com o Fcebook " 
+                }); 
+            }); 	
+         
               console.log("Connected");   
             
     }
@@ -147,6 +150,8 @@ function loginFacebook() {
             scope: 'public_profile,email', 
             return_scopes: true
         });
+    }else{
+
     }
     
  }
