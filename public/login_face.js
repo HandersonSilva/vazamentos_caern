@@ -15,15 +15,7 @@
     console.log('statusChangeCallback');
     console.log(response);
     // Logged into your app and Facebook.
-        FB.api('/me', {fields:'name,email'} , function(response) {
-            // Response tem tudo que você solicitou, inclusive o access_token.
-            console.log(response);
-            console.log('Successful login for: ' + response.name+"|"+response.email);
-            nameUseFace = response.name;
-            emailUserFace = response.email;
-
-        
-        });
+      
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -61,7 +53,11 @@
                 $.ajax({
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                    data: {login:loginFace},
+                    data: {
+                        statusLogin:loginFace,
+                        nameUser:  nameUseFac,
+                        emailUser: emailUserFace
+                    },
                     success:function(response){
                         alert("Conectado ao face"+response);
                         //alert(data);
@@ -131,7 +127,11 @@ FB.Event.subscribe('auth.login', function () {
             $.ajax({
             type:"POST",
             url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-            data: {login:loginFace},
+            data: {
+                statusLogin:loginFace,
+                nameUser:  nameUseFac,
+                emailUser: emailUserFace
+            },
             success:function(data){
         
                 alert("Conectado com o face"+data);
@@ -151,11 +151,24 @@ function loginFacebook() {
     if(loginFace!='connected'){
         FB.login(function(response) {
             if (response.authResponse) {
+                FB.api('/me', {fields:'name,email'} , function(response) {
+                    // Response tem tudo que você solicitou, inclusive o access_token.
+                    console.log(response);
+                    console.log('Successful login for: ' + response.name+"|"+response.email);
+                    nameUseFace = response.name;
+                    emailUserFace = response.email;
+        
+                
+                });
                 $(function(){
                     $.ajax({
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                    data: {login:loginFace},
+                    data: {
+                        statusLogin:loginFace,
+                        nameUser:  nameUseFac,
+                        emailUser: emailUserFace
+                    },
                     success:function(data){
                 
                        alert("login com face sucesso!!"+data);
