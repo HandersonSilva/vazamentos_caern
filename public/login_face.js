@@ -31,27 +31,27 @@
                 nameUseFace = response.name;
                 emailUserFace = response.email;
 
-              
+                $(function(){
+                    $.ajax({
+                        type:"POST",
+                        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
+                        data: {
+                                statusLogin:loginFace,
+                                nameUser:  nameUseFac,
+                                emailUser: emailUserFace
+                            },
+                        success:function(response){
+                            alert("Conectado ao face"+response);
+                            //alert(data);
+                                //redirecionar para outra pagina
+                                window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
+                        }
+                   }); 
+                });   
                 });
 
               console.log("Connected");
-              $(function(){
-                $.ajax({
-                    type:"POST",
-                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                    data: {
-                            statusLogin:loginFace,
-                            nameUser:  nameUseFac,
-                            emailUser: emailUserFace
-                        },
-                    success:function(response){
-                        alert("Conectado ao face"+response);
-                        //alert(data);
-                            //redirecionar para outra pagina
-                            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
-                    }
-               }); 
-            });     
+              
             
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
