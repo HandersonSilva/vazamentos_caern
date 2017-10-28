@@ -53,7 +53,7 @@
             }
             if($login_face =='not connected') {
                 unset($_SESSION['login_face']);
-                echo "Variavel login = ".$login_face;
+                echo $login_face;
                // $this->redirect("usuario/login");
             }
                
