@@ -127,7 +127,7 @@ function loginFacebook() {
                     data: {login:loginFace},
                     success:function(data){
                 
-                       alert("login com face sucesso!!");
+                       alert("login com face sucesso!!"+data);
                         
                     },
                     error: function (result) {
