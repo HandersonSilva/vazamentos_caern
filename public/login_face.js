@@ -56,17 +56,8 @@
                     }
                }); 
             }); 
-        } else{
-           alert("Realize o Login para ter acesso ao sistema!!!");
+        }      
 
-            //resolvendo problema de carregamento da pagina
-           /* window.onload = function(){
-                document.getElementById('#btn_login_face').value = 'Entre com o facebook';
-              }*/
-          
-        }
-   
-    
     
 }
 
