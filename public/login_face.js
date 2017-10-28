@@ -29,7 +29,7 @@
                 nameUseFace = response.name;
                 emailUserFace = response.email;
     
-               // setDataOK();
+                setDataOK();
             });
            
          
@@ -153,7 +153,7 @@ function loginFacebook() {
         });
     }
     if(loginFace == 'connected'){
-        setDataOK();
+        setData();
       
     }
     
@@ -193,7 +193,7 @@ function loginFacebook() {
         success:function(data){
     
            alert("Você Já está Logado "+data);
-           window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
+           //window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
             
         },
         error: function (result) {
