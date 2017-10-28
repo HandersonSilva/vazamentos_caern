@@ -38,12 +38,12 @@
             }
         public function facebook() {
             $login_face = isset($_POST['statusLogin']) ? $_POST['statusLogin']:"";
-            $nameUserFace = isset($_POST['nameUser']) ? $_POST['nameUse']:"";
+            $nameUserFace = isset($_POST['userName']) ? $_POST['userName']:"";
             $emailUserFace =isset($_POST['emailUser']) ? $_POST['emailUser']:"";
            
             if($login_face == 'connected'){
                 $_SESSION['login_face'] = $login_face;
-                echo "variavel session=".$_SESSION['login_face']." "."como ".$nameUserFace." "."Email = ".$emailUserFace;
+                echo "variavel session=".$_SESSION['login_face']." "."como "."Usuario = ".$nameUserFace." "."Email = ".$emailUserFace;
                // $this->redirect("usuario/usuarioHome");
             }
             if($login_face =='not connected') {

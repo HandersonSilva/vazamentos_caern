@@ -176,7 +176,7 @@ function loginFacebook() {
         url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
         data: {
             statusLogin:loginFace,
-            nameUser:  nameUseFace,
+            userName:  nameUseFace,
             emailUser: emailUserFace
         },
         success:function(data){
