@@ -49,6 +49,10 @@
                     },
                     success:function(response){
                         alert("Faça login com o face"+response);
+                        if(response == 'not connected'){
+                            loginFace = 'not logged';
+                            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/login";
+                        }
                         //alert(data);
                             //redirecionar para outra pagina
                            // window.location = "http://handersonsilva.com/vazamentos_caern/usuario/login";
@@ -62,6 +66,7 @@
             document.getElementById('#btn_login_face').value = 'Entre com o facebook';
           }*/
         } else{
+            alert("Realize o Login para ter acesso ao sistema!!!");
 
             //resolvendo problema de carregamento da pagina
            /* window.onload = function(){
@@ -157,7 +162,8 @@ function loginFacebook() {
         });
     }
     if(loginFace == 'connected'){
-        window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
+        setData();
+      
     }
     
  }
