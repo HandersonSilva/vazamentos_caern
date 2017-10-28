@@ -120,7 +120,21 @@ function loginFacebook() {
     if(loginFace!='connected'){
         FB.login(function(response) {
             if (response.authResponse) {
-               
+                $(function(){
+                    $.ajax({
+                    type:"POST",
+                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
+                    data: {login:loginFace},
+                    success:function(data){
+                
+                       alert("login com face sucesso!!");
+                        
+                    },
+                    error: function (result) {
+                        // Como requisitar $resposta e mostrar ela aqui
+                    }
+                });      
+            });
             }       
         });
     }
