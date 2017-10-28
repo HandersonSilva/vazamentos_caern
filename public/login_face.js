@@ -48,7 +48,7 @@
                         statusLogin:loginFace,
                     },
                     success:function(response){
-                        alert(response);
+                       // alert(response);
                        
                         //alert(data);
                             //redirecionar para outra pagina
@@ -56,12 +56,6 @@
                     }
                }); 
             }); 
-             
-          
-        //resolvendo problema de carregamento da pagina
-         /* window.onload = function(){
-            document.getElementById('#btn_login_face').value = 'Entre com o facebook';
-          }*/
         } else{
            alert("Realize o Login para ter acesso ao sistema!!!");
 
