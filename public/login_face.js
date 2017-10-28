@@ -31,12 +31,7 @@
     
                 setDataOK();
             });
-            window.onload = function(){
-                console.log("Connectedd");   
-                jQuery(document).ready(function($){
-                    $( "#btn_login_face" ).text( " Continuar com o Facebook " );
-                });
-            }
+           
          
               
             
@@ -200,7 +195,12 @@ function loginFacebook() {
         success:function(data){
     
            alert("Você Já está Logado "+data);
-          
+           window.onload = function(){
+            console.log("Connectedd");   
+            jQuery(document).ready(function($){
+                $( "#btn_login_face" ).text( " Continuar com o Facebook " );
+            });
+        }
             
         },
         error: function (result) {
