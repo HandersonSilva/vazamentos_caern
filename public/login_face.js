@@ -23,14 +23,13 @@
     if (response.status === 'connected') {
             loginFace ='connected';	
             window.onload = function(){
+                console.log("Connectedd");   
                 jQuery(document).ready(function($){
-                    $( "#btn_login_face" ).text( " Continuar com o Fcebook " ).attr({ 
-                        title: " Continuar com o Fcebook " 
-                    }); 
+                    $( "#btn_login_face" ).text( " Continuar com o Fcebook " );
                 });
             }
          
-              console.log("Connectedd");   
+              
             
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
