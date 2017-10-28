@@ -1,5 +1,11 @@
 
-  
+    window.onload = function(){
+        jQuery(document).ready(function($){
+            $("#btn_login_face").click( function(){
+                loginFacebook();
+            });
+        });
+    }
   var loginFace = "";
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -33,13 +39,7 @@
              // The person is not logged into your app or we are unable to tell.
              console.log("não connected");
                //pegando o click do button
-            window.onload = function(){
-                jQuery(document).ready(function($){
-                    $("#btn_login_face").click( function(){
-                        loginFacebook();
-                    });
-                });
-            }
+          
         //resolvendo problema de carregamento da pagina
          /* window.onload = function(){
             document.getElementById('#btn_login_face').value = 'Entre com o facebook';
@@ -116,11 +116,14 @@ FB.Event.subscribe('auth.login', function () {
 
 //função login
 function loginFacebook() {
-    FB.login(function(response) {
-        if (response.authResponse) {
-           
-        }       
-    });
+    if(loginFace!='connected'){
+        FB.login(function(response) {
+            if (response.authResponse) {
+               
+            }       
+        });
+    }
+    
  }
  
 // Load the SDK asynchronously
