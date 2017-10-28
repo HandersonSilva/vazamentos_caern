@@ -38,8 +38,22 @@
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
              // The person is not logged into your app or we are unable to tell.
-             console.log("não connected");
-               //pegando o click do button
+             console.log("not connected");
+             loginFace ='not connected';
+             $(function(){
+                $.ajax({
+                    type:"POST",
+                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
+                    data: {login:loginFace},
+                    success:function(response){
+                        alert("Conectado ao face"+response);
+                        //alert(data);
+                            //redirecionar para outra pagina
+                            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/login";
+                    }
+               }); 
+            }); 
+             
           
         //resolvendo problema de carregamento da pagina
          /* window.onload = function(){
