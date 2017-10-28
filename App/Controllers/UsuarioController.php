@@ -32,10 +32,12 @@
            
             if($login_face == 'connected'){
                 $_SESSION['login_face'] = $login_face;
-                $this->render("usuario/homeUsuario");
+                echo $_SESSION['login_face'];
+              //  $this->render("usuario/homeUsuario");
             }else {
                 $_SESSION["msg_login"] = "Não foi Possivel conectar ao Facebook";
-                $this->redirect("usuario/login");
+                echo "Variavel login = ".$login_face;
+               // $this->redirect("usuario/login");
             }
                
         }
