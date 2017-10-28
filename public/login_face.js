@@ -93,31 +93,7 @@ FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
 });
 
-};
-
-//função login
-function loginFacebook() {
-    FB.login(function(response) {
-        if (response.authResponse) {
-            $(function(){
-                $.ajax({
-                type:"POST",
-                url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                data: {login:loginFace},
-                success:function(){
-            
-                   
-                    
-                },
-                error: function (result) {
-                    // Como requisitar $resposta e mostrar ela aqui
-                }
-            });      
-        });
-        }       
-    });
- }
-/* FB.Event.subscribe('auth.login', function () {
+FB.Event.subscribe('auth.login', function () {
     loginFace = 'connected';
     $(function(){
             $.ajax({
@@ -134,7 +110,19 @@ function loginFacebook() {
             }
         });      
     });
-});*/
+});
+
+};
+
+//função login
+function loginFacebook() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+           
+        }       
+    });
+ }
+ 
 // Load the SDK asynchronously
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
