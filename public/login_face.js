@@ -153,7 +153,7 @@ function loginFacebook() {
         });
     }
     if(loginFace == 'connected'){
-        setData();
+        setDataOK();
       
     }
     
