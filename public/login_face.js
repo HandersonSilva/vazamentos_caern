@@ -30,7 +30,7 @@
                         alert("Conectado ao face"+response);
                         //alert(data);
                             //redirecionar para outra pagina
-                      //  window.location = "http://handersonsilva.com/vazamentos_caern/usuario/facebook";
+                            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/usuarioHome";
                     }
                }); 
             });     
@@ -104,7 +104,7 @@ FB.Event.subscribe('auth.login', function () {
             success:function(data){
         
                 alert("Conectado com o face"+data);
-                
+                window.location = "http://handersonsilva.com/vazamentos_caern/usuario/usuarioHome";
             },
             error: function (result) {
                 // Como requisitar $resposta e mostrar ela aqui
@@ -128,6 +128,7 @@ function loginFacebook() {
                     success:function(data){
                 
                        alert("login com face sucesso!!"+data);
+                       window.location = "http://handersonsilva.com/vazamentos_caern/usuario/usuarioHome";
                         
                     },
                     error: function (result) {
