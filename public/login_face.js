@@ -39,7 +39,7 @@
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
              // The person is not logged into your app or we are unable to tell.
              console.log("not connected");
-            // loginFace ='not connected';
+             loginFace ='not connected';
              $(function(){
                 $.ajax({
                     type:"POST",
