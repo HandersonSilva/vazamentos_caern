@@ -158,28 +158,9 @@ function loginFacebook() {
                     nameUseFace = response.name;
                     emailUserFace = response.email;
         
-                
+                    setData();
                 });
-                $(function(){
-                    $.ajax({
-                    type:"POST",
-                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                    data: {
-                        statusLogin:loginFace,
-                        nameUser:  nameUseFace,
-                        emailUser: emailUserFace
-                    },
-                    success:function(data){
                 
-                       alert("login com face sucesso!!"+data);
-                       window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
-                        
-                    },
-                    error: function (result) {
-                        // Como requisitar $resposta e mostrar ela aqui
-                    }
-                });      
-            });
             }       
         },{
             scope: 'public_profile,email', 
@@ -187,6 +168,28 @@ function loginFacebook() {
         });
     }
     
+ }
+ function setData(){
+    $(function(){
+        $.ajax({
+        type:"POST",
+        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
+        data: {
+            statusLogin:loginFace,
+            nameUser:  nameUseFace,
+            emailUser: emailUserFace
+        },
+        success:function(data){
+    
+           alert("login com face sucesso!!"+data);
+           window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
+            
+        },
+        error: function (result) {
+            // Como requisitar $resposta e mostrar ela aqui
+        }
+        });      
+    });
  }
  
 // Load the SDK asynchronously
