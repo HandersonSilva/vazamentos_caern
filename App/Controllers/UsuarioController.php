@@ -43,8 +43,13 @@
            
             if($login_face == 'connected'){
                 $_SESSION['login_face'] = $login_face;
-                echo "variavel session=".$_SESSION['login_face']." "."como "."Usuario = ".$nameUserFace." "."Email = ".$emailUserFace;
+                $_SESSION["nome_usuario"]= $nameUserFace;
+                $_SESSION["email_usuario"]= $emailUserFace;
+                echo "Status da variavel session = ".$_SESSION['login_face']." | "."Login =  "."Usuario = ".$nameUserFace." | "."Email = ".$emailUserFace;
                // $this->redirect("usuario/usuarioHome");
+
+               //Falta implementação da gravação dos dados do usuario com facebook
+               //...........................................
             }
             if($login_face =='not connected') {
                 unset($_SESSION['login_face']);
