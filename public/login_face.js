@@ -59,7 +59,7 @@
                         emailUser: emailUserFace
                     },
                     success:function(response){
-                        alert("Conectado ao face"+response);
+                        alert("Faça login com o face"+response);
                         //alert(data);
                             //redirecionar para outra pagina
                            // window.location = "http://handersonsilva.com/vazamentos_caern/usuario/login";
