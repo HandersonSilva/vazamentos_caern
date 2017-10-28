@@ -12,6 +12,9 @@
         public function index(){
             $this->redirect("usuario/Cadastro");
         }
+        public function usuarioHome(){
+            $this->render("usuario/homeUsuario");
+        }
 
         public function Cadastro(){
             $this->render("usuario/Cadastro");
@@ -33,7 +36,7 @@
             if($login_face == 'connected'){
                 $_SESSION['login_face'] = $login_face;
                 echo "variavel session=".$_SESSION['login_face'];
-               $this->render("usuario/homeUsuario");
+                $this->redirect("usuario/usuarioHome");
             }else {
                 $_SESSION["msg_login"] = "Não foi Possivel conectar ao Facebook";
                 echo "Variavel login = ".$login_face;
