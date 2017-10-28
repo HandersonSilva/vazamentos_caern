@@ -206,12 +206,12 @@ function loginFacebook() {
         }
         });      
     });
-    window.onload = function(){
+    
         console.log("Connectedd");   
         jQuery(document).ready(function($){
             $( "#btn_login_face" ).text( " Continuar com o Facebook " );
         });
-     }
+     
  }
  
 // Load the SDK asynchronously
