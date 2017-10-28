@@ -36,26 +36,31 @@
         public function newsenha() {
                 $this->render("usuario/novaSenha");
             }
-        public function facebook() {
-            $login_face = isset($_POST['statusLogin']) ? $_POST['statusLogin']:"";
-            $nameUserFace = isset($_POST['userName']) ? $_POST['userName']:"";
-            $emailUserFace =isset($_POST['emailUser']) ? $_POST['emailUser']:"";
-           
-            if($login_face == 'connected'){
-                $_SESSION['login_face'] = $login_face;
-                $_SESSION["nome_usuario"]= $nameUserFace;
-                $_SESSION["email_usuario"]= $emailUserFace;
-                echo "Status da variavel session = ".$_SESSION['login_face']." | "."Login =  "."Usuario = ".$nameUserFace." | "."Email = ".$emailUserFace;
-               // $this->redirect("usuario/usuarioHome");
-
-               //Falta implementação da gravação dos dados do usuario com facebook
-               //...........................................
+        public function facebook($key) {
+            if($key == "V_caern"){
+                $login_face = isset($_POST['statusLogin']) ? $_POST['statusLogin']:"";
+                $nameUserFace = isset($_POST['userName']) ? $_POST['userName']:"";
+                $emailUserFace =isset($_POST['emailUser']) ? $_POST['emailUser']:"";
+               
+                if($login_face == 'connected'){
+                    $_SESSION['login_face'] = $login_face;
+                    $_SESSION["nome_usuario"]= $nameUserFace;
+                    $_SESSION["email_usuario"]= $emailUserFace;
+                    echo "Status da variavel session = ".$_SESSION['login_face']." | "."Login =  "."Usuario = ".$nameUserFace." | "."Email = ".$emailUserFace;
+                   // $this->redirect("usuario/usuarioHome");
+    
+                   //Falta implementação da gravação dos dados do usuario com facebook
+                   //...........................................
+                }
+                if($login_face =='not connected') {
+                    unset($_SESSION['login_face']);
+                    echo $login_face;
+                   // $this->redirect("usuario/login");
+                }
+            }else{
+                $this->redirect("usuario/login");
             }
-            if($login_face =='not connected') {
-                unset($_SESSION['login_face']);
-                echo $login_face;
-               // $this->redirect("usuario/login");
-            }
+            
                
         }
         public function validaLogin(){
