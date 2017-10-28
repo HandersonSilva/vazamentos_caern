@@ -193,7 +193,7 @@ function loginFacebook() {
         success:function(data){
     
            alert("Você Já está Logado "+data);
-           
+           window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
             
         },
         error: function (result) {
