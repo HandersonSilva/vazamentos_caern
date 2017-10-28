@@ -7,6 +7,9 @@
         });
     }
   var loginFace = "";
+  var idUserFaace = "";
+  var nameUseFace = "";
+  var emailUserFace = "";
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -20,12 +23,27 @@
             /*window.onload = function(){
                 document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
               }*/
+               // Logged into your app and Facebook.
+                FB.api('/me', {fields:'name,email'} , function(response) {
+                // Response tem tudo que você solicitou, inclusive o access_token.
+                console.log(response);
+                console.log('Successful login for: ' + response.name+"|"+response.email);
+                nameUseFace = response.name;
+                emailUserFace = response.email;
+
+              
+                });
+
               console.log("Connected");
               $(function(){
                 $.ajax({
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                    data: {login:loginFace},
+                    data: {
+                            statusLogin:loginFace,
+                            nameUser:  nameUseFac,
+                            emailUser: emailUserFace
+                        },
                     success:function(response){
                         alert("Conectado ao face"+response);
                         //alert(data);

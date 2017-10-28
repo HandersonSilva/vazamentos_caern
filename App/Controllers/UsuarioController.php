@@ -37,18 +37,17 @@
                 $this->render("usuario/novaSenha");
             }
         public function facebook() {
-            $login_face = isset($_POST['login']) ? $_POST['login']:"";
+            $login_face = isset($_POST['statusLogin']) ? $_POST['statusLogin']:"";
+            $nameUserFace = isset($_POST['nameUser']) ? $_POST['nameUse']:"";
+            $emailUserFace =isset($_POST['emailUser']) ? $_POST['emailUser']:"";
            
             if($login_face == 'connected'){
                 $_SESSION['login_face'] = $login_face;
-                echo "variavel session=".$_SESSION['login_face'];
+                echo "variavel session=".$_SESSION['login_face']." "."como ".$nameUserFace." "."Email = ".$emailUserFace;
                // $this->redirect("usuario/usuarioHome");
             }
             if($login_face =='not connected') {
                 unset($_SESSION['login_face']);
-             
-               
-                
                 echo "Variavel login = ".$login_face;
                 //$this->redirect("usuario/login");
             }
