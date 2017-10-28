@@ -7,7 +7,7 @@
         });
     }
   var loginFace = "";
-  var idUserFaace = "";
+  var idUserFace = "";
   var nameUseFace = "";
   var emailUserFace = "";
   // This is called with the results from from FB.getLoginStatus().
@@ -32,7 +32,7 @@
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {
                             statusLogin:loginFace,
-                            nameUser:  nameUseFac,
+                            nameUser:  nameUseFace,
                             emailUser: emailUserFace
                         },
                     success:function(response){
@@ -55,7 +55,7 @@
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {
                         statusLogin:loginFace,
-                        nameUser:  nameUseFac,
+                        nameUser:  nameUseFace,
                         emailUser: emailUserFace
                     },
                     success:function(response){
@@ -129,7 +129,7 @@ FB.Event.subscribe('auth.login', function () {
             url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
             data: {
                 statusLogin:loginFace,
-                nameUser:  nameUseFac,
+                nameUser:  nameUseFace,
                 emailUser: emailUserFace
             },
             success:function(data){
@@ -166,7 +166,7 @@ function loginFacebook() {
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {
                         statusLogin:loginFace,
-                        nameUser:  nameUseFac,
+                        nameUser:  nameUseFace,
                         emailUser: emailUserFace
                     },
                     success:function(data){
