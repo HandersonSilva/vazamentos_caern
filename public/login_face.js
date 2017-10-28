@@ -48,7 +48,7 @@
                         statusLogin:loginFace,
                     },
                     success:function(response){
-                        alert("Faça login com o face"+response);
+                        alert(response);
                         if(response == 'not connected'){
                             loginFace = 'not logged';
                             window.location = "http://handersonsilva.com/vazamentos_caern/usuario/login";
