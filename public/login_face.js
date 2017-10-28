@@ -26,8 +26,8 @@
                     type:"POST",
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {login:loginFace},
-                    success:function(){
-                        
+                    success:function(response){
+                        alert("Conectado ao face")
                         //alert(data);
                             //redirecionar para outra pagina
                       //  window.location = "http://handersonsilva.com/vazamentos_caern/usuario/facebook";
