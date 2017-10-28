@@ -20,6 +20,7 @@
             /*window.onload = function(){
                 document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
               }*/
+              console.log("Connected");
               $(function(){
                 $.ajax({
                     type:"POST",
@@ -98,7 +99,7 @@ FB.Event.subscribe('auth.login', function () {
     $(function(){
             $.ajax({
             type:"POST",
-            url:"http://handersonsilva.com/usuario/facebook",
+            url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
             data: {login:loginFace},
             success:function(data){
         
