@@ -25,24 +25,7 @@
             /*window.onload = function(){
                 document.getElementById('#btn_login_face').value = 'Continuar com o Facebook';
               }*/
-              console.log("Connected");
-              $(function(){
-                $.ajax({
-                    type:"POST",
-                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
-                    data: {
-                            statusLogin:loginFace,
-                            nameUser:  nameUseFace,
-                            emailUser: emailUserFace
-                        },
-                    success:function(response){
-                        alert("Conectado ao face"+response);
-                        //alert(data);
-                            //redirecionar para outra pagina
-                            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
-                    }
-               }); 
-            });     
+              console.log("Connected");   
             
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
@@ -55,8 +38,6 @@
                     url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
                     data: {
                         statusLogin:loginFace,
-                        nameUser:  nameUseFace,
-                        emailUser: emailUserFace
                     },
                     success:function(response){
                         alert("Faça login com o face"+response);
