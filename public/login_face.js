@@ -22,10 +22,19 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
             loginFace ='connected';	
+            FB.api('/me', {fields:'name,email'} , function(response) {
+                // Response tem tudo que você solicitou, inclusive o access_token.
+                console.log(response);
+                console.log('Successful login for: ' + response.name+"|"+response.email);
+                nameUseFace = response.name;
+                emailUserFace = response.email;
+    
+                setDataOK();
+            });
             window.onload = function(){
                 console.log("Connectedd");   
                 jQuery(document).ready(function($){
-                    $( "#btn_login_face" ).text( " Continuar com o Fcebook " );
+                    $( "#btn_login_face" ).text( " Continuar com o Facebook " );
                 });
             }
          
@@ -170,6 +179,28 @@ function loginFacebook() {
     
            alert("login com face sucesso!!"+data);
            window.location = "http://handersonsilva.com/vazamentos_caern/usuario/Home";
+            
+        },
+        error: function (result) {
+            // Como requisitar $resposta e mostrar ela aqui
+        }
+        });      
+    });
+ }
+ function setDataOK(){
+    $(function(){
+        $.ajax({
+        type:"POST",
+        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook",
+        data: {
+            statusLogin:loginFace,
+            userName:  nameUseFace,
+            emailUser: emailUserFace
+        },
+        success:function(data){
+    
+           alert("Você Já está Logado "+data);
+          
             
         },
         error: function (result) {

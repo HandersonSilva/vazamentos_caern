@@ -8,7 +8,12 @@
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
- 
+        FB.api('/me', {fields:'name,email'} , function(response) {
+            // Response tem tudo que você solicitou, inclusive o access_token.
+            console.log(response);
+            console.log('Successful login for: ' + response.name+"|"+response.email);
+         
+        });
    
     }
      if (response.status === 'not_authorized') {
