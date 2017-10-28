@@ -103,7 +103,7 @@ FB.Event.subscribe('auth.login', function () {
             data: {login:loginFace},
             success:function(data){
         
-                alert("Conectado ao face"+data);
+                alert("Conectado com o face"+data);
                 
             },
             error: function (result) {

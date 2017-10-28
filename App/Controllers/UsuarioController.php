@@ -37,7 +37,7 @@
             }else {
                 $_SESSION["msg_login"] = "Não foi Possivel conectar ao Facebook";
                 echo "Variavel login = ".$login_face;
-               // $this->redirect("usuario/login");
+                $this->redirect("usuario/login");
             }
                
         }
