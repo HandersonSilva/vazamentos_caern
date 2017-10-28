@@ -21,14 +21,16 @@
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
-            loginFace ='connected';
-            $( document ).ready( function(){ 
-                $( "#btn_login_face" ).text( " Continuar com o Fcebook " ).attr({ 
-                    title: " Continuar com o Fcebook " 
-                }); 
-            }); 	
+            loginFace ='connected';	
+            window.onload = function(){
+                jQuery(document).ready(function($){
+                    $( "#btn_login_face" ).text( " Continuar com o Fcebook " ).attr({ 
+                        title: " Continuar com o Fcebook " 
+                    }); 
+                });
+            }
          
-              console.log("Connected");   
+              console.log("Connectedd");   
             
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
