@@ -39,7 +39,7 @@
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
              // The person is not logged into your app or we are unable to tell.
              console.log("not connected");
-             loginFace ='not connected';
+            // loginFace ='not connected';
              $(function(){
                 $.ajax({
                     type:"POST",
@@ -66,7 +66,7 @@
             document.getElementById('#btn_login_face').value = 'Entre com o facebook';
           }*/
         } else{
-            alert("Realize o Login para ter acesso ao sistema!!!");
+           alert("Realize o Login para ter acesso ao sistema!!!");
 
             //resolvendo problema de carregamento da pagina
            /* window.onload = function(){
