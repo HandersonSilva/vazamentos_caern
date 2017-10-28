@@ -168,6 +168,9 @@ function loginFacebook() {
                 });      
             });
             }       
+        },{
+            scope: 'public_profile,email', 
+            return_scopes: true
         });
     }
     
