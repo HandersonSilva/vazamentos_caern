@@ -31,6 +31,7 @@
     }
      if (response.status === 'not_authorized' || response.status === 'unknown' ) {
              // The person is not logged into your app or we are unable to tell.
+             console.log("não connected");
                //pegando o click do button
             window.onload = function(){
                 jQuery(document).ready(function($){
