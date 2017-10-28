@@ -36,8 +36,8 @@
         public function newsenha() {
                 $this->render("usuario/novaSenha");
             }
-        public function facebook($key) {
-            if($key == "V_caern"){
+        public function facebook() {
+           
                 $login_face = isset($_POST['statusLogin']) ? $_POST['statusLogin']:"";
                 $nameUserFace = isset($_POST['userName']) ? $_POST['userName']:"";
                 $emailUserFace =isset($_POST['emailUser']) ? $_POST['emailUser']:"";
@@ -57,9 +57,7 @@
                 
                    // $this->redirect("usuario/login");
                 }
-            }else{
-                //$this->redirect("usuario/login");
-            }
+            
             
                
         }

@@ -43,7 +43,7 @@
              $(function(){
                 $.ajax({
                     type:"POST",
-                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook/V_caern",
+                    url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook/",
                     data: {
                         statusLogin:loginFace,
                     },
@@ -162,7 +162,7 @@ function loginFacebook() {
     $(function(){
         $.ajax({
         type:"POST",
-        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook/V_caern",
+        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook/",
         data: {
             statusLogin:loginFace,
             userName:  nameUseFace,
@@ -184,7 +184,7 @@ function loginFacebook() {
     $(function(){
         $.ajax({
         type:"POST",
-        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook/V_caern",
+        url:"http://handersonsilva.com/vazamentos_caern/usuario/facebook/",
         data: {
             statusLogin:loginFace,
             userName:  nameUseFace,
