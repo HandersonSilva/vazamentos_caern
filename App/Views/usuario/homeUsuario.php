@@ -29,7 +29,7 @@
 
 <div class="row">
         
-              <div class="col-md-3 col-sm-2" id="div_form">
+              <div class="col-md-3 col-sm-12" id="div_form">
                    <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -144,7 +144,7 @@
                 
                 <?php }?>
               </div>    
-          <div class="col-md-9 ">
+          <div class="col-md-9 col-sm-12 ">
               <div id="map" style="border: 1px solid #000"></div>
           </div>
                     

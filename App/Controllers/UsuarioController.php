@@ -74,7 +74,7 @@
 
             
         }
-        
+        //calcula o tempo de acordo com os paramentros passados e retorna a quantidade de minutos
         private function calculaTempo($hora_inicial, $hora_final) {
              $i = 1;
              $tempo_total;
@@ -255,7 +255,7 @@
                 //verifica se o token vindo pelo formulario existe no banco
                 $verifica = $usuarioDao->verificaToken($token);
                 $fk_usuario =  $verifica->fk_usuario;
-                    //hora que o token foi salvo no banco
+                //hora que o token foi salvo no banco
                 $hora_token = $verifica->tempo_token;
                 //verifica se o token expirou
                  $tempo = $this->getHora($hora_token);
@@ -263,13 +263,17 @@
                     
                     $atualizar = $usuarioDao->atualizaSenhaUsuario($nova_senha, $fk_usuario);
                     if($atualizar > 0){
-                        echo "Senha atualizada";
+                        $_SESSION['senha_update'] = "Sucesso!!! senha atualizada";
+                        $this->redirect("usuario/newsenha");
                     }else{
                         echo "Erro ao atualizar senha";
                     }
                     
                 }else{
-                    echo "Esse token expirou, por favor repita o processo de redefinição";
+                        $link = "http://".APP_HOST."usuario/redefinir";
+                        $_SESSION['token_exp'] = "Esse token expirou, por favor repita o processo de redefinição "."<a href='$link'".">Clique aqui</a>";
+                        $this->redirect("usuario/newsenha");
+                        
                 }
                 
             }

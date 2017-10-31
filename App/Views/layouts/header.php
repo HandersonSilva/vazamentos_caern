@@ -28,7 +28,7 @@
     <style>
        html body{
       background-color: #80deea;
-      margin: opx;
+      
       
     }
     #img_logo{
@@ -81,7 +81,7 @@
 }
 
     #linha_principal{
-      margin-top: 100px;
+      margin-top: 50px;
       margin-right: 80px; 
       margin-left: 0px;
     }
@@ -142,13 +142,14 @@
             border-color: #64b5f6;
         }
         .row{
-            margin: 5px 5px 0px 5px;
+            margin:0px;
             margin-bottom: 30px;
             width: 100%
         }
         #map {
             margin-top: auto;
-            width: 95%;
+           padding-left: 0px;
+            width: 100%;
             height: 500px;
         }
  
@@ -157,19 +158,20 @@
         }
         
         #page-header{
-            margin: auto;
+            argin-left: 0px;
+            margin-right: 30px ;
         }
         .col-sm-12{
             margin: 1px;
         }
-        div.col-md-9{
-            padding-left: 3px;
-            padding-right: 3px;
-        }
+        
         
         .lista{
             padding: 0px;
     }
+    .col-md-9{
+     padding-right: 1px;
+ }
              
 }
     </style>

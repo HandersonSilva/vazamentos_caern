@@ -10,16 +10,17 @@
 <script type="text/javascript" src="public/script_site.js"></script>
 <!--inclui arquivo css customizado a pagina-->
 <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
+
 <div class="row">
     <div class="page-header" id="page-header">
         <h5 id="text-home" >Aqui você poderá visualizar os vazamentos já cadastrados por todos os usuários</h5>
     </div>
-    <div class="col-md-9 col-xs-12" style="margin-top: 10px;">
+    <div class="col-md-9  col-sm-12" style="margin-top: 10px;">
         
         <div id="map" style="border: 2px solid #000"></div>
     </div>
     <div class="col-md-3" style="margin-top: 10px;" id="div_coment">
-        <a href="http://<?=APP_HOST;?>vazamento"><button type="button" class="btn btn-default col-md-12 col-sm-12" id="btn_tela_hUsuario">Cadastrar um vazamento</button></a>
+        <a href="http://<?=APP_HOST;?>vazamento"><button type="button" class="btn btn-primary btn-md  col-sm-12" id="btn_tela_hUsuario">Cadastrar um vazamento</button></a>
         <br><br>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">

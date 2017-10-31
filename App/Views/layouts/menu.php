@@ -12,13 +12,6 @@
     
         <a class="navbar-brand" href="http://<?php echo APP_HOST; ?>">
             <img src="<?=IMG_LOGO?>" id="img_logo"></a>
-             <p class="text-right" style="margin-top:10px;margin-left: 70%; color: #fff;">
-            <!--verifica se existe a session nome_usuario e se a url equivale a do usuario ou home e imprime o texto de bem vindo-->
-            <?php if((isset($_SESSION['nome_usuario']) && $url == 'http://'.APP_HOST.'vazamento')
-                  || (isset($_SESSION['nome_usuario']) && $url == 'http://'.APP_HOST)){
-                    echo "Bem vindo(a) ".$nome_usuario;
-            }?>
-        </p>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,7 +38,13 @@
     </div>
      
    </nav>
-
+<p class="text-right" style="margin-top:80px;margin-left: 70%; color: #fff;">
+            <!--verifica se existe a session nome_usuario e se a url equivale a do usuario ou home e imprime o texto de bem vindo-->
+            <?php if((isset($_SESSION['nome_usuario']) && $url == 'http://'.APP_HOST.'vazamento')
+                  || (isset($_SESSION['nome_usuario']) && $url == 'http://'.APP_HOST)){
+                    echo "Bem vindo(a) ".$nome_usuario;
+            }?>
+</p>
     
     
         
