@@ -5,6 +5,8 @@
         $msg = isset($_SESSION["msg_login"])?$_SESSION["msg_login"]:"";
  ?>
 <script src="../public/script_site.js"></script>
+
+<script src="../public/login_face.js"></script>
 <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
 <div class="container" style="margin-top: 50px">
           <div class="row">
@@ -12,6 +14,8 @@
           <div class="col-md-6" id="col_login">
               <h3>Login do usuário</h3>
               <form id="form_user" action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
+                <button type="button" style="  width: 100%; height: 50%;" id="btn_login_face" class="btn btn-primary" >Entre com o facebook</button>
+                   
                     <div class="form-group">
                     <label for="exampleInputEmail1">Email*</label>
                     <input type="email" class="form-control" id="email_log" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email" value="<?php echo $email_usuario_log?>">
