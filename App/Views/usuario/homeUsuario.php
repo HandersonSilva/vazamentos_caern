@@ -51,7 +51,7 @@
                       
                       <div class="form-group">
                           <p>Data:</p>
-                          <input type="date"  class="form-control" name="data" id="data" maxlength="10">
+                          <input type="date"  class="form-control" name="data" id="data"/>
                       </div>
                        <div class="form-group">
                            <p>Selecione imagem do vazamento</p>
@@ -116,10 +116,8 @@
                                     '<strong>Descrição: </strong>'.'<font class="text-success">'.$data->descricao_vazamento.'</font>'.'<br>'.
                                     '<strong>Data: </strong>'.'<font class="text-success">'.$data_campo.'</font>'.'<br>'.
                                     '<strong>Status :</strong> '.'<font class="text-success"  id="status">'.$status.'</font>'?>
-                                
                         </li>
                
-                             
                     <?php }?>
                 <?php }else{
                     echo "<p>Nenhum vazamento cadastrado até agora!!!</p>";
@@ -135,8 +133,6 @@
                                 icon: "success",
                             });</script>';
                 
-                
-                    
                      unset($_SESSION['sucesso_vaz']);
                     ?>
                 
@@ -155,9 +151,7 @@
         
     </div>
 </div>
-          
           <br>
-      
       
           <script>
               

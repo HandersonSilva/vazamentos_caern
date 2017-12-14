@@ -7,7 +7,6 @@
 <script src="../public/script_site.js"></script>
 
 <script src="../public/login_face.js"></script>
-<link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
 <div class="container" style="margin-top: 50px">
           <div class="row">
           <div class="col-md-3"></div>
@@ -52,7 +51,7 @@
   var contador = 5;
         function contar() {
             
-            document.getElementById('cronometro').innerHTML = "Você será redirecionado em: "+contador;
+            document.getElementById('cronometro').innerHTML = "Você será redirecionado em instantes...aguarde!!!";
             contador--;
         }
         function redirecionar() {
@@ -63,7 +62,7 @@
             }
         }
         setInterval(redirecionar, 1000);
-
+        clearInterval();
 
         
 </script>

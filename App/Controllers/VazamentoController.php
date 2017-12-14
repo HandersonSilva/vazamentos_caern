@@ -74,12 +74,13 @@
                     $vazamento = new Vazamento();
                     
                     $date = $_POST["data"];
-                    $data_sql = date("y-d-m", strtotime($date));
+                    
+                    //$data_sql = date("y-M-d", strtotime($date));
                     
                     $id = $_POST["id_usuario_logado"];
                     $vazamento->setDescricao($_POST['descricaoV']);
                     $vazamento->setStatus(1);
-                    $vazamento->setDate($data_sql);
+                    $vazamento->setDate($date);
                     $vazamento->setGravidade($_POST['intensidade']);
                     $vazamento->setTempo(0);
                     $vazamento->setFkPonto($idLocalizacao);

@@ -20,13 +20,15 @@
             $nome = $usuario->getName();
             $email =$usuario->getEmail();
             $senha=$usuario->getSenha();
-           
+            $img_perfil = $usuario->getImg_perfil();
+            
             
             //prepara query de insercao
-            $insere = $this->conPdo->prepare("INSERT INTO caern_usuario(nome_usuario,email_usuario,senha_usuario) VALUES(:nome,:email,:senha)");
+            $insere = $this->conPdo->prepare("INSERT INTO caern_usuario(nome_usuario,email_usuario,senha_usuario,img_perfil) VALUES(:nome,:email,:senha,:img_perfil)");
             $insere->bindParam(':nome',$nome);
             $insere->bindParam(':email',$email);
             $insere->bindParam(':senha',$senha);
+            $insere->bindParam(':img_perfil',$img_perfil);
           
             //verifica se operacao foi bem sucedida
             if($insere->execute()){
@@ -66,7 +68,7 @@
                 
                 public function validarusuario($emailt, $senhat){
                     try {
-                        $sql = "SELECT id_usuario,nome_usuario,email_usuario FROM caern_usuario WHERE email_usuario = '$emailt' "
+                        $sql = "SELECT id_usuario,nome_usuario,email_usuario,img_perfil FROM caern_usuario WHERE email_usuario = '$emailt' "
                                 . "AND senha_usuario = '$senhat'";
                         
                         $query = $this->conPdo->prepare($sql);
@@ -131,7 +133,7 @@
            
            public function comparaEmail($email) {
                try {
-                   $sql = "SELECT id_usuario, email_usuario FROM caern_usuario WHERE email_usuario = '$email'";
+                   $sql = "SELECT id_usuario,nome_usuario, email_usuario FROM caern_usuario WHERE email_usuario = '$email'";
                    $query = $this->conPdo->prepare($sql);
                    
                    if($query->execute()){

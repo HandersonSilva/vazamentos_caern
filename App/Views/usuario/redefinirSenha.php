@@ -19,7 +19,7 @@
                     
                </form>
               
-              <p id="msg" style="color: #d9534f"><?php echo $email_enviado;              
+              <p id="msg" class="text-success"><?php echo $email_enviado;              
                      unset($_SESSION["email_sucesso"]);?></p>
                 
               </div>
@@ -27,25 +27,6 @@
           <div class="col-md-3"></div>
           </div>
       </div>
-<script>
-  var contador = 5;
-        function contar() {
-            
-            document.getElementById('cronometro').innerHTML = "Você será redirecionado em: "+contador;
-            contador--;
-        }
-        function redirecionar() {
-            contar();
-            if (contador == 0) {
-                
-                document.location.href = 'http://<?php echo APP_HOST;?>vazamento';
-            }
-        }
-        setInterval(redirecionar, 1000);
-
-
-        
-</script>
 
 
 

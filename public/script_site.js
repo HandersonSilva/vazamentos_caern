@@ -1,5 +1,5 @@
 $(document).ready( function(){
-           
+    
             var url_atual = window.location.href;
             //verifica se ja esta logado
                 $("#menu_logar").click( function(){
@@ -129,12 +129,13 @@ $(document).ready( function(){
         if(campo_vazio) return false;
         
 	});
+        
         //confirma logout
         $("#logout").click( function(){
             //recupera o valor do campo val_logout
             var logout = $("#val_logout").val();
             swal({
-                title: "Sair do sistema?",
+                title: "Deseja sair?",
                 text: "Clique em ok para confirmar ou cancelar para abortar operação",
                 icon: "warning",
                 buttons: true,

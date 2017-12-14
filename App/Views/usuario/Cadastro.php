@@ -11,9 +11,9 @@ $sucesso = isset($_SESSION['sucesso'])? $_SESSION['sucesso'] : "";
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <div class="page-header">
-              <h2>Novo usuário</h2>          
-          </div>
-              <form action="http://<?php echo APP_HOST;?>usuario/Salvar" method="POST" id="form_user">
+                <h2>Novo usuário</h2>          
+              </div>
+              <form action="http://<?php echo APP_HOST;?>usuario/Salvar" method="POST" enctype="multipart/form-data" id="form_user">
               <div class="form-group">
             <label for="exampleInputEmail1">Nome usuário*</label>
             <input type="text" class="form-control" id="nome_cad" name="nome_usuario" aria-describedby="nome_usuario" placeholder="usuário">
@@ -26,9 +26,14 @@ $sucesso = isset($_SESSION['sucesso'])? $_SESSION['sucesso'] : "";
            
             </div>
             <div class="form-group">
-    <label for="exampleInputPassword1">Senha*</label>
-    <input type="password" class="form-control" id="senha_cad" name="senha_usuario" placeholder="Senha">
-  </div>
+            <label for="exampleInputPassword1">Senha*</label>
+            <input type="password" class="form-control" id="senha_cad" name="senha_usuario" placeholder="Senha">
+            </div>
+                  
+            <div class="form-group">
+                <label for="img_perfil">Imagem de perfil</label>
+               <input type="file" class="form-control" id="img_perfil" name="img_perfil" placeholder="Selecione imagem">
+            </div>
   
               <button type="submit" id="btn_cad" class="btn btn-primary pull-right">Cadastrar</button>
   

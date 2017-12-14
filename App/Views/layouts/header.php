@@ -2,6 +2,10 @@
 <html lang="pt-br">
 <head>
   <title><?php echo TITLE; ?></title>
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
    <!-- Required meta tags -->
    <meta charset="utf-8">
@@ -28,17 +32,13 @@
 
     <style>
        html body{
-      background-color: #80deea;
+        background-color: #80deea;
       
       
     }
     #img_logo{
         width:120px;
-        height: 47px;
-    }
-    
-    .cad_vaz{
-        margin-left: 25px;
+        height: 50px;
     }
     
     /*navbar*/
@@ -55,25 +55,7 @@
         height: 40px;
         align:center;
     }
-    
-    .lista_com{
-        margin-top: 10px;
-        padding: 5px;
-        overflow-y: auto;
-    }
-    .lista_com_person{
-       
-        padding: 0px;
-        background-color: transparent;
-        border: 0px;
-    }
-    
-    
-
-#hr_com{
-    border: 1px solid ;
-}
-
+   
    .navbar-dark .navbar-nav .nav-link {
     color: #fff;
 }
@@ -122,59 +104,24 @@
             text-align: center;
             position: static;
             width: 100%;
+            
 }
 
-      @media screen and (max-width: 767px){
-    
-        #linha_principal{
-
-            margin-right: 10px;
+        /* config botao flutuante*/
+        .mdl-layout {
+            align-items: center;
+          justify-content: center;
         }
-        
-
-        #text_info{
-     
-            margin-left: 5px;
+        .mdl-layout__content {
+            padding: 24px;
+            flex: none;
         }
-      
-        #div_form{
-            padding: 5px;
-            border: 0.5px solid ;
-            border-color: #64b5f6;
+        .mdl-button {
+            margin-top: 10px;
+          margin-bottom: 10px;
+          margin-right: 10px;
         }
-        .row{
-            margin:0px;
-            margin-bottom: 30px;
-            width: 100%
-        }
-        #map {
-            margin-top: auto;
-           padding-left: 0px;
-            width: 100%;
-            height: 500px;
-        }
- 
-        .cad_vaz{
-            margin-left: 0px;
-        }
-        
-        #page-header{
-            argin-left: 0px;
-            margin-right: 30px ;
-        }
-        .col-sm-12{
-            margin: 1px;
-        }
-        
-        
-        .lista{
-            padding: 0px;
-    }
-    .col-md-9{
-     padding-right: 1px;
- }
-             
-}
+       
     </style>
     
 </head>
