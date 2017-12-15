@@ -71,7 +71,7 @@ $(document).ready( function(){
         $('#btn_login').click( function(){
             var campo_vazio = false;
             //verifica se os campos foram preenchidos
-            if($('#email_log').val() == ''){
+            if($('#email_log').val() == '' ){
                 $('#email_log').css({'border-color': '#A94442'});
                 
                 campo_vazio = true;
@@ -198,4 +198,7 @@ $(document).ready( function(){
         });
         
      if(retorno == false){setTimeout(document.load(),3000);}
+     
+     $(":file").filestyle();
+
 });

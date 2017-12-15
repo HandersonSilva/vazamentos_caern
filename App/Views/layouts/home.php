@@ -26,11 +26,12 @@
 
     
 </div>
-<!-- Colored FAB button with ripple -->
+        <!-- Colored FAB button with ripple -->
         <a href="http://<?=APP_HOST;?>vazamento"><button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored button--mini-fab" id="button_fab" >
           <i class="material-icons">add</i>
         </button></a>
-
+        
+      <!--script do mapa-->
       <script>
             var map;
             //funcao Map
@@ -60,7 +61,7 @@
                 <?php }else{ ?>
                 <?php foreach($data as $ponto){?>
 
-                        <?php if($ponto->lat_ponto !="" && $ponto->log_ponto !="") {
+                        <?php if($ponto->lat_ponto != "" && $ponto->log_ponto != "") {
                             $data_sql = $ponto->data_vazamento;
                             $data_formatada = date("d/m/Y", strtotime($data_sql));
                             

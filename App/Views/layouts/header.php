@@ -24,11 +24,13 @@
     <script type="text/javascript" src="public/script_site.js"></script>
     
     
+    
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg"
     ></script>
     <!--framework axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-   
+    <script type="text/javascript" src="public/bootstrap-filestyle.min.js"> </script>
 
     <style>
        html body{
@@ -47,6 +49,14 @@
     }
     #col_login{
      margin-top: 40px;
+ }
+ 
+ .mdl-textfield {
+     width: 400px;
+     padding-top: 18px;
+    padding-bottom:27px;
+    margin-bottom: -10px;
+     
  }
     
     
