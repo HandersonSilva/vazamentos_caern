@@ -2,6 +2,10 @@
 <html lang="pt-br">
 <head>
   <title><?php echo TITLE; ?></title>
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
    <!-- Required meta tags -->
    <meta charset="utf-8">
@@ -20,25 +24,23 @@
     <script type="text/javascript" src="public/script_site.js"></script>
     
     
+    
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPE_0srgytD-jZEv6S5R0xKiEDzYmqSxg"
     ></script>
     <!--framework axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-   
+    <script type="text/javascript" src="public/bootstrap-filestyle.min.js"> </script>
 
     <style>
        html body{
-      background-color: #80deea;
-      margin: opx;
+        background-color: #80deea;
+      
       
     }
     #img_logo{
         width:120px;
-        height: 47px;
-    }
-    
-    .cad_vaz{
-        margin-left: 25px;
+        height: 50px;
     }
     
     /*navbar*/
@@ -48,6 +50,14 @@
     #col_login{
      margin-top: 40px;
  }
+ 
+ .mdl-textfield {
+     width: 400px;
+     padding-top: 18px;
+    padding-bottom:27px;
+    margin-bottom: -10px;
+     
+ }
     
     
     .form-control{
@@ -55,25 +65,7 @@
         height: 40px;
         align:center;
     }
-    
-    .lista_com{
-        margin-top: 10px;
-        padding: 5px;
-        overflow-y: auto;
-    }
-    .lista_com_person{
-       
-        padding: 0px;
-        background-color: transparent;
-        border: 0px;
-    }
-    
-    
-
-#hr_com{
-    border: 1px solid ;
-}
-
+   
    .navbar-dark .navbar-nav .nav-link {
     color: #fff;
 }
@@ -82,7 +74,7 @@
 }
 
     #linha_principal{
-      margin-top: 100px;
+      margin-top: 50px;
       margin-right: 80px; 
       margin-left: 0px;
     }
@@ -122,57 +114,24 @@
             text-align: center;
             position: static;
             width: 100%;
+            
 }
 
-      @media screen and (max-width: 767px){
-    
-        #linha_principal{
-
-            margin-right: 10px;
+        /* config botao flutuante*/
+        .mdl-layout {
+            align-items: center;
+          justify-content: center;
         }
-        
-
-        #text_info{
-     
-            margin-left: 5px;
+        .mdl-layout__content {
+            padding: 24px;
+            flex: none;
         }
-      
-        #div_form{
-            padding: 5px;
-            border: 0.5px solid ;
-            border-color: #64b5f6;
+        .mdl-button {
+            margin-top: 10px;
+          margin-bottom: 10px;
+          margin-right: 10px;
         }
-        .row{
-            margin: 5px 5px 0px 5px;
-            margin-bottom: 30px;
-            width: 100%
-        }
-        #map {
-            margin-top: auto;
-            width: 95%;
-            height: 500px;
-        }
- 
-        .cad_vaz{
-            margin-left: 0px;
-        }
-        
-        #page-header{
-            margin: auto;
-        }
-        .col-sm-12{
-            margin: 1px;
-        }
-        div.col-md-9{
-            padding-left: 3px;
-            padding-right: 3px;
-        }
-        
-        .lista{
-            padding: 0px;
-    }
-             
-}
+       
     </style>
     
 </head>

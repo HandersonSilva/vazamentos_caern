@@ -1,5 +1,5 @@
 $(document).ready( function(){
-           
+    
             var url_atual = window.location.href;
             //verifica se ja esta logado
                 $("#menu_logar").click( function(){
@@ -71,7 +71,7 @@ $(document).ready( function(){
         $('#btn_login').click( function(){
             var campo_vazio = false;
             //verifica se os campos foram preenchidos
-            if($('#email_log').val() == ''){
+            if($('#email_log').val() == '' ){
                 $('#email_log').css({'border-color': '#A94442'});
                 
                 campo_vazio = true;
@@ -129,12 +129,13 @@ $(document).ready( function(){
         if(campo_vazio) return false;
         
 	});
+        
         //confirma logout
         $("#logout").click( function(){
             //recupera o valor do campo val_logout
             var logout = $("#val_logout").val();
             swal({
-                title: "Sair do sistema?",
+                title: "Deseja sair?",
                 text: "Clique em ok para confirmar ou cancelar para abortar operação",
                 icon: "warning",
                 buttons: true,
@@ -197,4 +198,7 @@ $(document).ready( function(){
         });
         
      if(retorno == false){setTimeout(document.load(),3000);}
+     
+     $(":file").filestyle();
+
 });

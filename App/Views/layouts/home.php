@@ -10,96 +10,28 @@
 <script type="text/javascript" src="public/script_site.js"></script>
 <!--inclui arquivo css customizado a pagina-->
 <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
+
 <div class="row">
-    <div class="page-header" id="page-header">
+    <div class="page-header text-justify" id="page-header">
         <h5 id="text-home" >Aqui você poderá visualizar os vazamentos já cadastrados por todos os usuários</h5>
     </div>
-    <div class="col-md-9 col-xs-12" style="margin-top: 10px;">
+    <div class="col-md-12  col-sm-12" style="margin-top: 10px;">
         
         <div id="map" style="border: 2px solid #000"></div>
+        
     </div>
-    <div class="col-md-3" style="margin-top: 10px;" id="div_coment">
-        <a href="http://<?=APP_HOST;?>vazamento"><button type="button" class="btn btn-default col-md-12 col-sm-12" id="btn_tela_hUsuario">Cadastrar um vazamento</button></a>
-        <br><br>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            <button class="btn btn-success btn-md col-sm-12" id="btn_abrir_form" title="formularioCadastro" value="formulario de cadastro">Deixe um comentário</button>
-                            <button class="btn btn-success btn-md col-sm-12" id="btn_fechar_form" title="formularioCadastro" value="formulario de cadastro">Minimizar</button>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                           
-                        <form action="http://<?php echo APP_HOST; ?>usuario/cadcom" id="form_dados" method="post">
-                                <div class="form-group">
-                                    <input class="form-control" name="nome_com" id="nome_com" type="text" placeholder="*Seu nome">
-                                </div>
-                                <div class="form-group">
-                                    <textarea name="comentario" class="col-sm-12" cols="80%"  rows="3" id="comentario" placeholder="Comentário"></textarea>
-                                </div>
-
-                            <input type="hidden" name="lat" id="lat" required>
-                            <input type="hidden" name="long" id="long" required>
-                            <!-- local aonde ficara os daddos passados pelo geocode-->
-                            <input type="hidden" name="pais" id="pais" required>
-                            <input type="hidden" name="uf" id="uf" required>
-                            <input type="hidden" name="cidade" id="cidade" required>
-                            <input type="hidden" name="rua" id="rua" required>
-                            <input type="hidden" name="id_usuario_logado" id="id_usuario_logado" value="<?php echo $_SESSION['id_user'];?>" required >
-                      
-                      <button type="submit" class="btn btn-primary" id="btn_enviar_coment">Enviar</button>
-                     
-                    </form>
-                            
-                        </div>
-                    </div>
-                </div>
-                 <div class="lista_com" style="width: 100%; height: 400px;">
-                     
-                     <ul class="list-group">
-                        <?php if(!empty($usuario)){//se existir dados 
-                    
-                            echo '<strong><p style="font-family:Viga;">Comentários</p></strong>'?>
-                        
-                            <?php foreach ($usuario as $comentarios){//percorre o array $dados_vaz ?>
-                                <li class="lista_com_person">
-                                     <?php echo "<strong>Nome:</strong>".'<font class="text_com">'.$comentarios->nome.'</font>'."<br>".
-                                     "<strong>comentario: </strong>".'<font class="text_com">'.$comentarios->comentario.'</font>'."<hr id='hr_com'>";?>
-
-                                </li>
-                            <?php }?>
-                      <?php }?>
-                     </ul>
-                     
-                </div>             
-            </div>
+    <div class="mdl-tooltip" data-mdl-for="button_fab">
+        Cadastrar novo vazamento
     </div>
+
     
 </div>
-<div class="row">
-    
-    
-    <div class="col-md-8">
-        <h4>Últimas notícias do RN</h4>
-        <?php if(!empty($feeds)){
-     foreach ($feeds->channel->item as $item ){
-         // formata e imprime uma string
-        printf('<a href="%s" title="%s" target="new" style="color:#0000FF;">%s</a><br>', $item->link, $item->title, $item->title,$item->picture);
-        // incrementamos a variável $count
-        $count++;
-        // caso nosso contador seja igual ao limite paramos a iteração
-        if($count == $limit) break;
-     }
-    }else{
-        echo 'Não foi possível carregar o feed ';
-    }?>
-    </div>
-    
-</div>    
+        <!-- Colored FAB button with ripple -->
+        <a href="http://<?=APP_HOST;?>vazamento"><button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored button--mini-fab" id="button_fab" >
+          <i class="material-icons">add</i>
+        </button></a>
+        
+      <!--script do mapa-->
       <script>
             var map;
             //funcao Map
@@ -129,7 +61,7 @@
                 <?php }else{ ?>
                 <?php foreach($data as $ponto){?>
 
-                        <?php if($ponto->lat_ponto !="" && $ponto->log_ponto !="") {
+                        <?php if($ponto->lat_ponto != "" && $ponto->log_ponto != "") {
                             $data_sql = $ponto->data_vazamento;
                             $data_formatada = date("d/m/Y", strtotime($data_sql));
                             

@@ -74,6 +74,7 @@
                    // echo $dadoLogin;
                     if($dadoLogin != null){
                         $_SESSION["msg_login"] = "Dados validados";
+                        $_SESSION['img_usuario'] = $dadoLogin->img_perfil;
                         $_SESSION["nome_usuario"]= $dadoLogin->nome_usuario;
                         $_SESSION["email_usuario"]= $dadoLogin->email_usuario;
                         $_SESSION['id_user'] = $dadoLogin->id_usuario;
@@ -108,7 +109,7 @@
 
             
         }
-        
+        //calcula o tempo de acordo com os paramentros passados e retorna a quantidade de minutos
         private function calculaTempo($hora_inicial, $hora_final) {
              $i = 1;
              $tempo_total;
@@ -142,17 +143,19 @@
         public function Salvar(){
             $usuarioD = new usuarioDAO();
             $usuario = new Usuario();
-
+            
+            
             $usuario->setNome($_POST['nome_usuario']);
             $usuario->setEmail($_POST['email_usuario']);
             $usuario->setSenha($_POST['senha_usuario']);
-
+            $upload = $this->getuploadImg();
+            $usuario->setImg_perfil($upload);
            //verifica se a funcao verificaEmail() retornou algum email 
             $msg = null;
             if($usuarioD->verificaEmail($usuario->getEmail()) > 0){//retornou email
                 $msg = "Email já cadastrado";
                 $_SESSION["msg"] = $msg;
-          
+             
                 $this->redirect("usuario/Cadastro");
             
             }else{//nao retornou nenhum email
@@ -161,9 +164,61 @@
                 $msg = "Usuário cadastrado com sucesso";
                 $_SESSION["sucesso"] = $msg;
                 $this->redirect("Usuario/cadastro");
+                
             }
           
         }
+        
+        private function getuploadImg( ){
+           
+            $imagem = $_FILES['img_perfil']['name'];
+            
+            //pasta onde a imagem sera salva
+            $_UP['pasta'] = "/opt/lampp/htdocs/vazamentos_caern/_fontes/imgs";
+            
+            //tamanho maximo do arquivo em bytes
+            $_UP['tamanho'] = 1024*1024*100;
+            
+            //array com as extensoes permitidas
+            $_UP['extensoes'] = array("png","jpg","jpeg","gif");
+            
+            //renomear
+            $_UP['renomeia'] = false;
+            
+            //array de erros de uploads do php
+            $_UP['erros'][0] = "Não houve erro";
+            $_UP['erros'][1] = "O arquivo no upload é maior que o limite do php";
+            $_UP['erros'][2] = "O arquivo ultrapassa o limite de tamanho especificado no HTML";
+            $_UP['erros'][3] = "O upload do arquivo foi feito parcialmente";
+            $_UP['erros'][4] = "Não foi feito upload do arquivo";
+            
+            if($_FILES['img_perfil']['erros'] != 0){
+                die("Não foi possível fazer upload da imagem, erro<br>".$_UP['erros'][$_FILES['img_perfil']['error']]);
+                exit();
+            }
+            
+            //verifica a extensao do arquivo
+            $extensao = strtolower(end(explode(".",$_FILES['img_perfil']['name'])));
+            if(array_search($extensao, $_UP['extensoes']) === false){
+               return "null";
+
+            }else{
+                if($_UP['renomeia'] ==true){
+                    $nome_final = time().".png";
+                }else{
+                    //mantem o nome original do arquivo
+                    $nome_final = $_FILES['img_perfil']['name'];
+                }
+                //verificar se e possivel mover o arquivo para a pasta escolhida
+                if(move_uploaded_file($_FILES['img_perfil']['tmp_name'], $_UP['pasta']."/".$nome_final)){
+                    return $nome_final;
+                }
+            }
+                    
+            
+        }
+            
+        
         
         
         public function cadcom() {
@@ -218,13 +273,14 @@
                 $email_existe = $usuarioDao->comparaEmail($email);
                 
                 if(!empty($email_existe)){
-                   $id_usuario = $email_existe->id_usuario; 
+                   $id_usuario = $email_existe->id_usuario;
+                   $nome_usuario = $email_existe->nome_usuario;
                   
                    $token = uniqid();
                    $usuarioDao->salvarToken($token, $id_usuario,$hora_atual);
                    
                    //informacoes do email
-                   $this->enviaLink($email,$token);
+                   $this->enviaLink($nome_usuario,$email,$token);
                     
                     
                 }else{
@@ -233,11 +289,11 @@
                 
             }
             
-            public function enviaLink($para,$token) {
+            private function enviaLink($nome,$para,$token) {
                 $email_setup = "caernvazamentos@gmail.com";
 
                 $mail = new PHPMailer();
-               
+                $mail->encodeHeader("utf8");
                 // Configura para envio de e-mails usando SMTP
                 $mail->isSMTP();
                 // Servidor SMTP
@@ -264,19 +320,22 @@
                 $mail->Subject = 'Redefinição de senha!!!';
                 // Mensagem que vai no corpo do e-mail
                 
-                $mail->Body = '<h4>Você está recebendo o link para redefinição de senha</h4><br>'.
-                                'Clique no link e depois copie e cole o código gerado<br><br>'.
-                                '<a href="http://localhost/vazamentos_caern/usuario/newsenha">Redefinir senha</a><br><br>'.
-                                '<strong>Código: </strong>'.$token;
+                $mail->Body = '<div style="background:url(_fontes/imgs/fundo.jpg);color:black;padding:5px;"><h4>Olá '.$nome.'</h4><br>'.
+                                'Clique no link, copie e cole o token gerado abaixo!!!<br><br>'.
+                                '<a href=http://'.APP_HOST.'/usuario/newsenha>clique aqui para redefinir sua senha</a>'.
+                                 '<br><br><p>Token: '.$token.'</p>'.'</div>';
+                
                 
 
                 // Envia o e-mail e captura o sucesso ou erro
                 if($mail->Send()):
-                    $_SESSION["email_sucesso"] = "Link enviado com sucesso!!!";
-                    $this->redirect("usuario/redefinir");
+                     $_SESSION["email_sucesso"] = "Enviamos um link para seu email";
+                     $this->redirect("usuario/redefinir");
                 else:
                     echo 'Erro ao enviar Email:' . $mail->ErrorInfo;
                 endif;
+                   
+                
             }
             
             public function validaToken() {
@@ -289,7 +348,7 @@
                 //verifica se o token vindo pelo formulario existe no banco
                 $verifica = $usuarioDao->verificaToken($token);
                 $fk_usuario =  $verifica->fk_usuario;
-                    //hora que o token foi salvo no banco
+                //hora que o token foi salvo no banco
                 $hora_token = $verifica->tempo_token;
                 //verifica se o token expirou
                  $tempo = $this->getHora($hora_token);
@@ -297,13 +356,17 @@
                     
                     $atualizar = $usuarioDao->atualizaSenhaUsuario($nova_senha, $fk_usuario);
                     if($atualizar > 0){
-                        echo "Senha atualizada";
+                        $_SESSION['senha_update'] = "Sucesso!!! senha atualizada";
+                        $this->redirect("usuario/newsenha");
                     }else{
                         echo "Erro ao atualizar senha";
                     }
                     
                 }else{
-                    echo "Esse token expirou, por favor repita o processo de redefinição";
+                        $link = "http://".APP_HOST."usuario/redefinir";
+                        $_SESSION['token_exp'] = "Esse token expirou, por favor repita o processo de redefinição "."<a href='$link'".">Clique aqui</a>";
+                        $this->redirect("usuario/newsenha");
+                        
                 }
                 
             }

@@ -29,7 +29,7 @@
 
 <div class="row">
         
-              <div class="col-md-3 col-sm-2" id="div_form">
+              <div class="col-md-3 col-sm-12" id="div_form">
                    <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -51,7 +51,7 @@
                       
                       <div class="form-group">
                           <p>Data:</p>
-                          <input type="date"  class="form-control" name="data" id="data" maxlength="10">
+                          <input type="date"  class="form-control" name="data" id="data"/>
                       </div>
                        <div class="form-group">
                            <p>Selecione imagem do vazamento</p>
@@ -116,10 +116,8 @@
                                     '<strong>Descrição: </strong>'.'<font class="text-success">'.$data->descricao_vazamento.'</font>'.'<br>'.
                                     '<strong>Data: </strong>'.'<font class="text-success">'.$data_campo.'</font>'.'<br>'.
                                     '<strong>Status :</strong> '.'<font class="text-success"  id="status">'.$status.'</font>'?>
-                                
                         </li>
                
-                             
                     <?php }?>
                 <?php }else{
                     echo "<p>Nenhum vazamento cadastrado até agora!!!</p>";
@@ -135,8 +133,6 @@
                                 icon: "success",
                             });</script>';
                 
-                
-                    
                      unset($_SESSION['sucesso_vaz']);
                     ?>
                 
@@ -144,7 +140,7 @@
                 
                 <?php }?>
               </div>    
-          <div class="col-md-9 ">
+          <div class="col-md-9 col-sm-12 ">
               <div id="map" style="border: 1px solid #000"></div>
           </div>
                     
@@ -155,9 +151,7 @@
         
     </div>
 </div>
-          
           <br>
-      
       
           <script>
               

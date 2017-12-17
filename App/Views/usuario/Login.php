@@ -7,29 +7,28 @@
 <script src="../public/script_site.js"></script>
 
 <script src="../public/login_face.js"></script>
-<link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
 <div class="container" style="margin-top: 50px">
           <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6" id="col_login">
+          <div class="col-md-4"></div>
+          <div class="col-md-4" id="col_login">
               <h3>Login do usuário</h3>
               <form id="form_user" action="http://<?php echo APP_HOST;?>usuario/validaLogin" method="post">
                 <button type="button" style="  width: 100%; height: 50%;" id="btn_login_face" class="btn btn-primary" >Entre com o facebook</button>
                    
-                    <div class="form-group">
-                    <label for="exampleInputEmail1">Email*</label>
-                    <input type="email" class="form-control" id="email_log" name="email_log" aria-describedby="emailHelp" placeholder="Digite seu email" value="<?php echo $email_usuario_log?>">
-
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="email" id="email_log" name="email_log" value="<?php echo $email_usuario_log?>">
+                        <label class="mdl-textfield__label" for="email_log">Email</label>
                     </div>
-                    <div class="form-group">
-                    <label for="exampleInputPassword1">Senha*</label>
-                    <input type="password" class="form-control" id="senha_log" name="senha_log" placeholder="Digite sua senha">
+                
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="password" id="senha_log" name="senha_log">
+                        <label class="mdl-textfield__label" for="senha_log">Senha</label>
                     </div>
 
                     <button type="submit" id="btn_login" class="btn btn-primary pull-right">Login</button>
                     <div class="row">
-                        <div class="col-md-6"><a href="http://<?php echo APP_HOST; ?>usuario/Cadastro" ><label>Não possui conta?</label></a></div>
-                        <div class=" col-md-6 text-right">
+                        <div class="col-md-6 col-sm-12 text-center"><a href="http://<?php echo APP_HOST; ?>usuario/Cadastro" ><label>Não possui conta?</label></a></div>
+                        <div class=" col-md-6 col-sm-12 text-center">
                             <a href="http://<?=APP_HOST;?>usuario/redefinir" ><label>Esqueci minha senha</label></a>
                     </div>
                </div> 
@@ -45,14 +44,14 @@
                 }?>
               </div>
           
-          <div class="col-md-3"></div>
+          <div class="col-md-4"></div>
           </div>
       </div>
 <script>
   var contador = 5;
         function contar() {
             
-            document.getElementById('cronometro').innerHTML = "Você será redirecionado em: "+contador;
+            document.getElementById('cronometro').innerHTML = "Você será redirecionado em instantes...aguarde!!!";
             contador--;
         }
         function redirecionar() {
@@ -63,7 +62,7 @@
             }
         }
         setInterval(redirecionar, 1000);
-
+        clearInterval();
 
         
 </script>
