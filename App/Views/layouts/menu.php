@@ -47,7 +47,7 @@
      
    </nav>
             
-            <?php if($imagem_de_perfil == ""){
+            <?php if($imagem_de_perfil == null){
                 $imagem_de_perfil = "perfil.png";
             }?>
             <!--verifica se existe a session nome_usuario e se a url equivale a do usuario ou home e imprime o texto de bem vindo-->

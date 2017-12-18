@@ -200,7 +200,7 @@
             //verifica a extensao do arquivo
             $extensao = strtolower(end(explode(".",$_FILES['img_perfil']['name'])));
             if(array_search($extensao, $_UP['extensoes']) === false){
-               return "null";
+               return null;
 
             }else{
                 if($_UP['renomeia'] ==true){
@@ -216,35 +216,6 @@
             }
                     
             
-        }
-            
-        
-        
-        
-        public function cadcom() {
-           $nome = $_POST["nome_com"];
-           $comentario = $_POST["comentario"];
-           
-           $usuario = new usuarioDAO();
-           
-           $cadastra = $usuario->cadastraComentario($nome, $comentario);
-           
-           if($cadastra > 0){
-               $this->redirect("home");
-               
-           } else {
-               
-           }
-        }
-        
-        public static function getComentarios() {
-           $usuario = new usuarioDAO();
-           
-           $coment = $usuario->retornaComentarios();
-           
-           if($coment != null){
-               return $coment;
-           }
         }
         
         public function logout() {
@@ -320,13 +291,11 @@
                 $mail->Subject = 'Redefinição de senha!!!';
                 // Mensagem que vai no corpo do e-mail
                 
-                $mail->Body = '<div style="background:url(_fontes/imgs/fundo.jpg);color:black;padding:5px;"><h4>Olá '.$nome.'</h4><br>'.
+                $mail->Body = '<div style="background:url(../_fontes/imgs/fundo.jpg);color:black;padding:5px;"><h4>Olá '.$nome.'</h4><br>'.
                                 'Clique no link, copie e cole o token gerado abaixo!!!<br><br>'.
                                 '<a href=http://'.APP_HOST.'/usuario/newsenha>clique aqui para redefinir sua senha</a>'.
-                                 '<br><br><p>Token: '.$token.'</p>'.'</div>';
+                                 '<br><br><p>Token: '.'<font style="color:#008aeb;">'.$token.'</font>'.'</p>'.'</div>';
                 
-                
-
                 // Envia o e-mail e captura o sucesso ou erro
                 if($mail->Send()):
                      $_SESSION["email_sucesso"] = "Enviamos um link para seu email";
@@ -335,7 +304,6 @@
                     echo 'Erro ao enviar Email:' . $mail->ErrorInfo;
                 endif;
                    
-                
             }
             
             public function validaToken() {
@@ -359,7 +327,8 @@
                         $_SESSION['senha_update'] = "Sucesso!!! senha atualizada";
                         $this->redirect("usuario/newsenha");
                     }else{
-                        echo "Erro ao atualizar senha";
+                        $_SESSION['error_senha_update'] = "Erro ao tentar atualizar senha!!!";
+                        $this->redirect("usuario/newsenha");
                     }
                     
                 }else{

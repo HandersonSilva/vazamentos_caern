@@ -1,5 +1,8 @@
 $(document).ready( function(){
     
+    configInpUser();
+    configInpEmail();
+    configInpSenha();
             var url_atual = window.location.href;
             //verifica se ja esta logado
                 $("#menu_logar").click( function(){
@@ -14,7 +17,53 @@ $(document).ready( function(){
                     }
 
                 });
-               
+                
+       function configInpUser(){
+           $(".user").click( function(){
+            $(".icon_user").hide();
+          
+           });
+            
+        $(".user").blur(function(){
+            $(".icon_user").show();
+
+        });
+       }  
+              
+       function configInpEmail(){
+           
+        $(".email").click( function(){
+             $(".icon_email").hide();
+
+         });
+         
+           
+        $(".email").blur(function(){
+
+            $(".icon_email").show();
+
+        });
+       }
+    
+     
+    function configInpSenha(){
+        $(".senha").click( function(){
+          $(".icon_senha").hide();
+          
+      });
+      
+         
+        $(".senha").blur(function(){
+
+            $(".icon_senha").show();
+
+     });
+    }
+     
+     
+   
+    
+        
     
     //lista de comentarios
      $("#btn_fechar_form").hide();

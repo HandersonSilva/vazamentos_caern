@@ -1,6 +1,7 @@
 <?php
  session_start();
  $senha_atulizada = isset($_SESSION['senha_update']) ? $_SESSION['senha_update'] : "";
+ $error_senha =     isset($_SESSION['error_senha_update']) ? $_SESSION['error_senha_update'] : "";
  $token_exp = isset($_SESSION['token_exp']) ? $_SESSION['token_exp'] : "";
 ?>
 <script src="../public/script_site.js"></script>
@@ -38,9 +39,12 @@
                 <?php if(!empty($senha_atulizada)){
                         echo '<p class="text-success">'.$senha_atulizada.'</p>';
                         unset($_SESSION["senha_update"]);
+                    }else if(!empty ($error_senha)){
+                        echo '<p  class="text-danger"">'.$error_senha.'</p>';
+                        unset($__SESSION['error_senha_update']);
                     }else{
                         echo '<p  class="text-danger"">'.$token_exp.'</p>';
-                        unset($_SESSION["token_exp"]);
+                        unset($_SESSION['token_exp']);
                     }
                 ?>
               </div> 
