@@ -18,25 +18,25 @@ $sucesso = isset($_SESSION['sucesso'])? $_SESSION['sucesso'] : "";
                 <form action="http://<?php echo APP_HOST;?>usuario/Salvar" method="POST" enctype="multipart/form-data" id="form_user">
                     
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="nome_cad" name="nome_usuario" value="<?php echo $email_usuario_log?>">
-                        <label class="mdl-textfield__label" for="nome_cad">*Nome de usuário</label>
+                       
+                        <input class="mdl-textfield__input user" type="text" id="nome_cad" name="nome_usuario" onload="configClickInput(nome_cad,icon_user)">
+                        <label class="mdl-textfield__label" for="nome_cad"><i class="material-icons icon_user icon" >person</i>  *Nome de usuário</label>
                     </div>
               
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="email" id="email_cad" name="email_usuario">
-                        <label class="mdl-textfield__label" for="nome_cad">*Email</label>
+                        <input class="mdl-textfield__input email" type="email" id="email_cad" name="email_usuario">
+                        <label class="mdl-textfield__label" for="nome_cad"><i class="material-icons icon_email icon">email</i>  *Email</label>
                     </div>
                     
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" id="senha_cad" name="senha_usuario">
-                        <label class="mdl-textfield__label" for="nome_cad">*Senha</label>
+                        <input class="mdl-textfield__input senha" type="password" id="senha_cad" name="senha_usuario">
+                        <label class="mdl-textfield__label" for="nome_cad"><i class="material-icons icon_senha icon">vpn_key</i>  *Senha</label>
                     </div>
-                  
                      <div class="mdl-layout">
                          <label for="img_perfil">Imagem de perfil</label>
                          <input class="mdl-textfield__input" type="file" id="img_perfil" name="img_perfil">
                     </div>
-                    
+                    <br>
                  
                     <button type="submit" id="btn_cad" class="btn btn-primary pull-right">Cadastrar</button>
   
@@ -47,6 +47,7 @@ $sucesso = isset($_SESSION['sucesso'])? $_SESSION['sucesso'] : "";
               <br>
               <?php if(!empty($msg)){?>
                <?php echo'<div class="alert alert-danger" role="alert">'
+                     .'<i class="material-icons">error</i>'
                     .$_SESSION['msg'];
                      unset($_SESSION['msg']);?>
                 <?php echo'</div>';?>
@@ -54,7 +55,7 @@ $sucesso = isset($_SESSION['sucesso'])? $_SESSION['sucesso'] : "";
               
                <?php if(!empty($sucesso)){?>
                <?php echo'<div class="alert alert-success  close " role="alert">'
-                    .$_SESSION['sucesso'];
+                        .$_SESSION['sucesso'];
                      unset($_SESSION['sucesso']);?>
                 <?php echo'</div>';?>
                     

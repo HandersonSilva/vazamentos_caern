@@ -89,48 +89,7 @@
                     }
            }
            
-           public function cadastraComentario($nome,$comentario) {
-               
-               try {
-                   $sql = "INSERT INTO comentarios_vaz(nome,comentario) VALUES(:nome,:comentario)";
-                   $insere = $this->conPdo->prepare($sql);
-                   $insere->bindParam(":nome", $nome);
-                   $insere->bindParam(":comentario", $comentario);
-                   
-                   
-                   if($insere->execute()){
-                       if($insere->rowCount() > 0){
-                           return $insere->rowCount();
-                       }
-                   }
-                   $insere = null;
-                   
-                   
-               } catch (Exception $exc) {
-                   throw new Exception("Erro ao na operação de cadastro",500);
-               }
-                          
-           }
-           
-           public function retornaComentarios() {
-               try {
-                   $sql = "SELECT nome, comentario FROM comentarios_vaz ";
-                   $query = $this->conPdo->prepare($sql);
-                   
-                   if($query->execute()){
-                       while ($row = $query->fetch(\PDO::FETCH_OBJ)){
-                           $comentarios[] = $row;
-                       }
-                       return $comentarios;
-                   }
-                   $query = null;
-                   
-                   
-               } catch (Exception $exc) {
-                   throw new Exception("Erro ao na operação de cadastro",500);
-               }
-           }
-           
+          
            public function comparaEmail($email) {
                try {
                    $sql = "SELECT id_usuario,nome_usuario, email_usuario FROM caern_usuario WHERE email_usuario = '$email'";

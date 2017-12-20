@@ -38,6 +38,13 @@
       
       
     }
+    #linha_login{
+    margin-top: 8px;
+ }
+ 
+ .text_icon{
+     padding-top: 5px;
+ }
     #img_logo{
         width:120px;
         height: 50px;
@@ -52,13 +59,21 @@
  }
  
  .mdl-textfield {
-     width: 400px;
-     padding-top: 18px;
+    width: 400px;
+    padding-top: 22px;
     padding-bottom:27px;
     margin-bottom: -10px;
-     
- }
     
+ }
+ 
+ .mdl-textfield__input{
+     font-size: 15px;
+ }
+   
+ .material-icons{
+     font-size: 18px;
+    
+ } 
     
     .form-control{
         background-color: #f5f5f5;
@@ -68,10 +83,10 @@
    
    .navbar-dark .navbar-nav .nav-link {
     color: #fff;
-}
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: #80deea;
-}
+    }
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color: #80deea;
+    }
 
     #linha_principal{
       margin-top: 50px;
@@ -100,8 +115,11 @@
     #form_user{
         padding: 10px;
         border: 1px solid #78909c;
-        border-radius: 5px;
+        border-radius: 10px;
         background-color: #eceff1;
+    }
+    .btn{
+        border-radius: 80px 80px 80px 80px; 
     }
     
     

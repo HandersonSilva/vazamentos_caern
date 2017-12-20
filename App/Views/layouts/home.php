@@ -1,12 +1,3 @@
-<?php
-  use App\Controllers\UsuarioController;
-  use App\Controllers\HomeController;
-  // limite de itens
-   $limit = 10;
-   // contador
-  $count = 0;
-  $usuario = UsuarioController::getComentarios();
-  $feeds = HomeController::geraFeed();?>
 <script type="text/javascript" src="public/script_site.js"></script>
 <!--inclui arquivo css customizado a pagina-->
 <link rel="stylesheet" type="text/css" href="public/estilo_home.css"/>
@@ -15,7 +6,7 @@
     <div class="page-header text-justify" id="page-header">
         <h5 id="text-home" >Aqui você poderá visualizar os vazamentos já cadastrados por todos os usuários</h5>
     </div>
-    <div class="col-md-12  col-sm-12" style="margin-top: 10px;">
+    <div class="col-md-12  col-sm-12">
         
         <div id="map" style="border: 2px solid #000"></div>
         
@@ -80,7 +71,7 @@
                                         icone = "_fontes/imgs/icon_vaz_caern2.png";
                                 }else{
                                         status = "Vazamento Fechado";
-                                        icone = "_fontes/imgs/vaz_cadastrado.png";
+                                        icone = "_fontes/imgs/vazamento_fechado.png";
                                 }
                                 var html = '<div style="witch:300px;">'+
                                         '<h4>Cadastrado por: '+usuario+'</h4>'+'<br/>'+
