@@ -18,7 +18,7 @@
             define('DB_HOST',"127.0.0.1");
             define('DB_USER',"root");
             define('DB_NAME',"caern_bd");
-            define('DB_PASSWORD',"");
+            define('DB_PASSWORD',"12312");
             define('DB_DRIVER',"mysql");
             define('IMG_LOGO',"../_fontes/imgs/logo_vaz_caern.png");
             define('IMG_LOGO2',"_fontes/imgs/logo_vaz_caern.png");
